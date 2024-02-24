@@ -1,0 +1,18 @@
+The error is in the line `ins_unop(vm, "~", *RKB())`. The `ins_unop()` function expects a `Variable` as the second argument, but `*RKB()` is a `bvalue` (i.e., a pointer to a bvalue).
+
+The corrected code:
+```cpp
+opcase(FLIP): {
+            bvalue *dst = RA(), *a = RKB();
+            if (var_isint(a)) {
+                var_setint(dst, -a->v.i);
+            } else if (var_isinstance(a)) {
+                ins_unop(vm, "~", **RKB());
+                reg = vm->reg;
+                *RA() = *vm->top; /* copy result to dst */
+            } else {
+                unop_error(vm, "~", a);
+            }
+            dispatch();
+        }
+```

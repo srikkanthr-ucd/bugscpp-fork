@@ -1,0 +1,26 @@
+Making check in src
+make[1]: Entering directory '/home/workspace/src'
+make[1]: Nothing to be done for 'check'.
+make[1]: Leaving directory '/home/workspace/src'
+Making check in tests
+make[1]: Entering directory '/home/workspace/tests'
+make  test_basic test_speed test_generate test_schema test_streamline
+make[2]: Entering directory '/home/workspace/tests'
+  CC       test_basic-test_basic.o
+  CCLD     test_basic
+/usr/bin/ld: test_basic-test_basic.o: in function `main':
+/home/workspace/tests/test_basic.c:78: undefined reference to `ucl_parser_new'
+/usr/bin/ld: /home/workspace/tests/test_basic.c:79: undefined reference to `ucl_parser_register_variable'
+/usr/bin/ld: /home/workspace/tests/test_basic.c:93: undefined reference to `ucl_parser_add_chunk'
+/usr/bin/ld: /home/workspace/tests/test_basic.c:78: undefined reference to `ucl_parser_new'
+/usr/bin/ld: /home/workspace/tests/test_basic.c:79: undefined reference to `ucl_parser_register_variable'
+/usr/bin/ld: /home/workspace/tests/test_basic.c:128: undefined reference to `ucl_parser_new'
+/usr/bin/ld: /home/workspace/tests/test_basic.c:129: undefined reference to `ucl_parser_add_string'
+/usr/bin/ld: ../src/.libs/libucl.so: undefined reference to `ucl_parser_add_chunk_priority'
+/usr/bin/ld: ../src/.libs/libucl.so: undefined reference to `ucl_maybe_parse_number'
+collect2: error: ld returned 1 exit status
+make[2]: *** [Makefile:634: test_basic] Error 1
+make[2]: Leaving directory '/home/workspace/tests'
+make[1]: Leaving directory '/home/workspace/tests'
+make[1]: *** [Makefile:1009: check-am] Error 2
+make: *** [Makefile:479: check-recursive] Error 1

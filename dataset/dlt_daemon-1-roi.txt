@@ -1,0 +1,4 @@
+
+    while (!feof(handle)) {
+        str1[0] = 0;
+
