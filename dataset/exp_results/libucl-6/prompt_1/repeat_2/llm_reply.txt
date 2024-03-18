@@ -1,0 +1,24 @@
+```c
+		else if (*p == '\\') {
+			*need_unescape = true;
+			ucl_chunk_skipc (chunk, p);
+			if (p < chunk->end) {
+				*p = ucl_str_deescape (p, chunk->end, &p);
+			}
+			continue;
+		}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 7,
+      "error_type": "incorrect_invocation",
+      "explanation": "The function `ucl_chunk_skipc` expects a `struct ucl_chunk *` as its first argument, but `p` is not of that type."
+    }
+  ],
+  "confidence": 0.6
+}
+```

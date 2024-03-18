@@ -1,0 +1,22 @@
+```c
+static bool is_directory(const char *fname)
+{
+    struct stat st;
+    if (stat(fname, &st) == 0 && S_ISDIR(st.st_mode))
+        return true;
+    return false;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 5,
+      "error_type": "Logical error",
+      "explanation": "The return value of `stat()` is not checked."
+    }
+  ],
+  "confidence": 0.9
+}
+```

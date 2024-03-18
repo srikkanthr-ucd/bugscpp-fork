@@ -1,0 +1,12 @@
+18c18
+< 	8	UDP 192.168.1.41:138 -> 192.168.1.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][4 pkts/891 bytes -> 0 pkts/0 bytes][Goodput ratio: 81/0][665.91 sec][Host: lab111][PLAIN TEXT ( EMEBECDBDBDBCACACACACACACACACA)]
+---
+> 	8	UDP 192.168.1.41:138 -> 192.168.1.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][4 pkts/891 bytes -> 0 pkts/0 bytes][Goodput ratio: 81/0][665.91 sec][Host: lab111][Risk: ** Known protocol on non standard port **][PLAIN TEXT ( EMEBECDBDBDBCACACACACACACACACA)]
+25c25
+< 	15	UDP 192.168.1.2:138 -> 192.168.1.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][2 pkts/486 bytes -> 0 pkts/0 bytes][Goodput ratio: 83/0][718.24 sec][Host: d002465][PLAIN TEXT ( EEDADADCDEDGDFC)]
+---
+> 	15	UDP 192.168.1.2:138 -> 192.168.1.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][2 pkts/486 bytes -> 0 pkts/0 bytes][Goodput ratio: 83/0][718.24 sec][Host: d002465][Risk: ** Known protocol on non standard port **][PLAIN TEXT ( EEDADADCDEDGDFC)]
+72c72
+< 	62	UDP 192.168.1.2:138 -> 192.168.1.251:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][1 pkts/243 bytes -> 0 pkts/0 bytes][Goodput ratio: 82/0][< 1 sec]
+---
+> 	62	UDP 192.168.1.2:138 -> 192.168.1.251:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][1 pkts/243 bytes -> 0 pkts/0 bytes][Goodput ratio: 82/0][< 1 sec][Risk: ** Known protocol on non standard port **]

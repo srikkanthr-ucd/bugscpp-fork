@@ -1,0 +1,18 @@
+```cpp
+			else if (*p == '"') {
+				state = STATE_QUOTED;
+			}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 1,
+      "error_type": "Typo",
+      "explanation": "STATE_QUOTED is a more descriptive name for the state than 2."
+    }
+  ],
+  "confidence": 0.8
+}
+```

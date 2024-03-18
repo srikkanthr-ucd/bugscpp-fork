@@ -1,0 +1,37 @@
+Repaired function:
+```c
+int EVP_PKEY_assign(EVP_PKEY *pkey, int type, void *key)
+{
+    int alias = type;
+
+#ifndef OPENSSL_NO_EC
+    if (EVP_PKEY_type(type) == EVP_PKEY_EC) {
+        const EC_GROUP *group = EC_KEY_get0_group(key);
+
+        if (group != NULL && EC_GROUP_get_curve_name(group) == NID_sm2)
+            alias = EVP_PKEY_SM2;
+    }
+#endif
+
+    if (pkey == NULL || !EVP_PKEY_set_type(pkey, alias)) // Corrected the condition from 'type' to 'alias'
+        return 0;
+    if (!EVP_PKEY_set_alias_type(pkey, alias))
+        return 0;
+    pkey->pkey.ptr = key;
+    return (key != NULL);
+}
+```
+
+JSON Report:
+```json
+{
+  "error": [
+    {
+      "line_number": 14,
+      "error_type": "Invalid Condition",
+      "explanation": "The condition 'type' is invalid in this context. It should be 'alias' instead."
+    }
+  ],
+  "confidence": 0.95
+}
+```

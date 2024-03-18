@@ -1,0 +1,20 @@
+```c
+		else if (c == '$') {
+			*var_expand = true;
+			parse_option(c, opt_var_expand);
+		}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 5,
+      "error_type": "Missing call to parse_option",
+      "explanation": "When the character c is '$', the function parse_option should be called with the arguments c and opt_var_expand."
+    }
+  ],
+  "confidence": 0.9
+}
+```

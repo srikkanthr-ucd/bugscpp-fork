@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 40: TestSimplifyTokens
+1/1 Test #40: TestSimplifyTokens ...............   Passed    1.57 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   1.58 sec

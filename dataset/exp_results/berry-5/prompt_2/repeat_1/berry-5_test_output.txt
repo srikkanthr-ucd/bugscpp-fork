@@ -1,0 +1,7 @@
+test_result: 
+berry-5: 
+build_result: True
+test_cases_result:  
+pass_rate: 0.9047619047619048
+pass_test_cases: ['berry-buggy-5-20', 'berry-buggy-5-13', 'berry-buggy-5-18', 'berry-buggy-5-2', 'berry-buggy-5-16', 'berry-buggy-5-11', 'berry-buggy-5-7', 'berry-buggy-5-21', 'berry-buggy-5-9', 'berry-buggy-5-12', 'berry-buggy-5-1', 'berry-buggy-5-8', 'berry-buggy-5-15', 'berry-buggy-5-14', 'berry-buggy-5-5', 'berry-buggy-5-4', 'berry-buggy-5-10', 'berry-buggy-5-17', 'berry-buggy-5-6']
+fail_test_cases: ['berry-buggy-5-19', 'berry-buggy-5-3']

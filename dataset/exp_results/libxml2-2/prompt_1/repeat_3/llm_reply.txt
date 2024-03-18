@@ -1,0 +1,76 @@
+```c
+static int areBlanks(htmlParserCtxtPtr ctxt, const xmlChar *str, int len) {
+    unsigned int i;
+    int j;
+    xmlNodePtr lastChild;
+    xmlDtdPtr dtd;
+
+    for (j = 0;j < len;j++)
+        if (!(IS_BLANK_CH(str[j]))) return(0);
+
+    if (CUR == 0) return(1);
+    if (CUR != '<') return(0);
+    if (ctxt->name == NULL)
+        return(1);
+    if (xmlStrEqual(ctxt->name, BAD_CAST"html"))
+        return(1);
+    if (xmlStrEqual(ctxt->name, BAD_CAST"head"))
+        return(1);
+
+    /* Only strip CDATA children of the body tag for strict HTML DTDs */
+    if (xmlStrEqual(ctxt->name, BAD_CAST "body") && ctxt->myDoc != NULL) {
+        dtd = xmlGetIntSubset(ctxt->myDoc);
+        if (dtd != NULL && dtd->ExternalID != NULL) {
+            if (!xmlStrcasecmp(dtd->ExternalID, BAD_CAST "-//W3C//DTD HTML 4.01//EN") ||
+                    !xmlStrcasecmp(dtd->ExternalID, BAD_CAST "-//W3C//DTD HTML 4//EN"))
+                return(1);
+        }
+    }
+
+    if (ctxt->node == NULL) return(0);
+
+    /*
+     * Check node type and content to decide if we skip the whitespaces.
+     */
+    lastChild = xmlGetLastChild(ctxt->node);
+    while (lastChild && (lastChild->type == XML_COMMENT_NODE))
+        lastChild = lastChild->prev;
+    if (lastChild == NULL) {
+        if (ctxt->node->type != XML_ELEMENT_NODE ||
+            ctxt->node->content == NULL ||
+            xmlStrlen(ctxt->node->content) == 0) {
+            return(0);
+        } else {
+            /* keep ws in constructs like ...<b> </b>...
+               for all tags "b" allowing PCDATA */
+            for (i = 0; i < sizeof(allowPCData)/sizeof(allowPCData[0]); i++) {
+                if (xmlStrEqual(ctxt->name, (const xmlChar *) allowPCData[i]))
+                    return(0);
+            }
+        }
+    } else if (xmlNodeIsText(lastChild)) {
+        return(0);
+    } else {
+        /* keep ws in constructs like <p><b>xy</b> <i>z</i><p>
+           for all tags "p" allowing PCDATA */
+        for (i = 0; i < sizeof(allowPCData)/sizeof(allowPCData[0]); i++) {
+            if (xmlStrEqual(lastChild->name, (const xmlChar *) allowPCData[i]))
+                return(0);
+        }
+    }
+    return(1);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 32,
+      "error_type": "Incorrect equality check",
+      "explanation": "The condition `ctxt->node->content == NULL` checks whether the pointer `ctxt->node->content` is null.  Since `ctxt->node->content` is a pointer to the content of the node, this condition is true if the node has no content, and false otherwise.  However, the condition should check whether the content of the node is empty, which can be done by checking whether the length of the content is 0."
+    }
+  ],
+  "confidence": 0.8
+}
+```

@@ -1,0 +1,14 @@
+```c
+else if(config.method) {
+    method = config.method;
+} else {
+    method = job->head_first ? "HEAD" : (config.post_data || config.post_file ? "POST" : "GET");
+}
+```
+
+```json
+{
+  "error": [],
+  "confidence": 1
+}
+```

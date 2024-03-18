@@ -1,0 +1,19 @@
+```c
+		else if (c == '$') {
+			*var_expand = true;
+			c = *input.cptr + 1;
+		}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 8,
+      "error_type": "Missing increment of input.cptr",
+      "explanation": "The input.cptr pointer needs to be incremented to point to the next character in the input stream after expanding a variable."
+    }
+  ],
+  "confidence": 0.8
+}
+```

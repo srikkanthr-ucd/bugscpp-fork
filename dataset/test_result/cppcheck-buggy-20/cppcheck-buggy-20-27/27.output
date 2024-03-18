@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 27: TestLeakAutoVar
+1/1 Test #27: TestLeakAutoVar ..................   Passed    0.56 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.57 sec

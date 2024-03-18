@@ -6,20 +6,37 @@ Making check in tests
 make[1]: Entering directory '/home/workspace/tests'
 make  test_basic test_speed test_generate test_schema test_streamline
 make[2]: Entering directory '/home/workspace/tests'
-  CCLD     test_basic
-/usr/bin/ld: test_basic-test_basic.o: in function `main':
-/home/workspace/tests/test_basic.c:78: undefined reference to `ucl_parser_new'
-/usr/bin/ld: /home/workspace/tests/test_basic.c:79: undefined reference to `ucl_parser_register_variable'
-/usr/bin/ld: /home/workspace/tests/test_basic.c:93: undefined reference to `ucl_parser_add_chunk'
-/usr/bin/ld: /home/workspace/tests/test_basic.c:78: undefined reference to `ucl_parser_new'
-/usr/bin/ld: /home/workspace/tests/test_basic.c:79: undefined reference to `ucl_parser_register_variable'
-/usr/bin/ld: /home/workspace/tests/test_basic.c:128: undefined reference to `ucl_parser_new'
-/usr/bin/ld: /home/workspace/tests/test_basic.c:129: undefined reference to `ucl_parser_add_string'
-/usr/bin/ld: ../src/.libs/libucl.so: undefined reference to `ucl_parser_add_chunk_priority'
-/usr/bin/ld: ../src/.libs/libucl.so: undefined reference to `ucl_maybe_parse_number'
-collect2: error: ld returned 1 exit status
-make[2]: *** [Makefile:634: test_basic] Error 1
+make[2]: 'test_basic' is up to date.
+make[2]: 'test_speed' is up to date.
+make[2]: 'test_generate' is up to date.
+make[2]: 'test_schema' is up to date.
+make[2]: 'test_streamline' is up to date.
 make[2]: Leaving directory '/home/workspace/tests'
-make[1]: *** [Makefile:1009: check-am] Error 2
+make  check-TESTS
+make[2]: Entering directory '/home/workspace/tests'
+make[3]: Entering directory '/home/workspace/tests'
+PASS: streamline.test
+============================================================================
+Testsuite summary for libucl 0.7.2
+============================================================================
+# TOTAL: 1
+# PASS:  1
+# SKIP:  0
+# XFAIL: 0
+# FAIL:  0
+# XPASS: 0
+# ERROR: 0
+============================================================================
+make[3]: Leaving directory '/home/workspace/tests'
+make[2]: Leaving directory '/home/workspace/tests'
 make[1]: Leaving directory '/home/workspace/tests'
-make: *** [Makefile:479: check-recursive] Error 1
+Making check in utils
+make[1]: Entering directory '/home/workspace/utils'
+make[1]: Nothing to be done for 'check'.
+make[1]: Leaving directory '/home/workspace/utils'
+Making check in doc
+make[1]: Entering directory '/home/workspace/doc'
+make[1]: Nothing to be done for 'check'.
+make[1]: Leaving directory '/home/workspace/doc'
+make[1]: Entering directory '/home/workspace'
+make[1]: Leaving directory '/home/workspace'

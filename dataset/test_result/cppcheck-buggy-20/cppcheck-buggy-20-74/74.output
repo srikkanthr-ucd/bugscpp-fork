@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 74: cfg-std_cpp
+1/1 Test #74: cfg-std_cpp ......................   Passed    2.95 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   2.96 sec

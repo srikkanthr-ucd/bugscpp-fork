@@ -1,0 +1,6 @@
+Test_Buggy_Repo_List: ['exiv2-20', 'yaml_cpp-6']
+Total_Patch_Number: 10
+Total_Compilable_Patch_Number: 9
+Total_Plausible_Patch_Number: 0
+Compilable_Patch_List: ['exiv2-20_Conversation-1', 'exiv2-20_Conversation-2', 'exiv2-20_Conversation-3', 'exiv2-20_Conversation-4', 'yaml_cpp-6_Conversation-1', 'yaml_cpp-6_Conversation-2', 'yaml_cpp-6_Conversation-3', 'yaml_cpp-6_Conversation-4', 'yaml_cpp-6_Conversation-5']
+Plausible_Patch_list: []

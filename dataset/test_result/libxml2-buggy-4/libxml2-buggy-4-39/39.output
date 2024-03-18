@@ -1,0 +1,8 @@
+Error for ./test/errors/extparsedent.xml failed
+File ./test/errors/extparsedent.xml generated an error
+Error for ./test/errors/extparsedent.xml failed
+File ./test/errors/extparsedent.xml generated an error
+## Error cases regression tests
+## Error cases stream regression tests
+I/O warning : failed to load external entity "/etc/doesnotexist"
+Total 2 tests, 2 errors, 0 leaks

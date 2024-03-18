@@ -1,0 +1,10 @@
+Test_Repo: yara-1
+Prompt_ID: 4
+Repeat_Num: 1
+Total_Patch_Num: 1
+Compilable_Patch_Num: 0
+Plausible_Patch_Num: 0
+Average_Response_Time: 4.230917453765869
+Average_Confidence: -1.0
+Average_Identify_Accuracy: -1.0
+Average_Pass_Rate: 0.0

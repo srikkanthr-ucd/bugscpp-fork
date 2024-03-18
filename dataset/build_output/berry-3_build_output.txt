@@ -1,0 +1,34 @@
+[berry] start building
+  Starting container
+    Image: hschoe/defects4cpp-ubuntu:berry
+[Clean...]
+done
+
+[Prebuild] generate resources
+[Compile] src/be_solidifylib.c
+[Compile] src/be_debuglib.c
+[Compile] src/be_string.c
+[Compile] src/be_filelib.c
+[Compile] src/be_class.c
+[Compile] src/be_vector.c
+[Compile] src/be_maplib.c
+[Compile] src/be_baselib.c
+[Compile] src/be_byteslib.c
+[Compile] src/be_object.c
+[Compile] src/be_oslib.c
+[Compile] src/be_gclib.c
+[Compile] src/be_parser.c
+src/be_parser.c: In function 'class_inherit':
+src/be_parser.c:1426:27: error: passing argument 2 of 'check_var' from incompatible pointer type [-Wincompatible-pointer-types]
+ 1426 |         check_var(parser, &e);
+      |                           ^~
+      |                           |
+      |                           bexpdesc ** {aka struct <anonymous> **}
+src/be_parser.c:110:50: note: expected 'bexpdesc *' {aka 'struct <anonymous> *'} but argument is of type 'bexpdesc **' {aka 'struct <anonymous> **'}
+  110 | static void check_var(bparser *parser, bexpdesc *e)
+      |                                        ~~~~~~~~~~^
+make: *** [Makefile:70: src/be_parser.o] Error 1
+
+  Closing container
+[berry] done
+Elapsed: 14.07s

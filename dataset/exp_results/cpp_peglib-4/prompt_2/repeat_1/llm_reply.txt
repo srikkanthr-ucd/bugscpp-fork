@@ -1,0 +1,37 @@
+```c++
+inline void LinkReferences::visit(Reference& ope) {
+    // Check if the reference is a macro parameter
+    auto found_param = false;
+    for (size_t i = 0; i < params_.size(); i++) {
+        const auto& param = params_[i];
+        if (param == ope.name_) {
+            ope.iarg_ = i;
+            found_param = true;
+            break;
+        }
+    }
+
+    // Check if the reference is a definition rule
+    if (grammar_.find(ope.name_) != grammar_.end()) {
+        auto& rule = grammar_.at(ope.name_);
+        ope.rule_ = &rule;
+    }
+
+    for (auto arg: ope.args_) {
+        arg->accept(*this);
+    }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 17,
+      "error_type": "condition_logic_error",
+      "explanation": "The condition `if (grammar_.count(ope.name_))` is always true."
+    }
+  ],
+  "confidence": 0.9
+}
+```

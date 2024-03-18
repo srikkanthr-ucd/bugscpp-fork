@@ -1,0 +1,24 @@
+```c
+void dpp_sighandler(int signum) {
+	__gcov_flush();
+	sigaction(SIGINT, &dpp_orig_sigaction, NULL);
+	exit(1);
+}
+```
+```json
+{
+  "error": [
+    {
+      "line_number": 3,
+      "error_type": "omission and vulnerability",
+      "explanation": "SIGINT signal was not included in the list for which handlers are to be reset."
+    },
+    {
+      "line_number": 4,
+      "error_type": "error due to division by zero",
+      "explanation": "The exit code should be an integer, not a division of two integers (signum / 0)."
+    }
+  ],
+  "confidence": 0.9
+}
+```

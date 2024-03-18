@@ -1,0 +1,50 @@
+```c
+else if (! k)
+            cwrite (new_file_flag, bp, to_write);
+          n_written += to_write;
+          bp += to_write;
+          n_read -= to_write;
+          new_file_flag = next;
+
+          /* A line could have been so long that it skipped
+             entire chunks. So create empty files in that case.  */
+          while (next || chunk_end <= n_written - 1)
+            {
+              if (!next && bp == eob)
+                {
+                  /* replenish buf, before going to next chunk.  */
+                  chunk_truncated = true;
+                  new_file_flag = 0;
+                  continue;
+                }
+              chunk_no++;
+              if (k && chunk_no > k)
+                return;
+              if (chunk_no == n)
+                chunk_end = file_size - 1; /* >= chunk_size.  */
+              else
+                chunk_end += chunk_size;
+              if (chunk_end <= n_written - 1)
+                {
+                  if (! k)
+                    cwrite (true, NULL, 0);
+                  new_file_flag = 0;
+                }
+              else
+                next = false;
+            }
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 29,
+      "error_type": "Incorrect handling of end of file",
+      "explanation": "The code does not properly reset the `new_file_flag` to 0 when it reaches the end of the file. This can lead to incorrect behavior when writing to the file."
+    }
+  ],
+  "confidence": 0.9
+}
+```

@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 45: TestString
+1/1 Test #45: TestString .......................   Passed    0.17 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.18 sec

@@ -1,0 +1,6 @@
+Test_Buggy_Repo_List: ['libtiff-4', 'libtiff-5', 'libucl-1', 'libucl-2', 'libucl-3', 'libucl-4']
+Total_Patch_Number: 26
+Total_Compilable_Patch_Number: 19
+Total_Plausible_Patch_Number: 0
+Compilable_Patch_List: ['libtiff-5_Conversation-1', 'libtiff-5_Conversation-2', 'libtiff-5_Conversation-4', 'libtiff-5_Conversation-5', 'libucl-1_Conversation-1', 'libucl-1_Conversation-2', 'libucl-1_Conversation-3', 'libucl-1_Conversation-4', 'libucl-1_Conversation-5', 'libucl-2_Conversation-1', 'libucl-2_Conversation-2', 'libucl-2_Conversation-3', 'libucl-2_Conversation-4', 'libucl-3_Conversation-1', 'libucl-4_Conversation-1', 'libucl-4_Conversation-2', 'libucl-4_Conversation-3', 'libucl-4_Conversation-4', 'libucl-4_Conversation-5']
+Plausible_Patch_list: []

@@ -1,0 +1,21 @@
+```c
+void dpp_sighandler(int signum) {
+	sigaction(signum, &dpp_orig_sigaction, NULL);
+	__gcov_flush();
+	raise(signum);
+	exit(1);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 3,
+      "error_type": "function-call-argument-mismatch",
+      "explanation": "Function sigaction requires it's 2nd argument pointer to sigaction structure, but &dpp_orig_sigaction is not a pointer but a reference to sigaction structure"
+    }
+  ],
+  "confidence": 1
+}
+```

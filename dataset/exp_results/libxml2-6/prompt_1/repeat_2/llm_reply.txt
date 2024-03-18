@@ -1,0 +1,38 @@
+```c
+static void xmlGROW (xmlParserCtxtPtr ctxt) {
+    unsigned long curEnd = ctxt->input->end - ctxt->input->cur;
+    unsigned long curBase = ctxt->input->cur - ctxt->input->base;
+
+    if (((curEnd > (unsigned long) XML_MAX_LOOKUP_LIMIT) ||
+         (curBase > (unsigned long) XML_MAX_LOOKUP_LIMIT)) &&
+         ((ctxt->input->buf) && (ctxt->input->buf->readcallback != (xmlInputReadCallback) xmlNop)) &&
+        ((ctxt->options & XML_PARSE_HUGE) == 0)) {
+        xmlFatalErr(ctxt, XML_ERR_INTERNAL_ERROR, "Huge input lookup");
+        xmlHaltParser(ctxt);
+	return;
+    }
+    xmlParserInputGrow(ctxt->input, INPUT_CHUNK);
+    if (ctxt->input->cur > ctxt->input->end ||
+        ctxt->input->cur < ctxt->input->base) {
+        xmlHaltParser(ctxt);
+        xmlFatalErr(ctxt, XML_ERR_INTERNAL_ERROR, "cur index out of bound");
+	return;
+    }
+    if (ctxt->input->cur && *ctxt->input->cur == 0) { // Fix: check for NULL
+        xmlParserInputGrow(ctxt->input, INPUT_CHUNK);
+    }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 21,
+      "error_type": "NULL Pointer Dereference",
+      "explanation": "The condition `(ctxt->input->cur != NULL && *ctxt->input->cur == 0)` is buggy. It dereferences `*ctxt->input->cur` without checking if `ctxt->input->cur` is NULL."
+    }
+  ],
+  "confidence": 0.95
+}
+```

@@ -1,0 +1,43 @@
+```c
+static void free_suffix(bfuncinfo *finfo, bexpdesc *e)
+{
+    int idx = e->v.ss.idx;
+    int nlocal = be_list_count(finfo->local);
+    /* release suffix register */
+    if ((idx >= 0) && (idx < nlocal)) {
+        be_code_freeregs(finfo, 1);
+        e->v.ss.idx = -1;
+        e->v.ss.tt = ETVOID;
+        return;
+    }
+    /* release object register */
+    if ((e->v.ss.tt == ETREG) && (e->v.ss.obj >= 0) && (e->v.ss.obj < nlocal)) {
+        be_code_freeregs(finfo, 1);
+        e->v.ss.obj = -1;
+        e->v.ss.tt = ETVOID;
+        return;
+    }
+    if ((e->v.ss.tt == ETREG) && (e->v.ss.obj >= nlocal) && (e->v.ss.obj < (nlocal+finfo->stacksize))) {
+        be_code_freeregs(finfo, 1);
+        e->v.ss.obj = -1;
+        e->v.ss.tt = ETVOID;
+        return;
+    }
+    /*else */
+    if ((e->v.ss.tt == ETREG) && (e->v.ss.obj >= (nlocal+finfo->stacksize))) {
+        /* an intermediate temporary variable passed between two assembly functions */
+        /* and temporarily stored on stack */
+        e->v.ss.tt = ETVOID;
+        return;
+    }
+
+    be_error(ERR_INTERNAL, "free_suffix: impossible express list register");
+}
+
+```
+```json
+{
+  "error": [],
+  "confidence": 1
+}
+```

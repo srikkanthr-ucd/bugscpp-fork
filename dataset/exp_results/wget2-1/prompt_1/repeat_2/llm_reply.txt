@@ -1,0 +1,31 @@
+```c
+int parse_method(struct global_config *config, struct http_job *job) {
+	if(config->method) {
+		method = config->method;
+	} else if (job->head_first) {
+		if(config->post_data || config->post_file)
+			method = "POST";
+		else
+			method = "HEAD";
+	} else {
+		if (config.post_data || config.post_file)
+			method = "POST";
+		else
+			method = "GET";
+	}
+	return 0;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 10,
+      "error_type": "syntax error",
+      "explanation": "config is a pointer to a struct. You should use config->post_data, not config.post_data."
+    }
+  ],
+  "confidence": 0.9
+}
+```

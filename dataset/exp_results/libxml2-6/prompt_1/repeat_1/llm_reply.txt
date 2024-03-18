@@ -1,0 +1,34 @@
+```c
+static void xmlGROW (xmlParserCtxtPtr ctxt) {
+    unsigned long curEnd = ctxt->input->end - ctxt->input->cur;
+    unsigned long curBase = ctxt->input->cur - ctxt->input->base;
+    int limit = XML_MAX_LOOKUP_LIMIT;
+
+    if (((curEnd > (unsigned long) limit) || (curBase > (unsigned long) limit)) && ((ctxt->input->buf) && (ctxt->input->buf->readcallback != (xmlInputReadCallback) xmlNop)) && ((ctxt->options & XML_PARSE_HUGE) == 0)) {
+        xmlFatalErr(ctxt, XML_ERR_INTERNAL_ERROR, "Huge input lookup");
+        xmlHaltParser(ctxt);
+        return;
+    }
+    xmlParserInputGrow(ctxt->input, INPUT_CHUNK);
+    if ((ctxt->input->cur > ctxt->input->end) || (ctxt->input->cur < ctxt->input->base)) {
+        xmlHaltParser(ctxt);
+        xmlFatalErr(ctxt, XML_ERR_INTERNAL_ERROR, "cur index out of bound");
+        return;
+    }
+    if ((ctxt->input->cur != NULL) && (*ctxt->input->cur == 0))
+        xmlParserInputGrow(ctxt->input, INPUT_CHUNK);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 1,
+      "error_type": "Undefined variable",
+      "explanation": "The variable XML_MAX_LOOKUP_LIMIT is used without being defined."
+    }
+  ],
+  "confidence": 0.7
+}
+```

@@ -1,0 +1,79 @@
+[berry] start building
+  Starting container
+    Image: hschoe/defects4cpp-ubuntu:berry
+[Clean...]
+done
+
+[Prebuild] generate resources
+[Compile] src/be_solidifylib.c
+src/be_solidifylib.c: In function 'm_solidify_proto':
+src/be_solidifylib.c:109:24: warning: format '%llX' expects argument of type 'long long unsigned int', but argument 6 has type 'long unsigned int' [-Wformat=]
+  109 |                 logfmt("%*s  { { .p=(void*)0x%016llX }, %s},\n", indent, "", (uint64_t) pr->ktab[k].v.p, type_name);
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~              ~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                              |
+      |                                                                              long unsigned int
+src/be_solidifylib.c:26:58: note: in definition of macro 'logbuf'
+   26 | #define logbuf(...)     snprintf(__lbuf, sizeof(__lbuf), __VA_ARGS__)
+      |                                                          ^~~~~~~~~~~
+src/be_solidifylib.c:109:17: note: in expansion of macro 'logfmt'
+  109 |                 logfmt("%*s  { { .p=(void*)0x%016llX }, %s},\n", indent, "", (uint64_t) pr->ktab[k].v.p, type_name);
+      |                 ^~~~~~
+src/be_solidifylib.c:109:52: note: format string is defined here
+  109 |                 logfmt("%*s  { { .p=(void*)0x%016llX }, %s},\n", indent, "", (uint64_t) pr->ktab[k].v.p, type_name);
+      |                                              ~~~~~~^
+      |                                                    |
+      |                                                    long long unsigned int
+      |                                              %016lX
+[Compile] src/be_debuglib.c
+[Compile] src/be_string.c
+[Compile] src/be_filelib.c
+[Compile] src/be_class.c
+[Compile] src/be_vector.c
+[Compile] src/be_maplib.c
+[Compile] src/be_baselib.c
+[Compile] src/be_byteslib.c
+src/be_byteslib.c: In function 'buf_set2_le':
+src/be_byteslib.c:318:17: warning: comparison of unsigned expression >= 0 is always true [-Wtype-limits]
+  318 |     if ((offset >= 0) && (offset < buf->len - 1)) {
+      |                 ^~
+src/be_byteslib.c:318:34: warning: comparison of integer expressions of different signedness: 'size_t' {aka 'const long unsigned int'} and 'int' [-Wsign-compare]
+  318 |     if ((offset >= 0) && (offset < buf->len - 1)) {
+      |                                  ^
+src/be_byteslib.c: In function 'buf_set2_be':
+src/be_byteslib.c:326:17: warning: comparison of unsigned expression >= 0 is always true [-Wtype-limits]
+  326 |     if ((offset >= 0) && (offset < buf->len - 1)) {
+      |                 ^~
+src/be_byteslib.c:326:34: warning: comparison of integer expressions of different signedness: 'size_t' {aka 'const long unsigned int'} and 'int' [-Wsign-compare]
+  326 |     if ((offset >= 0) && (offset < buf->len - 1)) {
+      |                                  ^
+src/be_byteslib.c: In function 'buf_set4_le':
+src/be_byteslib.c:350:17: warning: comparison of unsigned expression >= 0 is always true [-Wtype-limits]
+  350 |     if ((offset >= 0) && (offset < buf->len - 3)) {
+      |                 ^~
+src/be_byteslib.c:350:34: warning: comparison of integer expressions of different signedness: 'size_t' {aka 'const long unsigned int'} and 'int' [-Wsign-compare]
+  350 |     if ((offset >= 0) && (offset < buf->len - 3)) {
+      |                                  ^
+src/be_byteslib.c: In function 'buf_set4_be':
+src/be_byteslib.c:360:17: warning: comparison of unsigned expression >= 0 is always true [-Wtype-limits]
+  360 |     if ((offset >= 0) && (offset < buf->len - 3)) {
+      |                 ^~
+src/be_byteslib.c:360:34: warning: comparison of integer expressions of different signedness: 'size_t' {aka 'const long unsigned int'} and 'int' [-Wsign-compare]
+  360 |     if ((offset >= 0) && (offset < buf->len - 3)) {
+      |                                  ^
+[Compile] src/be_object.c
+[Compile] src/be_oslib.c
+[Compile] src/be_gclib.c
+[Compile] src/be_parser.c
+[Compile] src/be_debug.c
+[Compile] src/be_strlib.c
+src/be_strlib.c: In function 'str_format':
+src/be_strlib.c:526:39: error: 'BE_FLOAT_FMTLEN' undeclared (first use in this function); did you mean 'BE_INT_FMTLEN'?
+  526 |                     mode_fixlen(mode, BE_FLOAT_FMTLEN);
+      |                                       ^~~~~~~~~~~~~~~
+      |                                       BE_INT_FMTLEN
+src/be_strlib.c:526:39: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Makefile:70: src/be_strlib.o] Error 1
+
+  Closing container
+[berry] done
+Elapsed: 14.67s

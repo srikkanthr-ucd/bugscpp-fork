@@ -8,17 +8,17 @@ def extract_code(str):
     cur_code = ''
     start = False
     for i in range(len(response)):
-        if response[i].startsWith('```') and start:
+        if response[i].startswith('```') and start:
             codes.append(cur_code)
             cur_code = ''
             start = False
-        if response[i].startsWith('```') and (not start):
+        if response[i].startswith('```') and (not start):
             start = True
         if start:
-            if not cur_code.empty():
+            if cur_code != '':
                 cur_code += '\n'
             cur_code += response[i]
-    if not codes.empty():
+    if len(codes) > 0:
         return codes[-1]
     else:
         return ''

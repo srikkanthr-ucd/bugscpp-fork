@@ -1,0 +1,21 @@
+```cpp
+void dpp_sighandler(int signum) {
+	__gcov_flush();
+	sigaction(SIGINT, &dpp_orig_sigaction, NULL);
+	raise(signum);
+	exit(1);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 3,
+      "error_type": "Function Argument Error",
+      "explanation": "The sigaction function expects its first argument to be a signal number, not a sigaction struct. The correct argument should be SIGINT, which is the signal number for the interrupt signal."
+    }
+  ],
+  "confidence": 1
+}
+```

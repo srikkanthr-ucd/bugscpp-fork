@@ -1,0 +1,19 @@
+```c
+else if (ent->etype == XML_EXTERNAL_GENERAL_PARSED_ENTITY) {
+	xmlFatalErrMsgStr(ctxt, XML_ERR_UNPARSED_ENTITY_DECL,
+		 "Entity reference to unparsed entity %s\n", ent->name);
+    }
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 2,
+      "error_type": "Use of undeclared identifier",
+      "explanation": "The variable name is not declared in the current scope."
+    }
+  ],
+  "confidence": 0.8
+}
+```

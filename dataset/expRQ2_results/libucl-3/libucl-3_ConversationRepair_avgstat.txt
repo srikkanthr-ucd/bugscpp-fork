@@ -1,0 +1,6 @@
+Test_Repo: libucl-3
+Conversation_Num: 1
+Total_Patch_Num: 1
+Compilable_Patch_Num: 1
+Plausible_Patch_Num: 0
+Average_Response_Time: 29.640490293502808

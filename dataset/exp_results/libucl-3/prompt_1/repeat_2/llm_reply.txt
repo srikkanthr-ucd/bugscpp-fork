@@ -1,0 +1,31 @@
+```c
+		else if (c == '$') {
+			*var_expand = true;
+			// skip $
+			c = fgetc(cursource);
+			if (c == EOF) {
+				//no more
+				*var_expand = false;
+				break;
+			}
+			if (c == '$') {
+				// $$
+				ungetc(c, cursource);
+				break;
+			}
+		}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 1,
+      "error_type": "Potential null pointer dereference",
+      "explanation": "The pointer `var_expand` may be null, which can lead to a null pointer dereference when `*var_expand` is used."
+    }
+  ],
+  "confidence": 0.5
+}
+```

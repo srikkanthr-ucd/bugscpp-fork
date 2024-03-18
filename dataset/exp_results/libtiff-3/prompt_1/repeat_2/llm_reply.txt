@@ -1,0 +1,21 @@
+```cpp
+void dpp_sighandler(int signum) {
+  __gcov_flush();
+  sigaction(sigaction, &dpp_orig_sigaction, NULL);
+  raise(signum);
+  exit(EXIT_SUCCESS);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 12,
+      "error_type": "Incorrect exit code",
+      "explanation": "The exit code should be EXIT_SUCCESS instead of 1 to indicate a successful exit."
+    }
+  ],
+  "confidence": 0.9
+}
+```

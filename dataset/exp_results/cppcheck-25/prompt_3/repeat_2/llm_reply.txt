@@ -1,0 +1,35 @@
+```c++
+static bool isLifetimeBorrowed(const ValueType *vt, const ValueType *vtParent)
+{
+    if (!vtParent)
+        return false;
+    if (!vt)
+        return false;
+    if (vt->type == ValueType::UNKNOWN_TYPE || vtParent->type == ValueType::UNKNOWN_TYPE)
+        return false;
+    if (vtParent->pointer > vt->pointer)
+        return true;
+    if (vtParent->pointer < vt->pointer && vtParent->isIntegral())
+        return true;
+    if (vtParent->str() == vt->str())
+        return true;
+    if (vtParent->pointer == vt->pointer && vtParent->type == vt->type && vtParent->isIntegral())
+        // sign conversion
+        return true;
+
+    return false;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 9,
+      "error_type": "NULL Pointers",
+      "explanation": "Checking the condition with '!' for pointers is problematic because NULL is defined as 0."
+    }
+  ],
+  "confidence": 0.8
+}
+```

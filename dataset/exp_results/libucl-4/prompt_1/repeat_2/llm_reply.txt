@@ -1,0 +1,24 @@
+```c
+		else if (*p == '\\') {
+			*need_unescape = true;
+			++p;
+			if (p < chunk->end) {
+				++p;
+			}
+			continue;
+		}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 5,
+      "error_type": "Incorrect use of ++",
+      "explanation": "The increment operator ++ is used incorrectly. It should be used to increment p after the check p < chunk->end."
+    }
+  ],
+  "confidence": 0.9
+}
+```

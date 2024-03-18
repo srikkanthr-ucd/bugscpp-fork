@@ -1,0 +1,35 @@
+```cpp
+static bool isLifetimeBorrowed(const ValueType *vt, const ValueType *vtParent)
+{
+    if (!vtParent)
+        return false;
+    if (!vt)
+        return false;
+    if (vt->type != ValueType::UNKNOWN_TYPE && vtParent->type != ValueType::UNKNOWN_TYPE) {
+        if (vtParent->pointer > vt->pointer && vt->isLValue())
+            return true; // Fix buggy condition
+        if (vtParent->pointer < vt->pointer && vtParent->isIntegral())
+            return true;
+        if (vtParent->str() == vt->str())
+            return true;
+        if (vtParent->pointer == vt->pointer && vtParent->type == vt->type && vtParent->isIntegral())
+            // sign conversion
+            return true;
+    }
+
+    return false;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 16,
+      "error_type": "LogicalError",
+      "explanation": "The condition `vtParent->pointer > vt->pointer` checks if the pointer of the parent value type is greater than the pointer of the current value type. This condition is incorrect because it should check if the pointer of the parent value type is greater than or equal to the pointer of the current value type to correctly determine if the current value type is lifetime-borrowed from the parent value type."
+    }
+  ],
+  "confidence": 0.9
+}
+```

@@ -1,0 +1,10 @@
+file result/errors/759579.xml is 0 bytes, result is 310 bytes
+Result for ./test/errors/759579.xml failed in result/errors/759579.xml
+File ./test/errors/759579.xml generated an error
+file result/errors/759579.xml.str is 207 bytes, result is 0 bytes
+Error for ./test/errors/759579.xml failed
+File ./test/errors/759579.xml generated an error
+## Error cases regression tests
+## Error cases regression tests (old 1.0)
+## Error cases stream regression tests
+Total 2 tests, 2 errors, 0 leaks

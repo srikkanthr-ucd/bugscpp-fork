@@ -1,0 +1,7 @@
+Test_Repo,Conversation_Num,Total_Patch_Num,Compilable_Patch_Num,Plausible_Patch_Num,Average_Response_Time
+libtiff-4,5,5,0,0,28.776484537124634
+libtiff-5,5,5,4,0,5.186161136627197
+libucl-1,5,5,5,0,13.577861404418945
+libucl-2,5,5,4,0,9.470753383636474
+libucl-3,1,1,1,0,29.640490293502808
+libucl-4,5,5,5,0,29.029135608673094

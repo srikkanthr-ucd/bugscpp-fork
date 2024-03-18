@@ -1,0 +1,5 @@
+file result/errors/759573-2.xml.err is 1538 bytes, result is 2466 bytes
+Error for ./test/errors/759573-2.xml failed
+File ./test/errors/759573-2.xml generated an error
+## Error cases regression tests
+Total 1 tests, 1 errors, 0 leaks

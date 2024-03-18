@@ -1,0 +1,36 @@
+```c++
+ValueFlow::Value getLifetimeObjValue(const Token *tok, bool inconclusive)
+{
+    ValueFlow::Value result;
+    auto pred = [&](const ValueFlow::Value &v) {
+        if (!v.isLocalLifetimeValue())
+            return false;
+        if (!inconclusive && v.isInconclusive())
+            return false;
+        if (!v.tokvalue->variable())
+            return false;
+        return true;
+    };
+    auto it = std::find_if(tok->values().begin(), tok->values().end(), pred);
+    if (it == tok->values().end())
+        return result;
+    result = *it;
+    // There should only be one lifetime object
+    if (std::find_if(std::next(it), tok->values().end(), pred) != tok->values().end())
+        return ValueFlow::Value{};
+    return result;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 11,
+      "error_type": "Single-line Error",
+      "explanation": "The condition that applies a filter to find another lifetime value is not correct. It should use the same predicate provided to std::find_if to ensure consistency in the search."
+    }
+  ],
+  "confidence": 1
+}
+```

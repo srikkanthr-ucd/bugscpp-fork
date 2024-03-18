@@ -1,0 +1,55 @@
+Example 4 (lines 46-50) [Issue 4](https://github.com/mity/md4c/issues/4)
+![alt text with *entity* &copy;](img.png 'title')
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><img src="img.png" alt="alt text with entity ©" title="title"></p>
++<p><img src="img.png" alt="alt text with entity ©" title="title">(img.png 'title')</p>
+
+Example 7 (lines 88-92) [Issue 11](https://github.com/mity/md4c/issues/11)
+x [link](/url "foo &ndash; bar") x
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p>x <a href="/url" title="foo – bar">link</a> x</p>
++<p>x <a href="/url" title="foo – bar">link</a>(/url &quot;foo – bar&quot;) x</p>
+
+Example 14 (lines 150-156) [Issue 40](https://github.com/mity/md4c/issues/40)
+[x](url
+'title'
+)x
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1,3 @@
+-<p><a href="url" title="title">x</a>x</p>
++<p><a href="url" title="title">x</a>(url
++'title'
++)x</p>
+
+Example 23 (lines 256-260) `md_is_link_destination_A()`
+[link](</url\.with\.escape>)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/url.with.escape">link</a></p>
++<p><a href="/url.with.escape">link</a>(&lt;/url.with.escape&gt;)</p>
+
+Example 25 (lines 276-284) `md_is_inline_link_spec()`
+> [link](/url 'foo
+> bar')
+
+--- expected HTML
++++ actual HTML
+@@ -1,4 +1,5 @@
+ <blockquote>
+ <p><a href="/url" title="foo
+-bar">link</a></p>
++bar">link</a>(/url 'foo
++bar')</p>
+ </blockquote>
+
+20 passed, 5 failed, 0 errored, 1 skipped

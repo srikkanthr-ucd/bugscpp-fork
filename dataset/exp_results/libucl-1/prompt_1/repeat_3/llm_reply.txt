@@ -1,0 +1,27 @@
+```c
+else if (obj->keylen > 0 && func->ud != NULL) {
+			func->ucl_emitter_append_len (func->ud, obj->key, obj->keylen);
+			if (obj->val != NULL && obj->val->len > 0 && func->ucl_emitter_append_len != NULL)
+				func->ucl_emitter_append_len (func->ud, obj->val->data, obj->val->len);
+			else if(obj->val != NULL && obj->val->len == 0 && func->ucl_emitter_append != NULL)
+				func->ucl_emitter_append (func->ud, "");
+			if (obj->keylen > 0 && obj->key != NULL && func->ucl_emitter_write_key != NULL)
+				func->ucl_emitter_write_key (func->ud, obj->key, obj->keylen);
+		} else {
+			func->ucl_emitter_append_len(func->ud, ",", 1);
+		}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 15,
+      "error_type": "incorrect_data_dependency",
+      "explanation": "The condition `obj->val != NULL && obj->val->len > 0` assumes that `obj->val` is not null and `obj->val->len` is greater than 0, but the condition `obj->keylen > 0 && func->ud != NULL` does not guarantee that `obj->val` is not null. If `obj->keylen` is greater than 0 and `func->ud` is not null, it is possible that `obj->val` is null and `obj->val->len` is not valid."
+    }
+  ],
+  "confidence": 0.8
+}
+```

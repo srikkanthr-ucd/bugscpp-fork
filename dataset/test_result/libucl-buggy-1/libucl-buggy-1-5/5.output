@@ -6,17 +6,35 @@ Making check in tests
 make[1]: Entering directory '/home/workspace/tests'
 make  test_basic test_speed test_generate test_schema test_streamline test_msgpack
 make[2]: Entering directory '/home/workspace/tests'
-  CCLD     test_basic
-/usr/bin/ld: test_basic-test_basic.o: in function `main':
-/home/workspace/tests/test_basic.c:130: undefined reference to `ucl_object_emit'
-/usr/bin/ld: /home/workspace/tests/test_basic.c:140: undefined reference to `ucl_object_emit'
-/usr/bin/ld: /home/workspace/tests/test_basic.c:172: undefined reference to `ucl_object_emit'
-/usr/bin/ld: /home/workspace/tests/test_basic.c:137: undefined reference to `ucl_object_emit'
-/usr/bin/ld: /home/workspace/tests/test_basic.c:133: undefined reference to `ucl_object_emit'
-/usr/bin/ld: ../src/.libs/libucl.so: undefined reference to `ucl_standartd_emitter_ops'
-collect2: error: ld returned 1 exit status
+make[2]: 'test_basic' is up to date.
+make[2]: 'test_speed' is up to date.
+make[2]: 'test_generate' is up to date.
+make[2]: 'test_schema' is up to date.
+make[2]: 'test_streamline' is up to date.
+make[2]: 'test_msgpack' is up to date.
 make[2]: Leaving directory '/home/workspace/tests'
-make[2]: *** [Makefile:647: test_basic] Error 1
-make[1]: *** [Makefile:1041: check-am] Error 2
+make  check-TESTS
+make[2]: Entering directory '/home/workspace/tests'
+make[3]: Entering directory '/home/workspace/tests'
+FAIL: speed.test
+============================================================================
+Testsuite summary for libucl 0.7.3
+============================================================================
+# TOTAL: 1
+# PASS:  0
+# SKIP:  0
+# XFAIL: 0
+# FAIL:  1
+# XPASS: 0
+# ERROR: 0
+============================================================================
+See tests/test-suite.log
+Please report to https://github.com/vstakhov/libucl
+============================================================================
+make[3]: *** [Makefile:867: test-suite.log] Error 1
+make[2]: *** [Makefile:975: check-TESTS] Error 2
+make[1]: *** [Makefile:1042: check-am] Error 2
+make: *** [Makefile:480: check-recursive] Error 1
+make[3]: Leaving directory '/home/workspace/tests'
+make[2]: Leaving directory '/home/workspace/tests'
 make[1]: Leaving directory '/home/workspace/tests'
-make: *** [Makefile:479: check-recursive] Error 1

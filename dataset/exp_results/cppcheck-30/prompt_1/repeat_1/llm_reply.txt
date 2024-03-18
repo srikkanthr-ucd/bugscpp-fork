@@ -1,0 +1,24 @@
+```c++
+bool isVariableChanged(const Token *tok, int indirect, const Settings *settings, bool cpp, int depth) {
+  if (tok->varname) {
+    if (indirect)
+      return isVariableChanged(tok->next, indirect - 1, settings, cpp, depth);
+    else if (tok->varname && tok->lang_token == VAR && settings->varChanged(settings, tok->varname, cpp))
+      return true;
+  }
+  return false;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 7,
+      "error_type": "Null pointer dereference",
+      "explanation": "tok->varname is used without checking if tok is NULL"
+    }
+  ],
+  "confidence": 0.9
+}
+```

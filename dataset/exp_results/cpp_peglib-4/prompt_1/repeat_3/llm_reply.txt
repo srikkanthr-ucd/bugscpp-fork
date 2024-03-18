@@ -1,0 +1,37 @@
+```cpp
+inline void LinkReferences::visit(Reference& ope) {
+    // Check if the reference is a macro definition
+    auto found_param = false;
+    for (size_t i = 0; i < params_.size(); i++) {
+        const auto& param = params_[i];
+        if (param == ope.name_) {
+            ope.iarg_ = i;
+            found_param = true;
+            break;
+        }
+    }
+
+    // Check if the reference is a definition rule
+    if (grammar_.count(ope.name_)) {
+        auto& rule = grammar_.at(ope.name_);
+        ope.rule_ = &rule;
+    }
+
+    for (auto arg: ope.args_) {
+        arg->accept(*this);
+    }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 11,
+      "error_type": "macro parameter",
+      "explanation": "The program aims to find if the current reference is a macro parameter. However, the variable `found_param` is initialized to `false`, the macro parameter check only sets `found_param` to `true` when the reference is found to be a parameter, and the variable is never checked later in the program. Thus, the program will report false for all references, even if they happen to be macro parameters. To fix the issue, one should set `found_param` to true before the loop if the reference is indeed a macro parameter (line 16)."
+    }
+  ],
+  "confidence": 0.8
+}
+```

@@ -1,0 +1,10 @@
+Test_Repo: cpp_peglib-4
+Prompt_ID: 3
+Repeat_Num: 3
+Total_Patch_Num: 3
+Compilable_Patch_Num: 3
+Plausible_Patch_Num: 0
+Average_Response_Time: 6.028071403503418
+Average_Confidence: 0.8666666666666667
+Average_Identify_Accuracy: 0.16666666666666666
+Average_Pass_Rate: 0.6595744680851064

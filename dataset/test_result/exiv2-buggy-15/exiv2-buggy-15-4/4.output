@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_run (test_issue_561.ShouldNotThrowsWithSpecificIsoSpeedValue)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/workspace/tests/system_tests.py", line 635, in test_run
+    retval, proc.returncode, msg="Return value does not match"
+AssertionError: 0 != -11 : Return value does not match
+
+----------------------------------------------------------------------
+Ran 1 test in 0.095s
+
+FAILED (failures=1)

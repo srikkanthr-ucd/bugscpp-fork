@@ -1,0 +1,144 @@
+[cppcheck] start building
+  Starting container
+    Image: hschoe/defects4cpp-ubuntu:cppcheck
+-- ------------------ General configuration for Cppcheck 2.1.99 -----------------
+-- 
+-- CMake Generator =       Unix Makefiles
+-- Compiler =              GNU
+-- Compiler Version =      7.5.0
+-- Build type =            Debug
+-- CMAKE_INSTALL_PREFIX =  /usr/local
+-- CMAKE_DISABLE_PRECOMPILE_HEADERS = Off
+-- C++ flags (General) =   
+-- C++ flags (Release) =   -O3 -DNDEBUG
+-- C++ flags (RelWithDebInfo) = -O2 -g -DNDEBUG
+-- C++ flags (Debug) =     -g
+-- Found Define: _GLIBCXX_DEBUG
+-- Found Define: FILESDIR="/usr/local/share/Cppcheck"
+-- 
+-- ---------------------------------------------------------
+-- ANALYZE_MEMORY =        OFF
+-- ANALYZE_ADDRESS =       OFF
+-- ANALYZE_THREAD =        OFF
+-- ANALYZE_UNDEFINED =     OFF
+-- ANALYZE_DATAFLOW =      OFF
+-- WARNINGS_ARE_ERRORS =   OFF
+-- 
+-- USE_MATCHCOMPILER =     Auto
+-- USE_MATCHCOMPILER_OPT = Off
+-- 
+-- BUILD_SHARED_LIBS =     OFF
+-- BUILD_TESTS =           ON
+-- ENABLE_CHECK_INTERNAL = OFF
+-- ENABLE_OSS_FUZZ =       ON
+-- 
+-- BUILD_GUI =             OFF
+-- WITH_QCHART =           OFF
+-- 
+-- HAVE_RULES =            OFF
+-- 
+-- USE_Z3 =                OFF
+-- 
+-- CLANG_TIDY=CLANG_TIDY-NOTFOUND
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/workspace/build
+
+
+[  1%] Building CXX object externals/tinyxml/CMakeFiles/tinyxml_objs.dir/tinyxml2.cpp.o
+[  1%] Built target tinyxml_objs
+[  2%] Building CXX object externals/simplecpp/CMakeFiles/simplecpp_objs.dir/simplecpp.cpp.o
+[  2%] Built target simplecpp_objs
+[  3%] Building CXX object lib/CMakeFiles/lib_objs.dir/cmake_pch.hxx.gch
+[  3%] Building CXX object lib/CMakeFiles/lib_objs.dir/analyzerinfo.cpp.o
+[  4%] Building CXX object lib/CMakeFiles/lib_objs.dir/astutils.cpp.o
+[  5%] Building CXX object lib/CMakeFiles/lib_objs.dir/bughuntingchecks.cpp.o
+[  6%] Building CXX object lib/CMakeFiles/lib_objs.dir/check.cpp.o
+[  6%] Building CXX object lib/CMakeFiles/lib_objs.dir/check64bit.cpp.o
+[  7%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkassert.cpp.o
+[  8%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkautovariables.cpp.o
+[  9%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkbool.cpp.o
+[  9%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkboost.cpp.o
+[ 10%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkbufferoverrun.cpp.o
+[ 11%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkclass.cpp.o
+[ 11%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkcondition.cpp.o
+[ 12%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkexceptionsafety.cpp.o
+[ 13%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkfunctions.cpp.o
+[ 14%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkinternal.cpp.o
+[ 14%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkio.cpp.o
+[ 15%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkleakautovar.cpp.o
+[ 16%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkmemoryleak.cpp.o
+[ 17%] Building CXX object lib/CMakeFiles/lib_objs.dir/checknullpointer.cpp.o
+[ 17%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkother.cpp.o
+[ 18%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkpostfixoperator.cpp.o
+[ 20%] Building CXX object lib/CMakeFiles/lib_objs.dir/checksizeof.cpp.o
+[ 21%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkstl.cpp.o
+[ 21%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkstring.cpp.o
+[ 22%] Building CXX object lib/CMakeFiles/lib_objs.dir/checktype.cpp.o
+[ 23%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkuninitvar.cpp.o
+[ 23%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkunusedfunctions.cpp.o
+[ 24%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkunusedvar.cpp.o
+[ 25%] Building CXX object lib/CMakeFiles/lib_objs.dir/checkvaarg.cpp.o
+[ 26%] Building CXX object lib/CMakeFiles/lib_objs.dir/clangimport.cpp.o
+[ 26%] Building CXX object lib/CMakeFiles/lib_objs.dir/cppcheck.cpp.o
+[ 27%] Building CXX object lib/CMakeFiles/lib_objs.dir/ctu.cpp.o
+[ 28%] Building CXX object lib/CMakeFiles/lib_objs.dir/errorlogger.cpp.o
+[ 29%] Building CXX object lib/CMakeFiles/lib_objs.dir/errortypes.cpp.o
+[ 29%] Building CXX object lib/CMakeFiles/lib_objs.dir/exprengine.cpp.o
+[ 30%] Building CXX object lib/CMakeFiles/lib_objs.dir/forwardanalyzer.cpp.o
+[ 31%] Building CXX object lib/CMakeFiles/lib_objs.dir/importproject.cpp.o
+[ 31%] Building CXX object lib/CMakeFiles/lib_objs.dir/library.cpp.o
+[ 32%] Building CXX object lib/CMakeFiles/lib_objs.dir/mathlib.cpp.o
+[ 33%] Building CXX object lib/CMakeFiles/lib_objs.dir/path.cpp.o
+[ 34%] Building CXX object lib/CMakeFiles/lib_objs.dir/pathanalysis.cpp.o
+[ 34%] Building CXX object lib/CMakeFiles/lib_objs.dir/pathmatch.cpp.o
+[ 35%] Building CXX object lib/CMakeFiles/lib_objs.dir/platform.cpp.o
+[ 36%] Building CXX object lib/CMakeFiles/lib_objs.dir/preprocessor.cpp.o
+[ 37%] Building CXX object lib/CMakeFiles/lib_objs.dir/programmemory.cpp.o
+[ 37%] Building CXX object lib/CMakeFiles/lib_objs.dir/settings.cpp.o
+[ 38%] Building CXX object lib/CMakeFiles/lib_objs.dir/suppressions.cpp.o
+[ 40%] Building CXX object lib/CMakeFiles/lib_objs.dir/symboldatabase.cpp.o
+[ 40%] Building CXX object lib/CMakeFiles/lib_objs.dir/templatesimplifier.cpp.o
+[ 41%] Building CXX object lib/CMakeFiles/lib_objs.dir/timer.cpp.o
+[ 42%] Building CXX object lib/CMakeFiles/lib_objs.dir/token.cpp.o
+[ 43%] Building CXX object lib/CMakeFiles/lib_objs.dir/tokenize.cpp.o
+[ 43%] Building CXX object lib/CMakeFiles/lib_objs.dir/tokenlist.cpp.o
+[ 44%] Building CXX object lib/CMakeFiles/lib_objs.dir/utils.cpp.o
+[ 45%] Building CXX object lib/CMakeFiles/lib_objs.dir/valueflow.cpp.o
+/home/workspace/lib/valueflow.cpp:2976:13: error: 'LinkReferences' has not been declared
+ inline void LinkReferences::visit(Reference& ope) {
+             ^~~~~~~~~~~~~~
+/home/workspace/lib/valueflow.cpp:2976:35: error: variable or field 'visit' declared void
+ inline void LinkReferences::visit(Reference& ope) {
+                                   ^~~~~~~~~
+/home/workspace/lib/valueflow.cpp:2976:35: error: 'Reference' was not declared in this scope
+/home/workspace/lib/valueflow.cpp:2976:46: error: 'ope' was not declared in this scope
+ inline void LinkReferences::visit(Reference& ope) {
+                                              ^~~
+/home/workspace/lib/valueflow.cpp:2976:46: note: suggested alternative: 'Type'
+ inline void LinkReferences::visit(Reference& ope) {
+                                              ^~~
+                                              Type
+/home/workspace/lib/valueflow.cpp: In function 'std::__debug::vector<LifetimeToken> getLifetimeTokens(const Token*, ValueFlow::Value::ErrorPath, int)':
+/home/workspace/lib/valueflow.cpp:3038:51: error: 'const class Variable' has no member named 'declaration'; did you mean 'declarationId'?
+             } else if (var->isReference() && var->declaration() &&
+                                                   ^~~~~~~~~~~
+                                                   declarationId
+/home/workspace/lib/valueflow.cpp:3039:49: error: 'const class Variable' has no member named 'declaration'; did you mean 'declarationId'?
+                         Token::simpleMatch(var->declaration()->astParent()->previous(), "return")) {
+                                                 ^~~~~~~~~~~
+                                                 declarationId
+/home/workspace/lib/valueflow.cpp:3040:45: error: 'const class Variable' has no member named 'declaration'; did you mean 'declarationId'?
+                 errorPath.emplace_back(var->declaration()->astParent()->previous(), "Returned by reference.");
+                                             ^~~~~~~~~~~
+                                             declarationId
+make[2]: *** [lib/CMakeFiles/lib_objs.dir/valueflow.cpp.o] Error 1
+lib/CMakeFiles/lib_objs.dir/build.make:956: recipe for target 'lib/CMakeFiles/lib_objs.dir/valueflow.cpp.o' failed
+CMakeFiles/Makefile2:354: recipe for target 'lib/CMakeFiles/lib_objs.dir/all' failed
+make[1]: *** [lib/CMakeFiles/lib_objs.dir/all] Error 2
+make: *** [all] Error 2
+Makefile:145: recipe for target 'all' failed
+
+  Closing container
+[cppcheck] done
+Elapsed: 1m 50.98s

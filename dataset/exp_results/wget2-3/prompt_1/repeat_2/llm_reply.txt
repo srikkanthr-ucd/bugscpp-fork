@@ -1,0 +1,27 @@
+```c
+static int identity(wget_decompressor *dc, const char *src, size_t srclen)
+{
+	if (!src)
+		return -1;
+
+	if (dc->sink)
+	{
+		dc->sink(dc->context, src, srclen);
+		return 0;
+	}
+	return -1;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 1,
+      "error_type": "Null pointer dereference",
+      "explanation": "dc should be checked before accessing its field sink."
+    }
+  ],
+  "confidence": 0.8
+}
+```

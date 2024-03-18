@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 4: TestAstUtils
+1/1 Test #4: TestAstUtils .....................   Passed    0.13 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.14 sec

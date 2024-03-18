@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 22: TestGarbage
+1/1 Test #22: TestGarbage ......................   Passed    0.33 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.33 sec

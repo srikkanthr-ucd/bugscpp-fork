@@ -1,0 +1,20 @@
+```c
+		else if (obj->keylen > 0 && func->ud != NULL) {
+			func->ucl_emitter_append_len (func->ud, obj->key, obj->keylen); 
+			func->ucl_emitter_write_key (func->ud); 
+		}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 5,
+      "error_type": "Function Call Error",
+      "explanation": "'ucl_emitter_write_key' should be called after 'ucl_emitter_append_len' in 'ucl_object' emitter functions"
+    }
+  ],
+  "confidence": 1
+}
+```

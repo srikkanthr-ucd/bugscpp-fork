@@ -1,0 +1,37 @@
+```c++
+bool isLikelyStreamRead(bool cpp, const Token *op)
+{
+    if (!cpp)
+        return false;
+
+    if (!Token::Match(op, "&|>>") || !op->isBinaryOp())
+        return false;
+
+    if (!Token::Match(op->astOperand2(), "%name%|.|*|[") || op->str() != op->astOperand2()->str())
+        return false;
+
+    const Token *parent = op;
+    while (parent->astParent() && parent->astParent()->str() == op->str())
+        parent = parent->astParent();
+    if (parent->astParent() && !Token::Match(parent->astParent(), "%oror%|&&|(|,|!"))
+        return false;
+    if (op->str() == "&" && parent->astParent())
+        return false;
+    if (!parent->astOperand1() || !parent->astOperand2() || !parent->astOperand1()->valueType() || !parent->astOperand2()->valueType())
+        return false;
+    return (!parent->astOperand1()->valueType()->isIntegral() || !parent->astOperand2()->valueType()->isIntegral());
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 14,
+      "error_type": "Incorrect conditional check",
+      "explanation": "In the original code, it checks if both `parent->astOperand1()->valueType()` and `parent->astOperand2()->valueType()` are integral types. This is incorrect and should be an OR condition. The corrected code checks if either operand's value type is not integral, which is the correct condition for this scenario."
+    }
+  ],
+  "confidence": 0.9
+}
+```

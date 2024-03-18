@@ -3,6 +3,7 @@ import re
 import json
 import os
 import sys
+import dataset_api
 
 from pathlib import Path
 
@@ -106,6 +107,7 @@ def get_complete_updated_codes(full_repo_name: str, is_buggy: bool):
     for change in changes:
         file_path = change.current_file
         added_lines = change.added_lines
+        removed_lines = change.removed_lines
         source_path = target_path + '/' + repo + '/'
         if is_buggy:
             source_path = source_path + 'buggy-' + index + '/' + file_path
@@ -113,13 +115,18 @@ def get_complete_updated_codes(full_repo_name: str, is_buggy: bool):
             source_path = source_path + 'fixed-' + index + '/' + file_path
         with open(source_path, 'r', encoding='utf-8-sig') as file:
             lines = file.readlines()
-            added_lines_indexes = []
-            for i, line in enumerate(lines):
-                if line.rstrip() in added_lines:
-                    added_lines_indexes.append(i + 1)
+            lines_no = []
+            if is_buggy:
+                for i, line in enumerate(lines):
+                    if line.rstrip() in added_lines:
+                        lines_no.append(i + 1)
+            else:
+                for i, line in enumerate(lines):
+                    if line.rstrip() in removed_lines:
+                        lines_no.append(i + 1)
             file.seek(0)
             code = file.read()
-            code_list[os.path.basename(file_path)] = {'code': code, 'buggy_line_no': added_lines_indexes}
+            code_list[os.path.basename(file_path)] = {'code': code, 'buggy_line_no': lines_no}
 
     return code_list
 
@@ -130,6 +137,14 @@ def get_buggy_functions(buggy_repo):
 
 def get_fixed_functions(repo):
     return get_updated_functions(repo, False)
+
+
+def get_buggy_functions_with_label(buggy_repo):
+    return get_updated_functions_with_label(buggy_repo, True)
+
+
+def get_fixed_functions_with_label(buggy_repo):
+    return get_updated_functions_with_label(buggy_repo, False)
 
 
 def get_buggy_functions_in_batch(buggy_repo_list):
@@ -149,6 +164,7 @@ def get_updated_functions(full_repo_name: str, is_buggy: bool):
         file_path = change.current_file
         start_line = change.start_line
         added_lines = change.added_lines
+        removed_lines = change.removed_lines
         source_file = target_path + '/' + repo
         if is_buggy:
             source_file = source_file + '/buggy-' + index + '/' + file_path
@@ -156,18 +172,93 @@ def get_updated_functions(full_repo_name: str, is_buggy: bool):
             source_file = source_file + '/fixed-' + index + '/' + file_path
         with open(source_file, 'r') as file:
             lines = file.readlines()
-            print('reading ', source_file, " has : ", len(lines), ' lines')
             start_index = find_function_start(lines, start_line - 1)
             end_index = find_function_end(lines, start_index)
             function_lines = lines[start_index:end_index + 1]
-            added_lines_indexes = []
-            for i, line in enumerate(function_lines):
-                if line.rstrip() in added_lines:
-                    added_lines_indexes.append(i + 1)
+            lines_no = []
+            if is_buggy:
+                for i, line in enumerate(function_lines):
+                    if line.rstrip() in added_lines:
+                        lines_no.append(i + 1)
+            else:
+                for i, line in enumerate(function_lines):
+                    if line.rstrip() in removed_lines:
+                        lines_no.append(i + 1)
             function = "".join(function_lines)
-            updated_functions[os.path.basename(file_path)] = {'function': function, 'buggy_line_no': added_lines_indexes}
+            updated_functions[os.path.basename(file_path)] = {'function': function, 'buggy_line_no': lines_no}
 
     return updated_functions
+
+
+def get_updated_functions_with_label(full_repo_name: str, is_buggy: bool):
+    updated_functions = {}
+    repo, index = full_repo_name.split("-")
+    patch_file_path = patch_path_prefix + repo + '/patch/' + "{:04d}".format(int(index)) + '-buggy.patch'
+    changes = parse_patch(patch_file_path)
+
+    for change in changes:
+        file_path = change.current_file
+        start_line = change.start_line
+        added_lines = change.added_lines
+        removed_lines = change.removed_lines
+        source_file = target_path + '/' + repo
+        if is_buggy:
+            source_file = source_file + '/buggy-' + index + '/' + file_path
+        else:
+            source_file = source_file + '/fixed-' + index + '/' + file_path
+        with open(source_file, 'r') as file:
+            lines = file.readlines()
+            start_index = find_function_start(lines, start_line - 1)
+            end_index = find_function_end(lines, start_index)
+            function_lines = lines[start_index:end_index + 1]
+            lines_no = []
+            if is_buggy:
+                for i, line in enumerate(function_lines):
+                    if line.rstrip() in added_lines:
+                        lines_no.append(i + 1)
+            else:
+                for i, line in enumerate(function_lines):
+                    if line.rstrip() in removed_lines:
+                        lines_no.append(i + 1)
+
+            lst = segment_list(lines_no)
+            for sub_list in lst:
+                first_element = sub_list[0]
+                last_element = sub_list[-1]
+                function_lines.insert(first_element - 1, '<start_bug>\n')
+                function_lines.insert(last_element + 1, '<end_bug>\n')
+
+            lines_no.clear()
+            if is_buggy:
+                for i, line in enumerate(function_lines):
+                    if line.rstrip() in added_lines:
+                        lines_no.append(i + 1)
+            else:
+                for i, line in enumerate(function_lines):
+                    if line.rstrip() in removed_lines:
+                        lines_no.append(i + 1)
+
+            function = "".join(function_lines)
+            updated_functions[os.path.basename(file_path)] = {'function': function, 'buggy_line_no': lines_no}
+
+    return updated_functions
+
+
+def segment_list(a):
+    # Initialize the result list with the first element of 'a' as a sublist
+    b = [[a[0]]] if a else []
+
+    # Iterate over the elements of 'a' starting from the second element
+    for i in range(1, len(a)):
+        # If the current element is consecutive to the last element of the last sublist in 'b'
+        if a[i] - b[-1][-1] == 1:
+            # Append the current element to the last sublist in 'b'
+            b[-1].append(a[i])
+        else:
+            # Otherwise, start a new sublist in 'b' with the current element
+            b.append([a[i]])
+
+    return b
 
 
 class Change:
@@ -209,7 +300,7 @@ def parse_patch(patch_file):
             elif line.startswith('+') and not line.startswith('+++'):
                 if change is not None:
                     change.get_added_lines().append(line[1:].rstrip())
-            elif line.startswith('-') and not line.startswith('---'):
+            elif line.startswith('-') and not line.startswith('--'):
                 if change is not None:
                     change.get_removed_lines().append(line[1:].rstrip())
 
@@ -218,10 +309,8 @@ def parse_patch(patch_file):
 
 def find_function_start(lines, start_index):
     func_def_regex = re.compile(
-        r'^\s*(?:static\s+)?(?:inline\s+)?(?:virtual\s+)?\w+\s+\w+\s*\([^)]*\)\s*(const)?\s*{?\s*$')
+        r'^\s*(?:static\s+)?(?:inline\s+)?(?:virtual\s+)?[\w:<>]+\s+[\w:]+\s*\([^)]*\)?\s*(const)?\s*{?\s*$')
     brace_regex = re.compile(r'^\s*\{\s*$')
-
-    print(len(lines), start_index, " ::: debugging")
 
     for i in range(start_index, -1, -1):
         line = lines[i]
@@ -259,3 +348,41 @@ def is_data_exist(repo, index):
     fixed_path = Path(target_path + "/" + repo + "/fixed-" + index)
     return buggy_path.exists() and fixed_path.exists()
 
+
+def filter_multi_files_bug_repo(lst:[]) ->[]:
+    new_lst = []
+    for repo in lst:
+        data = get_buggy_files(repo)
+        if len(data) == 1:
+            new_lst.append(repo)
+    return new_lst
+
+
+def find_repair_scenarios_repos():
+    total_bugs = 0
+    rs_repos = []
+    idx = 1
+    for bug_tag in dataset_api.bugs_line_tags:
+        for error_tag in dataset_api.error_types_tags:
+            lst = dataset_api.search_repositories_by_tags(bug_tag, error_tag)
+            lst = filter_multi_files_bug_repo(lst)
+            print(f'RS_{idx}: {bug_tag} - {error_tag}: , num: {len(lst)}')
+            print(f'{lst}')
+            rs_repos.append(lst)
+            idx += 1
+            total_bugs += len(lst)
+    print(f'total bugs in 6 RSs: {total_bugs}')
+    print(f'rs_repos: {rs_repos}')
+
+    for i in range(len(rs_repos)):
+        for j in range(i + 1, len(rs_repos)):
+            common_elements = set(rs_repos[i]).intersection(rs_repos[j])
+            common_elements_list = list(common_elements)
+            print(f'RS_{i + 1} and RS_{j + 1}\'s common repos: {common_elements_list}')
+
+
+def get_rq3_buggy_data(buggy_repo):
+    with open('rq3_buggy_functions.json', 'r') as file:
+        data = json.load(file)
+        buggy_data = data.get(buggy_repo)
+    return buggy_data

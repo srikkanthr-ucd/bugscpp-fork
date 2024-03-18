@@ -1,0 +1,7 @@
+test_result: 
+example-1: 
+build_result: True
+test_cases_result:  
+pass_rate: 0.0
+pass_test_cases: []
+fail_test_cases: ['example-buggy-1-2', 'example-buggy-1-3', 'example-buggy-1-4', 'example-buggy-1-5', 'example-buggy-1-1']

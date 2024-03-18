@@ -1,0 +1,39 @@
+```c++
+inline void LinkReferences::visit(Reference& ope) {
+    // Check if the reference is a macro parameter
+    auto found_param = false;
+    for (size_t i = 0; i < params_.size(); i++) {
+        const auto& param = params_[i];
+        if (param == ope.name_) {
+            ope.iarg_ = i;
+            found_param = true;
+            break;
+        }
+    }
+
+    // Check if the reference is a definition rule
+    if (grammar_.count(ope.name_)) {
+        auto& rule = grammar_.at(ope.name_);
+        ope.rule_ = &rule;
+    } else {
+        throw std::runtime_error("Undefined reference: " + ope.name_);
+    }
+
+    for (auto arg: ope.args_) {
+        arg->accept(*this);
+    }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 16,
+      "error_type": "Undefined reference",
+      "explanation": "The reference `ope.name_` is not defined in the grammar. It is necessary to check if the reference exists in the grammar before accessing it to avoid undefined reference errors."
+    }
+  ],
+  "confidence": 0.9
+}
+```

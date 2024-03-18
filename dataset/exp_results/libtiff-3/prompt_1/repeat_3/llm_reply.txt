@@ -1,0 +1,21 @@
+```c
+void dpp_sighandler(int signum) {
+	__gcov_flush();
+	sigaction(SIGINT, &dpp_orig_sigaction, NULL);
+	raise(signum);
+	exit(1);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 4,
+      "error_type": "argument mismatch",
+      "explanation": "The first argument to sigaction() should be the signal number, not the structure pointer."
+    }
+  ],
+  "confidence": 0.9
+}
+```

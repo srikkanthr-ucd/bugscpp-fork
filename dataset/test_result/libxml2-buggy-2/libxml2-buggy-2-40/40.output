@@ -1,0 +1,14 @@
+file result/HTML/758605.html.err is 82 bytes, result is 88 bytes
+Error for ./test/HTML/758605.html failed
+File ./test/HTML/758605.html generated an error
+file result/HTML/758605.html is 147 bytes, result is 127 bytes
+Result for ./test/HTML/758605.html failed in result/HTML/758605.html
+File ./test/HTML/758605.html generated an error
+Got a difference for ./test/HTML/758605.html
+File ./test/HTML/758605.html generated an error
+## HTML regression tests
+## Push HTML regression tests
+## HTML SAX regression tests
+## Error cases regression tests
+## Error cases stream regression tests
+Total 7 tests, 3 errors, 0 leaks

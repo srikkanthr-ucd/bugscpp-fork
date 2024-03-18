@@ -1,0 +1,35 @@
+```c++
+static bool isLifetimeBorrowed(const ValueType *vt, const ValueType *vtParent)
+{
+    if (!vtParent)
+        return false;
+    if (!vt)
+        return false;
+    if (vt->type != ValueType::UNKNOWN_TYPE && vtParent->type != ValueType::UNKNOWN_TYPE) {
+        if (vtParent->pointer > vt->pointer && vtParent->type != ValueType::vt_longlong && vt->type != ValueType::vt_longlong)
+            return true;
+        if (vtParent->pointer < vt->pointer && vtParent->isIntegral())
+            return true;
+        if (vtParent->str() == vt->str())
+            return true;
+        if (vtParent->pointer == vt->pointer && vtParent->type == vt->type && vtParent->isIntegral())
+            // sign conversion
+            return true;
+    }
+
+    return false;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 11,
+      "error_type": "logical error",
+      "explanation": "Using `>` for comparison mistake."
+    }
+  ],
+  "confidence": 0.9
+}
+```

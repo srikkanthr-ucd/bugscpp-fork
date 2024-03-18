@@ -1,0 +1,20 @@
+```c
+		else if (c == '$') {
+			*var_expand = true;
+			my_get_var(cur, var_expand);  <--missing function call
+		}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 7,
+      "error_type": "missing function call",
+      "explanation": "The program requires a function call to `my_get_var` when the character `c` is equal to `$`."
+    }
+  ],
+  "confidence": 1.0
+}
+```

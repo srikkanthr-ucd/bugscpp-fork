@@ -1,0 +1,38 @@
+```c++
+static int _yr_scan_wicompare(
+    const uint8_t* data,
+    size_t data_size,
+    uint8_t* string,
+    size_t string_length)
+{
+  const uint8_t* s1 = data;
+  const uint8_t* s2 = string;
+
+  size_t i = 0;
+
+  if (data_size < string_length)
+    return 0;
+
+  while (i < string_length && yr_lowercase[*s1] == yr_lowercase[*s2])
+  {
+    s1+=2;
+    s2++;
+    i++;
+  }
+
+  return (int) ((i == string_length) ? i * 2 : 0);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 10,
+      "error_type": "incorrect_comparison",
+      "explanation": "The condition `data_size < string_length * 2` is incorrect. This condition checks if the size of the data buffer is smaller than twice the length of the string. However, the correct condition should be `data_size < string_length`. This condition ensures that the data buffer is large enough to contain the string after it is converted to wide characters."
+    }
+  ],
+  "confidence": 0.98
+}
+```

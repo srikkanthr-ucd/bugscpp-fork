@@ -1,0 +1,34 @@
+```
+static bool isLifetimeBorrowed(const ValueType *vt, const ValueType *vtParent)
+{
+    if (!vtParent)
+        return false;
+    if (!vt)
+        return false;
+    if (vt->type != ValueType::UNKNOWN_TYPE && vtParent->type != ValueType::UNKNOWN_TYPE) {
+        if (vtParent->pointer > vt->pointer)
+            return true;
+        if (vtParent->pointer < vt->pointer && vtParent->isIntegral())
+            return true;
+        if (vtParent->str() == vt->str())
+            return true;
+        if (vtParent->pointer == vt->pointer && vtParent->type == vt->type && vtParent->isIntegral())
+            // sign conversion
+            return true;
+        if (vtParent->pointer == vt->pointer && vtParent->type == vt->type && vt->isIntegral() && (vtParent->type == ValueType::FLOAT_TYPE || vtParent->type == ValueType::DOUBLE_TYPE))
+            // floating point -> integral conversion
+            return true;
+        if (vtParent->pointer == vt->pointer && vtParent->type == vt->type && vt->type == ValueType::STRUCT_TYPE)
+            // struct -> struct conversion
+            return true;
+        if ((vtParent->pointer == vt->pointer || vtParent->pointer == vt->pointer+1 || vtParent->pointer == vt->pointer-1) && vtParent->type == vt->type && vt->type == ValueType::CHAR_TYPE && ((int)vtParent->pointer-(int)vt->pointer <=3 && (int)vtParent->pointer-(int)vt->pointer >= -3))
+            // char -> char conversion
+            return true;
+        if (vtParent->pointer == vt->pointer && vtParent->type == vt->type && vt->type == ValueType::ENUM_TYPE)
+            // enum -> enum conversion
+            return true;
+    }
+
+    return false;
+}
+```

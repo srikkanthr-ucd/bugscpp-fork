@@ -1,0 +1,48 @@
+```c++
+void Tokenizer::removeMacrosInGlobalScope() {
+  vector<string> lines = getFileContents();
+  int total_lines = lines.size();
+  for (int i = 0; i < total_lines; i++) {
+    string line = lines[i];
+    bool is_macro = false;
+    if (line.find("#define") != string::npos) {
+      is_macro = true;
+    } else if (line.find("#") != string::npos) {
+      is_macro = true;
+      for (int j = line.find("#"); j < line.size(); j++) {
+        if (line[j] != ' ' && line[j] != '\t') {
+          is_macro = false;
+          break;
+        }
+      }
+    }
+    if (is_macro) {
+      lines.erase(lines.begin() + i);
+      i--;
+      total_lines--;
+    }
+  }
+  ofstream file(file_name);
+  for (auto i = lines.begin(); i != lines.end(); i++)
+    file << *i << endl;
+  file.close();
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 16,
+      "error_type": "Off-by-one Error",
+      "explanation": "The assignment of `i--` should be placed at the end of the if block."
+    },
+    {
+      "line_number": 18,
+      "error_type": "Unused Variable",
+      "explanation": "The variable `total_lines` is incremented within the loop, but the incremented value is never used."
+    }
+  ],
+  "confidence": 0.8
+}
+```

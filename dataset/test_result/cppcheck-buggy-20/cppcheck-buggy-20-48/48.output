@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 48: TestSymbolDatabase
+1/1 Test #48: TestSymbolDatabase ...............   Passed    1.08 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   1.08 sec

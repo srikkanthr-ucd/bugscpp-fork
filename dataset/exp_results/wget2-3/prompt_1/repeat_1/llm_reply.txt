@@ -1,0 +1,24 @@
+```c
+static int identity(wget_decompressor *dc, const char *src, size_t srclen)
+{
+	if (dc->sink)
+	{
+		dc->sink(dc->context, src, srclen);
+		return 0;
+	}
+	return -1;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 10,
+      "error_type": "missing_return_statement",
+      "explanation": "The function doesn't return a value when dc->sink is NULL."
+    }
+  ],
+  "confidence": 0.9
+}
+```

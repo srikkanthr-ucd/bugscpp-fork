@@ -1,0 +1,7 @@
+test_result: 
+dlt_daemon-1: 
+build_result: True
+test_cases_result:  
+pass_rate: 0.0
+pass_test_cases: []
+fail_test_cases: ['dlt_daemon-buggy-1-8', 'dlt_daemon-buggy-1-23', 'dlt_daemon-buggy-1-35', 'dlt_daemon-buggy-1-42', 'dlt_daemon-buggy-1-28', 'dlt_daemon-buggy-1-34', 'dlt_daemon-buggy-1-26', 'dlt_daemon-buggy-1-25', 'dlt_daemon-buggy-1-11', 'dlt_daemon-buggy-1-31', 'dlt_daemon-buggy-1-44', 'dlt_daemon-buggy-1-21', 'dlt_daemon-buggy-1-49', 'dlt_daemon-buggy-1-47', 'dlt_daemon-buggy-1-43', 'dlt_daemon-buggy-1-29', 'dlt_daemon-buggy-1-22', 'dlt_daemon-buggy-1-36', 'dlt_daemon-buggy-1-12', 'dlt_daemon-buggy-1-14', 'dlt_daemon-buggy-1-41', 'dlt_daemon-buggy-1-30', 'dlt_daemon-buggy-1-24', 'dlt_daemon-buggy-1-4', 'dlt_daemon-buggy-1-20', 'dlt_daemon-buggy-1-37', 'dlt_daemon-buggy-1-2', 'dlt_daemon-buggy-1-19', 'dlt_daemon-buggy-1-46', 'dlt_daemon-buggy-1-48', 'dlt_daemon-buggy-1-18', 'dlt_daemon-buggy-1-9', 'dlt_daemon-buggy-1-39', 'dlt_daemon-buggy-1-16', 'dlt_daemon-buggy-1-51', 'dlt_daemon-buggy-1-10', 'dlt_daemon-buggy-1-33', 'dlt_daemon-buggy-1-17', 'dlt_daemon-buggy-1-40', 'dlt_daemon-buggy-1-32', 'dlt_daemon-buggy-1-3', 'dlt_daemon-buggy-1-1', 'dlt_daemon-buggy-1-13', 'dlt_daemon-buggy-1-5', 'dlt_daemon-buggy-1-38', 'dlt_daemon-buggy-1-15', 'dlt_daemon-buggy-1-53', 'dlt_daemon-buggy-1-27', 'dlt_daemon-buggy-1-7', 'dlt_daemon-buggy-1-56', 'dlt_daemon-buggy-1-45', 'dlt_daemon-buggy-1-6', 'dlt_daemon-buggy-1-52', 'dlt_daemon-buggy-1-54', 'dlt_daemon-buggy-1-55', 'dlt_daemon-buggy-1-50']

@@ -1,0 +1,31 @@
+```c++
+static bool isLifetimeBorrowed(const ValueType *vt, const ValueType *vtParent)
+{
+    if (!vtParent || !vt)
+        return false;
+    if (vt->type != ValueType::UNKNOWN_TYPE && vtParent->type != ValueType::UNKNOWN_TYPE) {
+        if (vtParent->pointer > vt->pointer)
+            return true;
+        if (vtParent->pointer < vt->pointer && vtParent->isIntegral())
+            return true;
+        // The pointer/integral types need to be of the same size, otherwise assignments won't work (unless the type is a struct)
+        if (vtParent->pointer == vt->pointer && vtParent->type == vt->type && vtParent->isLifetimeBorrowed())
+            return true;
+    }
+
+    return false;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 22,
+      "error_type": "missing_return_statement",
+      "explanation": "The if statement needs a return statement. Adding a return statement will ensure that the function behaves as expected"
+    }
+  ],
+  "confidence": 0.9
+}
+```

@@ -1,0 +1,33 @@
+```c
+static void code_not(bfuncinfo *finfo, bexpdesc *e)
+{
+    switch (e->type) {
+    case ETINT: e->v.i = !e->v.i; break;
+    case ETREAL: e->v.r = !e->v.r; break;
+    case ETNIL: e->v.i = 0; break;
+    case ETBOOL: e->v.i = !e->v.i; break;
+    case ETSTRING: e->v.i = 0; break;
+    default: {
+        int temp = e->t;
+        e->t = e->f;
+        e->f = temp;
+        e->not = NOT_EXPR | (e->not ^ NOT_MASK);
+        return;
+    }
+    }
+    e->type = ETBOOL;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 8,
+      "error_type": "logical_error",
+      "explanation": "The logical value of the ETREAL type is not stored in the `v.i` field, but in the `v.r` field."
+    }
+  ],
+  "confidence": 1
+}
+```

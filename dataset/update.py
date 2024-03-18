@@ -1,5 +1,5 @@
 import os
-from fetch import patch_path_prefix, target_path, get_buggy_files, parse_patch, find_function_start, find_function_end
+from fetch import patch_path_prefix, target_path, get_buggy_files, parse_patch, find_function_start, find_function_end, get_rq3_buggy_data
 
 
 def update_buggy_code(buggy_repo, corrected_code):
@@ -12,7 +12,7 @@ def update_buggy_code(buggy_repo, corrected_code):
         source_file = target_path + '/' + repo + '/buggy-' + index + '/' + file_path
         with open(source_file, 'r') as file:
             # write original code into temp file first
-            content = file.read() 
+            content = file.read()
             write_code_to_temp_file(content, buggy_repo + '-' + os.path.basename(file_path))
 
             # update buggy file with corrected code provided by llm
@@ -20,12 +20,33 @@ def update_buggy_code(buggy_repo, corrected_code):
             lines = file.readlines()
             start_index = find_function_start(lines, start_line - 1)
             end_index = find_function_end(lines, start_index)
-            print(start_index, end_index, 'at', file_path)
 
             # replace function code within the specified range
             lines[start_index:end_index + 1] = corrected_code.splitlines(keepends=True)
-            with open(source_file, 'w', encoding='utf-8') as file:
-                file.writelines(lines)
+            with open(source_file, 'w', encoding='utf-8') as file2:
+                file2.writelines(lines)
+
+
+def update_buggy_code_for_rq3(buggy_repo, corrected_code):
+    repo, index = buggy_repo.split("-")
+    file_path = get_buggy_files(buggy_repo)[0]
+    source_file = target_path + '/' + repo + '/buggy-' + index + '/' + file_path
+    with open(source_file, 'r') as file:
+        # write original code into temp file first
+        content = file.read()
+        write_code_to_temp_file(content, buggy_repo + '-' + os.path.basename(file_path))
+
+        # update buggy file with corrected code provided by llm
+        file.seek(0)
+        lines = file.readlines()
+        buggy_data = get_rq3_buggy_data(buggy_repo)
+        start_index = buggy_data['start_index']
+        end_index = buggy_data['end_index']
+
+        # replace function code within the specified range
+        lines[start_index:end_index + 1] = corrected_code.splitlines(keepends=True)
+        with open(source_file, 'w', encoding='utf-8') as file2:
+            file2.writelines(lines)
 
 
 def restore_buggy_code(buggy_repo):

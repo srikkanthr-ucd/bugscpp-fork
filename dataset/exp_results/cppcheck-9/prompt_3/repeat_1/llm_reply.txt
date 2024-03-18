@@ -1,0 +1,36 @@
+```c++
+ValueFlow::Value getLifetimeObjValue(const Token *tok, bool inconclusive)
+{
+    ValueFlow::Value result;
+    auto pred = [&](const ValueFlow::Value &v) {
+        if (!v.isLocalLifetimeValue())
+            return false;
+        if (!inconclusive && v.isInconclusive())
+            return false;
+        if (!v.tokvalue->variable())
+            return false;
+        return true;
+    };
+    auto it = std::find_if(tok->values().rbegin(), tok->values().rend(), pred); // Fix: Change the iterator to start from the end
+    if (it == tok->values().rend())
+        return result;
+    result = *it;
+    // There should only be one lifetime
+    if (std::find_if(std::next(it).base(), tok->values().rend(), pred) != tok->values().rend())
+        return ValueFlow::Value{};
+    return result;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 12,
+      "error_type": "incorrect_iterator_direction",
+      "explanation": "The iterator 'it' is initialized starting from the beginning of the 'values' collection, which is incorrect for retrieving the lifetime object value. It should start from the end instead."
+    }
+  ],
+  "confidence": 1
+}
+```

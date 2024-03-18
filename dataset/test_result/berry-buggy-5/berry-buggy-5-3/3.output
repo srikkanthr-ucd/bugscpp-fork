@@ -1,0 +1,4 @@
+assert_failed: assert failed!
+stack traceback:
+	<native>: in native function
+	tests/bytes.be:122: in function `main`

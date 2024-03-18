@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 31: TestNullPointer
+1/1 Test #31: TestNullPointer ..................   Passed    1.04 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   1.05 sec

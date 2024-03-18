@@ -1,0 +1,10 @@
+Test_Repo: cppcheck-8
+Prompt_ID: 2
+Repeat_Num: 3
+Total_Patch_Num: 3
+Compilable_Patch_Num: 3
+Plausible_Patch_Num: 0
+Average_Response_Time: 5.278512477874756
+Average_Confidence: 0.9
+Average_Identify_Accuracy: 0.0
+Average_Pass_Rate: 0.9523809523809524

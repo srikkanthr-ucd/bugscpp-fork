@@ -1,0 +1,91 @@
+[   1/  83] [1;32mPASS: build/tests/doctests-es.next/tests/link-doc-02.API-REFERENCE63[0m
+[   2/  83] [1;32mPASS: build/tests/doctests-es.next/tests/link-doc-02.API-REFERENCE64[0m
+[   3/  83] [1;32mPASS: build/tests/doctests-es.next/tests/link-doc-03.API-EXAMPLE7[0m
+[   4/  83] [1;32mPASS: build/tests/doctests-es.next/tests/link-doc-07.DEBUGGER1[0m
+[   5/  83] [1;32mPASS: build/tests/doctests-es.next/tests/link-doc-07.DEBUGGER2[0m
+[   6/  83] [1;32mPASS: build/tests/doctests-es.next/tests/link-doc-07.DEBUGGER3[0m
+[   7/  83] [1;32mPASS: build/tests/doctests-es.next/tests/link-doc-07.DEBUGGER4[0m
+[   8/  83] [1;32mPASS: build/tests/doctests-es.next/tests/link-doc-07.DEBUGGER5[0m
+[   9/  83] [1;32mPASS: build/tests/doctests-es.next/tests/link-doc-07.DEBUGGER6[0m
+[  10/  83] [1;32mPASS: build/tests/doctests-es.next/tests/link-doc-07.DEBUGGER7[0m
+[  11/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE-define-property[0m
+[  12/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE-define-property-getset[0m
+[  13/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE-foreach-property[0m
+[  14/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE-jsbacktrace[0m
+[  15/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE-jscapturebacktrace[0m
+[  16/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE-jssourcename[0m
+[  17/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE-objects-foreach[0m
+[  18/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE-objects-foreach-nativeptr[0m
+[  19/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE-parse-function[0m
+[  20/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE-parse-simple[0m
+[  21/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE1[0m
+[  22/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE10[0m
+[  23/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE11[0m
+[  24/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE12[0m
+[  25/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE13[0m
+[  26/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE17[0m
+[  27/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE18[0m
+[  28/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE19[0m
+[  29/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE3[0m
+[  30/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE34[0m
+[  31/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE37[0m
+[  32/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE38[0m
+[  33/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE39[0m
+[  34/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE4[0m
+[  35/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE40[0m
+[  36/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE41[0m
+[  37/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE42[0m
+[  38/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE43[0m
+[  39/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE44[0m
+[  40/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE45[0m
+[  41/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE46[0m
+[  42/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE47[0m
+[  43/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE48[0m
+[  44/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE49[0m
+[  45/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE5[0m
+[  46/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE50[0m
+[  47/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE51[0m
+[  48/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE52[0m
+[  49/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE53[0m
+[  50/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE54[0m
+[  51/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE55[0m
+[  52/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE56[0m
+[  53/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE57[0m
+[  54/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE58[0m
+[  55/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE59[0m
+[  56/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE6[0m
+[  57/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE60[0m
+[  58/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE61[0m
+[  59/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE62[0m
+[  60/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE65[0m
+[  61/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE66[0m
+[  62/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE67[0m
+[  63/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE7[0m
+[  64/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE71[0m
+[  65/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE72[0m
+[  66/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE73[0m
+[  67/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE74[0m
+[  68/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE75[0m
+[  69/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE8[0m
+[  70/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-02.API-REFERENCE9[0m
+[  71/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-03.API-EXAMPLE1[0m
+[  72/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-03.API-EXAMPLE10[0m
+[  73/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-03.API-EXAMPLE2[0m
+[  74/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-03.API-EXAMPLE3[0m
+[  75/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-03.API-EXAMPLE4[0m
+[  76/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-03.API-EXAMPLE5[0m
+[  77/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-03.API-EXAMPLE8[0m
+[  78/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-03.API-EXAMPLE9[0m
+[  79/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-10.EXT-REFERENCE-HANDLER1[0m
+[  80/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-10.EXT-REFERENCE-HANDLER2[0m
+[  81/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-10.EXT-REFERENCE-HANDLER3[0m
+[  82/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-10.EXT-REFERENCE-HANDLER4[0m
+[  83/  83] [1;32mPASS: build/tests/doctests-es.next/tests/unit-doc-10.EXT-REFERENCE-HANDLER5[0m
+
+[summary] build/tests/doctests-es.next/tests/unit-*
+
+TOTAL: 83
+[1;32mPASS: 83[0m
+[1;31mFAIL: 0[0m
+
+[1;32mSuccess: 100%[0m

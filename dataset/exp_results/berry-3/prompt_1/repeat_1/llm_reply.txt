@@ -1,0 +1,27 @@
+```c
+static void class_inherit(bparser *parser, bexpdesc *e)
+{
+    if (next_type(parser) == OptColon) { /* ':' */
+        bexpdesc e1;
+        scan_next_token(parser); /* skip ':' */
+        expr(parser, &e1);
+        check_var(parser, &e1);
+
+        /* Fix: Call be_code_setparent() instead of be_code_setsuper() */
+        be_code_setparent(parser->finfo, e, &e1);
+    }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 20,
+      "error_type": "incorrect function call",
+      "explanation": "Calling be_code_setsuper() is incorrect. It should be be_code_setparent()."
+    }
+  ],
+  "confidence": 1.0
+}
+```

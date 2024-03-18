@@ -1,0 +1,36 @@
+```cpp
+static bool isLifetimeBorrowed(const ValueType *vt, const ValueType *vtParent)
+{
+    if (!vtParent || !vt)
+        return false;
+    if (vt->type != ValueType::UNKNOWN_TYPE && vtParent->type != ValueType::UNKNOWN_TYPE) {
+        if (vtParent->pointer > vt->pointer)
+            return true;
+        if (vtParent->pointer < vt->pointer && vtParent->isIntegral())
+            return true;
+        if (vtParent->str() == vt->str())
+            return true;
+        if (vtParent->pointer == vt->pointer && vtParent->type == vt->type && vtParent->isIntegral())
+            // sign conversion
+            return true;
+        if (vtParent->pointer == vt->pointer && vtParent->type == vt->type && !vtParent->isIntegral())
+            // non-integral type (potentially an alias)
+            return true;
+    }
+
+    return false;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 8,
+      "error_type": "missing equality check",
+      "explanation": "The condition `vtParent->type == vt->type` does not check for equality when `vtParent` and `vt` are both integral types. This prevents the function from correctly identifying integral types that are lifetime borrowed."
+    }
+  ],
+  "confidence": 0.95
+}
+```

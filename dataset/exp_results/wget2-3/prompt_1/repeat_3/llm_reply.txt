@@ -1,0 +1,28 @@
+```c
+static int identity(wget_decompressor *dc, const char *src, size_t srclen)
+{
+	if (!src)
+		return -1;
+
+	if (dc->sink)
+	{
+		dc->sink(dc->context, src, srclen);
+		return 0;
+	}
+	return srclen; // dc->sink could be NULL, need to return srclen in such case.
+}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 8,
+      "error_type": "Incorrect Return Value",
+      "explanation": "Function `identity` should return `srclen` when `dc->sink` is NULL."
+    }
+  ],
+  "confidence": 0.8
+}
+```

@@ -1,0 +1,6 @@
+Test_Repo: yara-2
+Conversation_Num: 5
+Total_Patch_Num: 5
+Compilable_Patch_Num: 5
+Plausible_Patch_Num: 2
+Average_Response_Time: 3.5261361598968506

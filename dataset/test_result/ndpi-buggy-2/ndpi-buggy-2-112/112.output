@@ -1,0 +1,4 @@
+21c21
+< 	10	UDP 192.168.1.252:138 -> 192.168.1.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][1 pkts/252 bytes -> 0 pkts/0 bytes][Goodput ratio: 83/0][< 1 sec][Host: endian-pc][PLAIN TEXT ( EFEOEEEJEBEOCNFAEDCACACACACACA)]
+---
+> 	10	UDP 192.168.1.252:138 -> 192.168.1.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][1 pkts/252 bytes -> 0 pkts/0 bytes][Goodput ratio: 83/0][< 1 sec][Host: endian-pc][Risk: ** Known protocol on non standard port **][PLAIN TEXT ( EFEOEEEJEBEOCNFAEDCACACACACACA)]

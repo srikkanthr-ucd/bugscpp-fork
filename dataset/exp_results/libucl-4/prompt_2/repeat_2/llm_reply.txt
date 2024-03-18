@@ -1,0 +1,26 @@
+Repaired function:
+```c
+		else if (*p == '\\') {
+			*need_unescape = true;
+			ucl_chunk_skipc (chunk, p);
+			if (p < chunk->end) {
+				ucl_chunk_skipn (chunk, p, 1); // Changed ucl_chunk_skipc to ucl_chunk_skipn
+			}
+			continue;
+		}
+
+```
+
+JSON Report:
+```json
+{
+  "error": [
+    {
+      "line_number": 212,
+      "error_type": "Incorrect function call",
+      "explanation": "Function `ucl_chunk_skipc` expects 2 arguments, but 3 arguments are passed."
+    }
+  ],
+  "confidence": 1.0
+}
+```

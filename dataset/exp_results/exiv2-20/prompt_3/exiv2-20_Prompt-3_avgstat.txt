@@ -1,0 +1,10 @@
+Test_Repo: exiv2-20
+Prompt_ID: 3
+Repeat_Num: 2
+Total_Patch_Num: 2
+Compilable_Patch_Num: 2
+Plausible_Patch_Num: 0
+Average_Response_Time: 15.417494773864746
+Average_Confidence: 0.7
+Average_Identify_Accuracy: 0.0
+Average_Pass_Rate: 0.6666666666666666

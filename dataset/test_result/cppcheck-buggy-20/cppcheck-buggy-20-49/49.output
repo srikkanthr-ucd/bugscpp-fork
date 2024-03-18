@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 49: TestThreadExecutor
+1/1 Test #49: TestThreadExecutor ...............   Passed   27.31 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =  27.31 sec

@@ -1,0 +1,20 @@
+```c
+			else if (*p == '"') {
+				state = 2;
+				++p;
+			}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 7,
+      "error_type": "Syntax error",
+      "explanation": "missing increment operator for p"
+    }
+  ],
+  "confidence": 1
+}
+```

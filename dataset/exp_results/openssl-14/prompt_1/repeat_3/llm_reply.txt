@@ -1,0 +1,36 @@
+```c
+int EVP_PKEY_assign(EVP_PKEY *pkey, int type, void *key)
+{
+    int alias = type;
+
+#ifndef OPENSSL_NO_EC
+    if (EVP_PKEY_type(type) == EVP_PKEY_EC) {
+        const EC_GROUP *group = EC_KEY_get0_group(key);
+
+        if (group != NULL && EC_GROUP_get_curve_name(group) == NID_sm2)
+            alias = EVP_PKEY_SM2;
+    }
+#endif
+
+    if (pkey == NULL || !EVP_PKEY_set_type(pkey, alias))
+        return 0;
+    if (!EVP_PKEY_set_alias_type(pkey, alias))
+        return 0;
+    pkey->save_alias_type = alias;  // Added this line
+    pkey->pkey.ptr = key;
+    return (key != NULL);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 16,
+      "error_type": "Memory Leak",
+      "explanation": "The code does not properly handle the case where `key` is `NULL`. This can lead to a memory leak, as the `pkey->pkey.ptr` field will not be properly set."
+    }
+  ],
+  "confidence": 0.7
+}
+```

@@ -1,0 +1,16 @@
+cat: DPP_TEST_INDEX: No such file or directory
+Note: Google Test filter = t_dlt_buffer_init_dynamic.*--gtest_filter=t_dlt_buffer_free_dynamic.*--gtest_filter=t_dlt_buffer_increase_size.*--gtest_filter=t_dlt_buffer_minimize_size.*--gtest_filter=t_dlt_buffer_reset.*--gtest_filter=t_dlt_buffer_push.*--gtest_filter=t_dlt_buffer_push3.*--gtest_filter=t_dlt_buffer_pull.*--gtest_filter=t_dlt_buffer_remove.*--gtest_filter=t_dlt_buffer_copy.*--gtest_filter=t_dlt_buffer_get.*--gtest_filter=t_dlt_buffer_get_message_count.*--gtest_filter=t_dlt_buffer_get_total_size.*--gtest_filter=t_dlt_buffer_get_used_size.*--gtest_filter=t_dlt_buffer_write_block.*--gtest_filter=t_dlt_buffer_read_block.*--gtest_filter=t_dlt_buffer_info.*--gtest_filter=t_dlt_buffer_status.*--gtest_filter=t_dlt_message_init.*--gtest_filter=t_dlt_message_free.*--gtest_filter=t_dlt_file_open.*--gtest_filter=t_dlt_file_quick_parsing.*--gtest_filter=t_dlt_message_print_ascii.*--gtest_filter=t_dlt_message_print_ascii_with_filter.*--gtest_filter=t_dlt_message_print_header.*--gtest_filter=t_dlt_message_print_header_with_filter.*--gtest_filter=t_dlt_message_print_hex.*--gtest_filter=t_dlt_message_print_hex_with_filter.*--gtest_filter=t_dlt_message_print_mixed_plain.*--gtest_filter=t_dlt_message_print_mixed_plain_with_filter.*--gtest_filter=t_dlt_message_print_mixed_html.*--gtest_filter=t_dlt_message_print_mixed_html_with_filter.*--gtest_filter=t_dlt_message_filter_check.*--gtest_filter=t_dlt_message_get_extraparamters.*--gtest_filter=t_dlt_message_header.*--gtest_filter=t_dlt_message_header_flags.*--gtest_filter=t_dlt_message_payload.*--gtest_filter=t_dlt_message_set_extraparamters.*--gtest_filter=t_dlt_message_read.*--gtest_filter=t_dlt_message_argument_print.*--gtest_filter=t_dlt_log_set_level.*--gtest_filter=dlt_log_set_filename.*--gtest_filter=t_dlt_log_init.*--gtest_filter=t_dlt_log_free.*--gtest_filter=t_dlt_log.*--gtest_filter=t_dlt_uptime.*--gtest_filter=t_dlt_set_id.*--gtest_filter=t_dlt_print_hex_string.*--gtest_filter=t_dlt_print_mixed_string.*--gtest_filter=t_dlt_print_char_string.*--gtest_filter=t_dlt_strnlen_s.*--gtest_filter=t_dlt_print_id.*--gtest_filter=t_dlt_get_version.*--gtest_filter=dlt_get_major_version.*--gtest_filter=dlt_get_minor_version.*
+[==========] Running 3 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 3 tests from t_dlt_buffer_init_dynamic
+[ RUN      ] t_dlt_buffer_init_dynamic.normal
+[       OK ] t_dlt_buffer_init_dynamic.normal (0 ms)
+[ RUN      ] t_dlt_buffer_init_dynamic.abnormal
+[       OK ] t_dlt_buffer_init_dynamic.abnormal (0 ms)
+[ RUN      ] t_dlt_buffer_init_dynamic.nullpointer
+[       OK ] t_dlt_buffer_init_dynamic.nullpointer (0 ms)
+[----------] 3 tests from t_dlt_buffer_init_dynamic (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 3 tests from 1 test case ran. (0 ms total)
+[  PASSED  ] 3 tests.

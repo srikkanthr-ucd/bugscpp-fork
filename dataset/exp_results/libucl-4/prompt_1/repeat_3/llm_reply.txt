@@ -1,0 +1,26 @@
+```c
+		else if (*p == '\\') {
+			*need_unescape = true;
+			ucl_chunk_skipc (chunk, p);
+			if (p < chunk->end) {
+				if (*p == '\\') {
+					ucl_chunk_skipc (chunk, p);
+				}
+			}
+			continue;
+		}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 10,
+      "error_type": "Logical error",
+      "explanation": "The code skips past the escape character '\\' if the next character is an escape character, which is incorrect. It should instead skip past the next character."
+    }
+  ],
+  "confidence": 0.9
+}
+```

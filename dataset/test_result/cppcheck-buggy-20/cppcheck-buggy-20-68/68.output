@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 68: TestMemleakNoVar
+1/1 Test #68: TestMemleakNoVar .................   Passed    0.29 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.29 sec

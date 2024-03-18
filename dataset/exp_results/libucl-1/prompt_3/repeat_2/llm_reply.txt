@@ -1,0 +1,15 @@
+```c
+		else if (obj->keylen > 0 && func->ud != NULL) {
+			func->ucl_emitter_append_len (func->ud, obj->key, obj->keylen);
+			if (obj->keylen > 0)
+				func->ucl_emitter_write_key (func->ud, obj->keylen);
+		}
+
+```
+
+```json
+{
+  "error": [],
+  "confidence": 1
+}
+```

@@ -1,0 +1,21 @@
+```c
+void dpp_sighandler(int signum) {
+	__gcov_flush();
+	sigaction(SIGINT, &dpp_orig_sigaction, NULL);
+	raise(signum);
+	exit(1);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 4,
+      "error_type": "Semantic error",
+      "explanation": "The function sigaction should be called with three arguments. The second argument is the address of the structure that specifies the action to be taken when the signal occurs. In this case, it should be the address of dpp_orig_sigaction."
+    }
+  ],
+  "confidence": 0.8
+}
+```

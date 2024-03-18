@@ -1,0 +1,24 @@
+```c
+		else if (*p == '\\') {
+			*need_unescape = true;
+			ucl_chunk_skipc (chunk, p);
+			if (p < chunk->end) {
+				ucl_chunk_setc (p, ucl_isescaped (*++p));
+			}
+			continue;
+		}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 16,
+      "error_type": "incorrect_function_call",
+      "explanation": "Wrong function call: the function 'ucl_chunk_skipc' should be used to skip the escaped character."
+    }
+  ],
+  "confidence": 1
+}
+```

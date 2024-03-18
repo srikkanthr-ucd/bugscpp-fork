@@ -1,0 +1,28 @@
+```c
+static void class_inherit(bparser *parser, bexpdesc *e)
+{
+    if (next_type(parser) == OptColon) { /* ':' */
+        bexpdesc e1;
+        scan_next_token(parser); /* skip ':' */
+        expr(parser, &e1);
+        check_var(parser, &e1);
+        be_code_setsuper(parser->finfo, e, &e1);
+        return;
+    }
+
+    be_code_setsuper(parser->finfo, e, NULL);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 11,
+      "error_type": "Missing return statement",
+      "explanation": "The function `class_inherit` should return `NULL` if there is no colon `:` after the first expression."
+    }
+  ],
+  "confidence": 0.7
+}
+```

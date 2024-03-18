@@ -1,0 +1,24 @@
+```c++
+void Tokenizer::removeMacrosInGlobalScope() {
+  for (auto it = macros.begin(); it != macros.end();) {
+    if (it->second->isMacroInGlobalScope()) {
+      it = macros.erase(it);
+    } else {
+      ++it;
+    }
+  }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 8,
+      "error_type": "Undefined variable `isMacroInGlobalScope`",
+      "explanation": "There is no member or function named `isMacroInGlobalScope` in the class `Macro` in the buggy code. It should be `isMacroInFileScope`."
+    }
+  ],
+  "confidence": 0.7
+}
+```

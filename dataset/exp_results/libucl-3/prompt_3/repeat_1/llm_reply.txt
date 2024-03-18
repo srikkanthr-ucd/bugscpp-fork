@@ -1,0 +1,22 @@
+```c
+		else if (c == '$') {
+			*var_expand = true;
+		}
+		else if (c == '_' && *var_expand) {
+			*var_expand = false;
+			return;
+		}
+
+```
+```json
+{
+  "error": [
+    {
+      "line_number": 10,
+      "error_type": "syntax error",
+      "explanation": "Missing 'else' statement before 'if' statement."
+    }
+  ],
+  "confidence": 0.7
+}
+```

@@ -1,0 +1,7 @@
+test_result: 
+libucl-3: 
+build_result: True
+test_cases_result:  
+pass_rate: 0.8
+pass_test_cases: ['libucl-buggy-3-5', 'libucl-buggy-3-4', 'libucl-buggy-3-2', 'libucl-buggy-3-3']
+fail_test_cases: ['libucl-buggy-3-1']

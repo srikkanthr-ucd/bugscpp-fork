@@ -1,0 +1,25 @@
+```c
+else if(config.method) {
+		method = config.method;
+	} else {
+		if (job->head_first) {
+			method = "HEAD";
+		} else {
+			if (config.post_data || config.post_file)
+				method = "POST";
+			else
+				method = "GET";
+		}
+	}
+	if (!strcmp(method, "HEAD")) {
+		job->head_first = true;
+	}
+
+```
+
+```json
+{
+  "error": [],
+  "confidence": 1
+}
+```

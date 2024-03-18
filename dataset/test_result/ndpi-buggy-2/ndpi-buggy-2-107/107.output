@@ -1,0 +1,4 @@
+50c50
+< 	35	UDP 192.168.1.43:138 -> 192.168.1.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][1 pkts/243 bytes -> 0 pkts/0 bytes][Goodput ratio: 82/0][< 1 sec][Host: desktop-rb5t12g][PLAIN TEXT ( EEEFFDELFEEPFACNFCECDFFEDBDCEH)]
+---
+> 	35	UDP 192.168.1.43:138 -> 192.168.1.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][1 pkts/243 bytes -> 0 pkts/0 bytes][Goodput ratio: 82/0][< 1 sec][Host: desktop-rb5t12g][Risk: ** Known protocol on non standard port **][PLAIN TEXT ( EEEFFDELFEEPFACNFCECDFFEDBDCEH)]

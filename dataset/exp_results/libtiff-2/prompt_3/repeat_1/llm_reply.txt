@@ -1,0 +1,21 @@
+```c
+void dpp_sighandler(int signum) {
+	__gcov_flush();
+	kill(getpid(), signum);
+	exit(1);
+}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 10,
+      "error_type": "Other Error",
+      "explanation": "The function raise should be replaced with kill."
+    }
+  ],
+  "confidence": 1.0
+}
+```

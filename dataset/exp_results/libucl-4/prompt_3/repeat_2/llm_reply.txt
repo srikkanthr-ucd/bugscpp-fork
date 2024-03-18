@@ -1,0 +1,28 @@
+Repaired function:
+```c
+		else if (*p == '\\') {
+			*need_unescape = true;
+			ucl_chunk_skipc (chunk, p);
+			if (p < chunk->end) {
+				ucl_chunk_skipc (chunk, p);
+				if (p < chunk->end) {
+					ucl_chunk_skipc (chunk, p);
+				}
+			}
+			continue;
+		}
+```
+
+JSON Report:
+```json
+{
+  "error": [
+    {
+      "line_number": 12,
+      "error_type": "Out-of-bound access",
+      "explanation": "Pointer p may reach the end of the chunk this iteration, while it is used in the next iteration to access another character."
+    }
+  ],
+  "confidence": 1.0
+}
+```

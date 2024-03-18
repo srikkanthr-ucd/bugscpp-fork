@@ -1,0 +1,74 @@
+```c++
+static void valueFlowInferCondition(TokenList* tokenlist,
+                                    const Settings* settings)
+{
+    for (Token* tok = tokenlist->front(); tok; tok = tok->next()) {
+        if (!tok->astParent())
+            continue;
+        if (tok->hasKnownValue())
+            continue;
+        if (tok->variable() && (Token::Match(tok->astParent(), "?|&&|!|%oror%") ||
+                                Token::Match(tok->astParent()->previous(), "if|while ("))) {
+            const ValueFlow::Value* result = proveNotEqual(tok->values(), 0);
+            if (!result)
+                continue;
+            ValueFlow::Value value = *result;
+            value.intvalue = 1;
+            value.bound = ValueFlow::Value::Bound::Point;
+            value.setKnown();
+            setTokenValue(tok, value, settings);
+        } else if (tok->isComparisonOp()) {
+            MathLib::bigint val = 0;
+            const Token* varTok = nullptr;
+            if (tok->astOperand1()->hasKnownIntValue()) {
+                val = tok->astOperand1()->values().front().intvalue;
+                varTok = tok->astOperand2();
+            } else if (tok->astOperand2()->hasKnownIntValue()) {
+                val = tok->astOperand2()->values().front().intvalue;
+                varTok = tok->astOperand1();
+            }
+            if (!varTok || !varTok->values().empty())
+                continue;
+            ValueFlow::Value value = ValueFlow::Value(0, ValueFlow::Value::Bound::Point);
+            value.setKnown();
+            if (Token::Match(tok, "==|!=")) {
+                value.intvalue = tok->str() == "!=";
+            } else if (Token::Match(tok, "<|>=")) {
+                value.intvalue = tok->str() == "<";
+            } else if (Token::Match(tok, ">|<=")) {
+                value.intvalue = tok->str() == ">";
+            }
+            setTokenValue(tok, value, settings);
+        }
+    }
+}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 30,
+      "error_type": "Dereference of null pointer (varTok)",
+      "explanation": "The variable varTok is used without being initialized."
+    },
+    {
+      "line_number": 17,
+      "error_type": "Uninitialized value (known)",
+      "explanation": "The variable known is used without being initialized."
+    },
+    {
+      "line_number": 31,
+      "error_type": "Uninitialized value (value)",
+      "explanation": "The variable value is used without being initialized."
+    },
+    {
+      "line_number": 34,
+      "error_type": "Uninitialized value (value)",
+      "explanation": "The variable value is used without being initialized."
+    }
+  ],
+  "confidence": 0.7
+}
+```

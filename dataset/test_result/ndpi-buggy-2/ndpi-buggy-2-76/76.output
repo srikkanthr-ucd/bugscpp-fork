@@ -1,0 +1,6 @@
+9,10c9,10
+< 	6	UDP 10.0.5.9:138 -> 10.0.5.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][1 pkts/243 bytes -> 0 pkts/0 bytes][Goodput ratio: 82/0][< 1 sec][Host: nvr9][PLAIN TEXT ( EOFGFCDJ)]
+< 	7	UDP 10.0.5.93:138 -> 10.0.5.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][1 pkts/243 bytes -> 0 pkts/0 bytes][Goodput ratio: 82/0][< 1 sec][Host: bowie][PLAIN TEXT ( ECEPFHEJEFCACACACACACACACACACA)]
+---
+> 	6	UDP 10.0.5.9:138 -> 10.0.5.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][1 pkts/243 bytes -> 0 pkts/0 bytes][Goodput ratio: 82/0][< 1 sec][Host: nvr9][Risk: ** Known protocol on non standard port **][PLAIN TEXT ( EOFGFCDJ)]
+> 	7	UDP 10.0.5.93:138 -> 10.0.5.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][1 pkts/243 bytes -> 0 pkts/0 bytes][Goodput ratio: 82/0][< 1 sec][Host: bowie][Risk: ** Known protocol on non standard port **][PLAIN TEXT ( ECEPFHEJEFCACACACACACACACACACA)]

@@ -1,0 +1,50 @@
+Example 16 (lines 155-166) [Issue 74](https://github.com/mity/md4c/issues/74)
+program returned error code 1
+=================================================================
+==1669==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x615000000078 at pc 0x564fb9c6b27d bp 0x7fffeb48d9d0 sp 0x7fffeb48d9c0
+WRITE of size 4 at 0x615000000078 thread T0
+    #0 0x564fb9c6b27c in md_parse (/home/workspace/build/md2html/md2html+0x6b27c)
+    #1 0x564fb9c40554 in md_render_html (/home/workspace/build/md2html/md2html+0x40554)
+    #2 0x564fb9c3957c in main (/home/workspace/build/md2html/md2html+0x3957c)
+    #3 0x7f4174445c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #4 0x564fb9c39ba9 in _start (/home/workspace/build/md2html/md2html+0x39ba9)
+
+0x615000000078 is located 8 bytes to the left of 512-byte region [0x615000000080,0x615000000280)
+allocated by thread T0 here:
+    #0 0x7f41748f3f30 in realloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdef30)
+    #1 0x564fb9c684ae in md_parse (/home/workspace/build/md2html/md2html+0x684ae)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/workspace/build/md2html/md2html+0x6b27c) in md_parse
+Shadow bytes around the buggy address:
+  0x0c2a7fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c2a7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c2a7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c2a7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c2a7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c2a7fff8000: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa[fa]
+  0x0c2a7fff8010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c2a7fff8020: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c2a7fff8030: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c2a7fff8040: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c2a7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1669==ABORTING
+0 passed, 0 failed, 1 errored, 23 skipped

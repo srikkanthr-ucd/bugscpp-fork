@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 15: TestConstructors
+1/1 Test #15: TestConstructors .................   Passed    0.61 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.62 sec

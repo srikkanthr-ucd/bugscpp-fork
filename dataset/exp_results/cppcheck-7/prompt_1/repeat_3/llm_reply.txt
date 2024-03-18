@@ -1,0 +1,36 @@
+```c++
+void Tokenizer::removeMacrosInGlobalScope() {
+  size_t idx = 0;
+  size_t offset = 0;
+  while ((idx = identifiers_.find(GLOBAL_MACRO_PREFIX_)) != string::npos) {
+    size_t pos = idx + GLOBAL_MACRO_PREFIX_.size();
+    string name;
+    while (pos < identifiers_.size() &&
+           (isalnum(identifiers_[pos]) || identifiers_[pos] == '_')) {
+      name += identifiers_[pos];
+      pos++;
+    }
+    if (macroNames_.find(name) != macroNames_.end()) {
+      for (size_t i = idx; i < pos; i++)
+        identifiers_[i] = ' ';
+      identifiers_.insert(pos, " ");
+      offset += (std::string(" ") - (identifiers_.substr(idx, pos - idx + 1)))
+                    .size();
+    }
+    idx += GLOBAL_MACRO_PREFIX_.size() + name.size();
+  }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 8,
+      "error_type": "logical_issue",
+      "explanation": "The condition in while loop is always false, as identifiers_.find will always return string::npos for the string GLOBAL_MACRO_PREFIX_, which causes the function to not removing any macros."
+    }
+  ],
+  "confidence": 0.7
+}
+```

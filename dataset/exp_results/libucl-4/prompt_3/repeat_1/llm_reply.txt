@@ -1,0 +1,33 @@
+```c
+		else if (*p == '\\') {
+			*need_unescape = true;
+			ucl_chunk_skipc (chunk, p);
+			if (p < chunk->end) {
+				switch (*p) {
+				case 'n':
+				case 'r':
+				case 't':
+					*p = "\\\n"[*p - 'n'];
+					break;
+				case 'x':
+					*need_unescape = false;
+					break;
+				}
+				ucl_chunk_skipc (chunk, p);
+			}
+			continue;
+		}
+
+```
+```json
+{
+  "error": [
+    {
+      "line_number": 12,
+      "error_type": "Null check",
+      "explanation": "p is not checked for null. This may cause a segfault."
+    }
+  ],
+  "confidence": 0.7
+}
+```

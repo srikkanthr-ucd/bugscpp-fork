@@ -1,0 +1,38 @@
+```c++
+bool isLikelyStreamRead(bool cpp, const Token *op)
+{
+    if (!cpp)
+        return false;
+
+    if (!Token::Match(op, "&|>>") || !op->isBinaryOp())
+        return false;
+
+    if (!Token::Match(op->astOperand2(), "%name%|.|*|[") && op->str() != op->astOperand2()->str())
+        return false;
+
+    const Token *parent = op;
+    while (parent->astParent() && parent->astParent()->str() == op->str())
+        parent = parent->astParent();
+    if (parent->astParent() && !Token::Match(parent->astParent(), "%oror%|&&|(|,|!"))
+        return false;
+    if (op->str() == "&" && parent->astParent())
+        return false;
+    if (!parent->astOperand1() || !parent->astOperand2())
+        return false;
+    return (!parent->astOperand1()->valueType() || !parent->astOperand1()->valueType()->isIntegral() ||
+            !parent->astOperand2()->valueType() || parent->astOperand2()->valueType()->isPointer());
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 16,
+      "error_type": "missing_condition_check",
+      "explanation": "The code does not check if the second operand is a pointer, which is necessary for a stream read."
+    }
+  ],
+  "confidence": 0.9
+}
+```

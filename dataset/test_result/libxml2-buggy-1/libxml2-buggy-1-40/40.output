@@ -1,0 +1,5 @@
+## Error cases regression tests
+Total 3 tests, 1 errors, 0 leaks
+file result/errors/758588.xml.err is 10953 bytes, result is 10721 bytes
+Error for ./test/errors/758588.xml failed
+File ./test/errors/758588.xml generated an error

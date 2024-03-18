@@ -1,0 +1,19 @@
+```c
+int readextension(void)
+{
+    int count;
+    char buf[255];
+    int status = 1;
+
+    (void) getc(infile);
+    while ((count = getc(infile)) && count <= 255)
+        if (fread(buf, 1, count, infile) != count) {
+            fprintf(stderr, "short read from file %s (%s)\n",
+                    filename, strerror(errno));
+            status = 0;
+            break;
+        }
+    buf[count] = 0; /* null termininate */
+    return status;
+}
+```

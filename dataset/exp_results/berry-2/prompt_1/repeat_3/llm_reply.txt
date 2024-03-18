@@ -1,0 +1,38 @@
+```cpp
+static void code_not(bfuncinfo *finfo, bexpdesc *e)
+{
+    switch (e->type) {
+    case ETINT: e->v.i = !e->v.i; break;
+    case ETREAL: e->v.i = !e->v.r; break;
+    case ETNIL: e->v.i = 1; break; // Fix: e->v.i = 0 to e->v.i = 1
+    case ETBOOL: e->v.i = !e->v.i; break;
+    case ETSTRING: e->v.i = !e->v.s; break; // Fix: e->v.i = 0 to e->v.i = !e->v.s
+    default: {
+        int temp = e->t;
+        e->t = e->f;
+        e->f = temp;
+        e->not = NOT_EXPR | (e->not ^ NOT_MASK);
+        return;
+    }
+    }
+    e->type = ETBOOL;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 13,
+      "error_type": "incorrect_initialization",
+      "explanation": "The value of ETNIL should be initialized to 1 instead of 0 when performing logical negation."
+    },
+    {
+      "line_number": 15,
+      "error_type": "incorrect_initialization",
+      "explanation": "The value of ETSTRING should be initialized to the negation of e->v.s instead of 0 when performing logical negation."
+    }
+  ],
+  "confidence": 0.9
+}
+```

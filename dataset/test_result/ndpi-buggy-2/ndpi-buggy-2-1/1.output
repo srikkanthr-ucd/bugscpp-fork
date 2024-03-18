@@ -1,0 +1,8 @@
+65c65
+< 	43	UDP 192.168.5.45:138 -> 192.168.255.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][3 pkts/648 bytes -> 0 pkts/0 bytes][Goodput ratio: 80/0][0.00 sec][Host: macbookair-e1d0][PLAIN TEXT ( ENEBEDECEPEPELEBEJ)]
+---
+> 	43	UDP 192.168.5.45:138 -> 192.168.255.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][3 pkts/648 bytes -> 0 pkts/0 bytes][Goodput ratio: 80/0][0.00 sec][Host: macbookair-e1d0][Risk: ** Known protocol on non standard port **][PLAIN TEXT ( ENEBEDECEPEPELEBEJ)]
+67c67
+< 	45	UDP 192.168.5.67:138 -> 192.168.255.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][2 pkts/549 bytes -> 0 pkts/0 bytes][Goodput ratio: 85/0][< 1 sec][Host: sanji-lifebook-][PLAIN TEXT ( FDEBEOEKEJ)]
+---
+> 	45	UDP 192.168.5.67:138 -> 192.168.255.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][2 pkts/549 bytes -> 0 pkts/0 bytes][Goodput ratio: 85/0][< 1 sec][Host: sanji-lifebook-][Risk: ** Known protocol on non standard port **][PLAIN TEXT ( FDEBEOEKEJ)]

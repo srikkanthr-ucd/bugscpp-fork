@@ -1,0 +1,36 @@
+```c++
+ValueFlow::Value getLifetimeObjValue(const Token *tok, bool inconclusive)
+{
+    ValueFlow::Value result;
+    auto pred = [&](const ValueFlow::Value &v) {
+        if (!v.isLocalLifetimeValue())
+            return false;
+        if (!inconclusive && v.isInconclusive())
+            return false;
+        if (!v.tokvalue->variable())
+            return false;
+        return true;
+    };
+    auto it = std::find_if(tok->values().begin(), tok->values().end(), pred);
+    if (it == tok->values().end())
+        return result;
+    result = *it;
+    // There should only be one lifetime
+    if (std::find_if(std::next(it), tok->values().end(), pred) != tok->values().end()) <start_bug>
+        return ValueFlow::Value{}; <end_bug>
+    return result;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 22,
+      "error_type": "Invalid condition",
+      "explanation": "The condition is always true and will always jump to the `return ValueFlow::Value{};` and return."
+    }
+  ],
+  "confidence": 0.9
+}
+```

@@ -1,0 +1,24 @@
+```cpp
+static void class_inherit(bparser *parser, bexpdesc *e)
+{
+    if (next_type(parser) == OptColon) { /* ':' */
+        bexpdesc e1;
+        scan_next_token(parser); /* skip ':' */
+        expr(parser, &e1);
+        check_var(parser, &e);
+        be_code_setsuper(parser->finfo, e, &e1);
+    }
+}
+```
+```json
+{
+  "error": [
+    {
+      "line_number": 8,
+      "error_type": "incorrect_argument_call",
+      "explanation": "Here, check_var() should take an address of e1 instead of e."
+    }
+  ],
+  "confidence": 0.7
+}
+```

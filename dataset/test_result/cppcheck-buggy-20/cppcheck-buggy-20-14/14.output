@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 14: TestCondition
+1/1 Test #14: TestCondition ....................   Passed    2.08 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   2.09 sec

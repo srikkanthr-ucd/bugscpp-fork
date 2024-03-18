@@ -1,0 +1,20 @@
+```c
+else if (ent->etype == XML_EXTERNAL_GENERAL_PARSED_ENTITY) {
+	xmlFatalErrMsgStr(ctxt, XML_ERR_UNPARSED_ENTITY,
+		 "Entity reference to unparsed entity %s\n", name);
+    }
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 1,
+      "error_type": "Incorrect entity type check",
+      "explanation": "The condition `ent->etype == XML_EXTERNAL_GENERAL_UNPARSED_ENTITY` is incorrect because it should be checking for `XML_EXTERNAL_GENERAL_PARSED_ENTITY` to correctly handle external parsed entities."
+    }
+  ],
+  "confidence": 0.9
+}
+```

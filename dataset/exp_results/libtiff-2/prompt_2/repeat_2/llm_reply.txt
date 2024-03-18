@@ -1,0 +1,21 @@
+```c
+void dpp_sighandler(int signum) {
+	__gcov_flush();
+	sigaction(signum, &dpp_orig_sigaction, NULL);
+	raise(signum);
+	exit(1);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 3,
+      "error_type": "incorrect_use of sigaction",
+      "explanation": "sigaction's second argument should be a pointer to a sigaction structure, but it is a sigaction structure."
+    }
+  ],
+  "confidence": 0.8
+}
+```

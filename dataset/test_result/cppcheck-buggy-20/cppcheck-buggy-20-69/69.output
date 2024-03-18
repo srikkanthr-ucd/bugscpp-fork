@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 69: cfg-posix_c
+1/1 Test #69: cfg-posix_c ......................   Passed    0.78 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.79 sec

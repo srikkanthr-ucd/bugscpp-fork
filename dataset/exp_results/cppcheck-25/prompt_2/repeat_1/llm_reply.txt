@@ -1,0 +1,35 @@
+```c++
+static bool isLifetimeBorrowed(const ValueType *vt, const ValueType *vtParent)
+{
+    if (!vtParent)
+        return false;
+    if (!vt)
+        return false;
+    if (vt->type != ValueType::UNKNOWN_TYPE && vtParent->type != ValueType::UNKNOWN_TYPE) {
+        if (vtParent->pointer > vt->pointer)
+            return true;
+        if (vtParent->pointer < vt->pointer && vtParent->isIntegral())
+            return true;
+        if (vtParent->str() == vt->str())
+            return true;
+        if (vtParent->pointer == vt->pointer && vtParent->type == vt->type && vtParent->isIntegral())
+            // sign conversion
+            return vtParent->isUnsigned();
+    }
+
+    return false;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 12,
+      "error_type": "Logical error",
+      "explanation": "In the if condition, the comparison vtParent->isIntegral() should be changed to vtParent->isUnsigned(). This is because the intent of this condition is to check if the parent type is an integral type and the child type is a signed integral type, in which case the child type is lifetime borrowed from the parent type due to sign conversion."
+    }
+  ],
+  "confidence": 0.9
+}
+```

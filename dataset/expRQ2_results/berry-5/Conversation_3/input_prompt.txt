@@ -1,0 +1,260 @@
+You are a automated program repair tool for C and C++. Your task is to provide a fix for the buggy function below.
+
+<<< Buggy Function:
+static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+>>>
+
+The following was the errors outputted by a failed test case.
+
+<<< Test Failed Log:
+assert_failed: assert failed!
+stack traceback:
+	<native>: in native function
+	tests/suffix.be:25: in function `main`
+
+>>>
+
+The following is the relevant code of that failed test case.
+
+<<< Test Code:
+var keys = [ 'key1', 'key2', 'key3', 'key4' ]
+var pairs = {
+    keys[0]: 'value1',
+    keys[1]: 'value2',
+    keys[2]: 'value3',
+    keys[3]: 'value4'
+}
+
+for i : 0 .. keys.size() - 1
+    assert(pairs[keys[i]] == 'value' .. i + 1)
+end
+
+#- test cases related to #101 -#
+class C var l end
+c=C()
+c.l=[0,1,2]
+
+def t_101_nok_1() return c.l[0..1] end
+def t_101_ok_1() var l2 = c.l return l2[0..1] end
+
+t_i = 0
+def t_101_nok_2() return c.l[t_i] end
+def t_101_ok_2() return c.l[0] end
+
+assert(t_101_nok_1() == [0, 1])
+assert(t_101_ok_1() == [0, 1])
+assert(t_101_nok_2() == 0)
+assert(t_101_ok_2() == 0)
+
+>>>
+
+The function provided by you is still not correct! Your repaired function is:
+
+<<< Function Repaired By You:
+static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+
+>>>
+
+That function has the following compiliation error:
+
+<<< Compliation Error:
+[Compile] src/be_timelib.c
+[Compile] src/be_code.c
+src/be_code.c:311:55: error: stray '\' in program
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                                       ^
+src/be_code.c: In function 'free_suffix':
+src/be_code.c:311:56: error: expected declaration specifiers before 'n'
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                                        ^
+src/be_code.c:311:58: error: stray '\' in program
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                                          ^
+src/be_code.c:311:86: error: stray '\' in program
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                                                                      ^
+src/be_code.c:311:133: error: stray '\' in program
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                                                                                                                     ^
+src/be_code.c:311:168: error: stray '\' in program
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                                                                                                                                                        ^
+src/be_code.c:311:220: error: stray '\' in program
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                                                                                                                                                                                                            ^
+src/be_code.c:311:257: error: stray '\' in program
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                                                                                                                                                                                                                                                 ^
+src/be_code.c:311:264: error: stray '\' in program
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                                                                                                                                                                                                                                                        ^
+src/be_code.c:311:299: error: stray '\' in program
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                                                                                                                                                                                                                                                                                           ^
+src/be_code.c:311:409: error: stray '\' in program
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                                                                                                                                                                                                                                                                                                                                                                                                         ^
+src/be_code.c:311:446: error: stray '\' in program
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^
+src/be_code.c:311:453: error: stray '\' in program
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^
+src/be_code.c:311:456: error: stray '\' in program
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ^
+src/be_code.c:311:457: error: expected declaration specifiers before 'n'
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ^
+src/be_code.c:313:9: error: expected declaration specifiers before 'e'
+  313 |         e->v.ss.obj = -1;
+      |         ^
+src/be_code.c:314:9: error: expected declaration specifiers before 'e'
+  314 |         e->v.ss.tt = ETVOID;
+      |         ^
+src/be_code.c:315:9: error: expected declaration specifiers before 'return'
+  315 |         return;
+      |         ^~~~~~
+src/be_code.c:316:5: error: expected declaration specifiers before '}' token
+  316 |     }
+      |     ^
+src/be_code.c:317:5: error: expected declaration specifiers before 'if'
+  317 |     if ((e->v.ss.tt == ETREG) && (e->v.ss.obj >= nlocal) && (e->v.ss.obj < (nlocal+finfo->stacksize))) {
+      |     ^~
+src/be_code.c:324:5: error: expected declaration specifiers before 'be_error'
+  324 |     be_error(ERR_INTERNAL, "free_suffix: impossible express list register");
+      |     ^~~~~~~~
+src/be_code.c:325:1: error: expected declaration specifiers before '}' token
+  325 | }
+      | ^
+src/be_code.c:328:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  328 | {
+      | ^
+src/be_code.c:341:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  341 | {
+      | ^
+src/be_code.c:346:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  346 | {
+      | ^
+src/be_code.c:356:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  356 | {
+      | ^
+src/be_code.c:404:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  404 | {
+      | ^
+src/be_code.c:424:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  424 | {
+      | ^
+src/be_code.c:441:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  441 | {
+      | ^
+src/be_code.c:451:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  451 | {
+      | ^
+src/be_code.c:466:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  466 | {
+      | ^
+src/be_code.c:490:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  490 | {
+      | ^
+src/be_code.c:499:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  499 | {
+      | ^
+src/be_code.c:518:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  518 | {
+      | ^
+src/be_code.c:531:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  531 | {
+      | ^
+src/be_code.c:543:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  543 | {
+      | ^
+src/be_code.c:558:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  558 | {
+      | ^
+src/be_code.c:567:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  567 | {
+      | ^
+src/be_code.c:578:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  578 | {
+      | ^
+src/be_code.c:610:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  610 | {
+      | ^
+src/be_code.c:623:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  623 | {
+      | ^
+src/be_code.c:633:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  633 | {
+      | ^
+src/be_code.c:639:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  639 | {
+      | ^
+src/be_code.c:649:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  649 | {
+      | ^
+src/be_code.c:658:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  658 | {
+      | ^
+src/be_code.c:675:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  675 | {
+      | ^
+src/be_code.c:689:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  689 | {
+      | ^
+src/be_code.c:709:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  709 | {
+      | ^
+src/be_code.c:717:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  717 | {
+      | ^
+src/be_code.c:723:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  723 | {
+      | ^
+src/be_code.c:729:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  729 | {
+      | ^
+src/be_code.c:744:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  744 | {
+      | ^
+src/be_code.c:753:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  753 | {
+      | ^
+src/be_code.c:768:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  768 | {
+      | ^
+src/be_code.c:777:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  777 | {
+      | ^
+src/be_code.c:786:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  786 | {
+      | ^
+src/be_code.c:799: error: expected '{' at end of input
+  799 | #endif
+      | 
+src/be_code.c:311:36: warning: unused parameter 'finfo' [-Wunused-parameter]
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                         ~~~~~~~~~~~^~~~~
+src/be_code.c:311:53: warning: unused parameter 'e' [-Wunused-parameter]
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |                                           ~~~~~~~~~~^
+src/be_code.c: At top level:
+src/be_code.c:37:12: error: 'var2reg' used but never defined
+   37 | static int var2reg(bfuncinfo *finfo, bexpdesc *e, int dst);
+      |            ^~~~~~~
+src/be_code.c:311:13: warning: 'free_suffix' defined but not used [-Wunused-function]
+  311 | static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+      |             ^~~~~~~~~~~
+src/be_code.c:277:12: warning: 'exp2const' defined but not used [-Wunused-function]
+  277 | static int exp2const(bfuncinfo *finfo, bexpdesc *e)
+      |            ^~~~~~~~~
+make: *** [Makefile:70: src/be_code.o] Error 1
+
+  Closing container
+
+>>>
+
+You will only respond with your repaired function in a code snippet as below:
+```
+<Your repaired function>
+```

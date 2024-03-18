@@ -1,0 +1,6 @@
+Test_Buggy_Repo_List: ['libucl-2', 'libucl-3', 'libucl-4']
+Total_Patch_Number: 9
+Total_Compilable_Patch_Number: 6
+Total_Plausible_Patch_Number: 0
+Compilable_Patch_List: ['libucl-3_Prompt-2_Repeat-1', 'libucl-3_Prompt-2_Repeat-2', 'libucl-3_Prompt-2_Repeat-3', 'libucl-4_Prompt-2_Repeat-1', 'libucl-4_Prompt-2_Repeat-2', 'libucl-4_Prompt-2_Repeat-3']
+Plausible_Patch_list: []

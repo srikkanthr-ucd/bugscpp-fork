@@ -1,0 +1,7 @@
+test_result: 
+libxml2-2: 
+build_result: True
+test_cases_result:  
+pass_rate: 0.975
+pass_test_cases: ['libxml2-buggy-2-26', 'libxml2-buggy-2-6', 'libxml2-buggy-2-23', 'libxml2-buggy-2-12', 'libxml2-buggy-2-31', 'libxml2-buggy-2-36', 'libxml2-buggy-2-39', 'libxml2-buggy-2-20', 'libxml2-buggy-2-19', 'libxml2-buggy-2-34', 'libxml2-buggy-2-38', 'libxml2-buggy-2-29', 'libxml2-buggy-2-32', 'libxml2-buggy-2-9', 'libxml2-buggy-2-24', 'libxml2-buggy-2-11', 'libxml2-buggy-2-17', 'libxml2-buggy-2-13', 'libxml2-buggy-2-27', 'libxml2-buggy-2-7', 'libxml2-buggy-2-1', 'libxml2-buggy-2-28', 'libxml2-buggy-2-4', 'libxml2-buggy-2-3', 'libxml2-buggy-2-18', 'libxml2-buggy-2-10', 'libxml2-buggy-2-21', 'libxml2-buggy-2-37', 'libxml2-buggy-2-14', 'libxml2-buggy-2-25', 'libxml2-buggy-2-8', 'libxml2-buggy-2-16', 'libxml2-buggy-2-5', 'libxml2-buggy-2-15', 'libxml2-buggy-2-22', 'libxml2-buggy-2-35', 'libxml2-buggy-2-30', 'libxml2-buggy-2-33', 'libxml2-buggy-2-2']
+fail_test_cases: ['libxml2-buggy-2-40']

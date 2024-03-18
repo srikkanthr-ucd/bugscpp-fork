@@ -1,0 +1,8 @@
+20c20
+< 	3	UDP 91.252.56.51:32704 <-> 192.168.2.12:56328 [proto: 78.45/STUN.WhatsAppCall][cat: VoIP/10][87 pkts/14598 bytes <-> 77 pkts/17336 bytes][Goodput ratio: 75/81][11.91 sec][bytes ratio: -0.086 (Mixed)][IAT c2s/s2c min/avg/max/stddev: 0/0 136/121 921/265 137/64][Pkt Len c2s/s2c min/avg/max/stddev: 68/68 168/225 318/331 61/68][Risk: ** Known protocol on non standard port **][PLAIN TEXT (KEXQD/)]
+---
+> 	3	UDP 91.252.56.51:32704 <-> 192.168.2.12:56328 [proto: 78.45/STUN.WhatsAppCall][cat: VoIP/10][87 pkts/14598 bytes <-> 77 pkts/17336 bytes][Goodput ratio: 75/81][11.91 sec][bytes ratio: -0.086 (Mixed)][IAT c2s/s2c min/avg/max/stddev: 0/0 136/121 921/265 137/64][Pkt Len c2s/s2c min/avg/max/stddev: 68/68 168/225 318/331 61/68][PLAIN TEXT (KEXQD/)]
+26c26
+< 	9	UDP 192.168.2.12:56328 -> 1.60.78.64:64282 [proto: 78.45/STUN.WhatsAppCall][cat: VoIP/10][16 pkts/1376 bytes -> 0 pkts/0 bytes][Goodput ratio: 51/0][9.38 sec][bytes ratio: 1.000 (Upload)][IAT c2s/s2c min/avg/max/stddev: 614/0 625/0 643/0 8/0][Pkt Len c2s/s2c min/avg/max/stddev: 86/0 86/0 86/0 0/0][Risk: ** Known protocol on non standard port **]
+---
+> 	9	UDP 192.168.2.12:56328 -> 1.60.78.64:64282 [proto: 78.45/STUN.WhatsAppCall][cat: VoIP/10][16 pkts/1376 bytes -> 0 pkts/0 bytes][Goodput ratio: 51/0][9.38 sec][bytes ratio: 1.000 (Upload)][IAT c2s/s2c min/avg/max/stddev: 614/0 625/0 643/0 8/0][Pkt Len c2s/s2c min/avg/max/stddev: 86/0 86/0 86/0 0/0]

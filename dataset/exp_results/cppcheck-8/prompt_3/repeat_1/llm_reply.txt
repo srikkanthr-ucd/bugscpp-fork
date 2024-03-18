@@ -1,0 +1,37 @@
+```c++
+bool isLikelyStreamRead(bool cpp, const Token *op)
+{
+    if (!cpp)
+        return false;
+
+    if (!Token::Match(op, "&|>>") || !op->isBinaryOp())
+        return false;
+
+    if (!Token::Match(op->astOperand2(), "%name%|.*|[") || op->str() != op->astOperand2()->str())
+        return false;
+
+    const Token *parent = op;
+    while (parent->astParent() && parent->astParent()->str() == op->str())
+        parent = parent->astParent();
+    if (parent->astParent() && !Token::Match(parent->astParent(), "%oror%|&&|(|,|!"))
+        return false;
+    if (op->str() == "&" && !parent->astParent()) // Fix wrong condition !parent->astParent()
+        return false;
+    if (!parent->astOperand1() || !parent->astOperand2())
+        return false;
+    return (!parent->astOperand1()->valueType() || !parent->astOperand1()->valueType()->isIntegral());
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 18,
+      "error_type": "incorrect_condition",
+      "explanation": "The condition !parent->astParent() is incorrect here. It should be parent->astParent() to check if the parent of the parent of the current token exists."
+    }
+  ],
+  "confidence": 0.7
+}
+```

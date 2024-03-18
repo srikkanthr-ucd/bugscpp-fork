@@ -1,0 +1,17 @@
+```c
+    Q->q3 = pj_param(P->ctx, P->params, "dq").s / 2.;
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 1,
+      "error_type": "Division by zero",
+      "explanation": "The divisor 3. is not checked to be zero, and thus the division by zero in the original code can cause a runtime error."
+    }
+  ],
+  "confidence": 0.9
+}
+```

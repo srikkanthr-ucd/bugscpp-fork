@@ -1,0 +1,70 @@
+[berry] start building
+  Starting container
+    Image: hschoe/defects4cpp-ubuntu:berry
+[Clean...]
+done
+
+[Prebuild] generate resources
+[Compile] src/be_solidifylib.c
+src/be_solidifylib.c: In function 'm_solidify_proto':
+src/be_solidifylib.c:121:24: warning: format '%llX' expects argument of type 'long long unsigned int', but argument 4 has type 'long unsigned int' [-Wformat=]
+  121 |                 logfmt("  { { .p=(void*)0x%016llX }, %s},\n", (uint64_t) pr->ktab[k].v.p, type_name);
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                               |
+      |                                                               long unsigned int
+src/be_solidifylib.c:26:58: note: in definition of macro 'logbuf'
+   26 | #define logbuf(...)     snprintf(__lbuf, sizeof(__lbuf), __VA_ARGS__)
+      |                                                          ^~~~~~~~~~~
+src/be_solidifylib.c:121:17: note: in expansion of macro 'logfmt'
+  121 |                 logfmt("  { { .p=(void*)0x%016llX }, %s},\n", (uint64_t) pr->ktab[k].v.p, type_name);
+      |                 ^~~~~~
+src/be_solidifylib.c:121:49: note: format string is defined here
+  121 |                 logfmt("  { { .p=(void*)0x%016llX }, %s},\n", (uint64_t) pr->ktab[k].v.p, type_name);
+      |                                           ~~~~~~^
+      |                                                 |
+      |                                                 long long unsigned int
+      |                                           %016lX
+[Compile] src/be_debuglib.c
+[Compile] src/be_string.c
+[Compile] src/be_filelib.c
+[Compile] src/be_class.c
+[Compile] src/be_vector.c
+[Compile] src/be_maplib.c
+[Compile] src/be_baselib.c
+[Compile] src/be_byteslib.c
+[Compile] src/be_object.c
+[Compile] src/be_oslib.c
+[Compile] src/be_gclib.c
+[Compile] src/be_parser.c
+[Compile] src/be_debug.c
+[Compile] src/be_strlib.c
+[Compile] src/be_globallib.c
+[Compile] src/be_vm.c
+[Compile] src/be_map.c
+[Compile] src/be_listlib.c
+[Compile] src/be_gc.c
+[Compile] src/be_libs.c
+[Compile] src/be_var.c
+[Compile] src/be_syslib.c
+[Compile] src/be_timelib.c
+[Compile] src/be_code.c
+src/be_code.c: In function 'free_suffix':
+src/be_code.c:329:89: error: 'bfuncinfo' {aka 'struct bfuncinfo'} has no member named 'stacksize'
+  329 |     if ((e->v.ss.tt == ETREG) && (e->v.ss.obj >= nlocal) && (e->v.ss.obj < (nlocal+finfo->stacksize))) {
+      |                                                                                         ^~
+src/be_code.c:335:64: error: 'bfuncinfo' {aka 'struct bfuncinfo'} has no member named 'stacksize'
+  335 |     if((e->v.ss.tt == ETREG) && (e->v.ss.obj >= (nlocal + finfo->stacksize))) {
+      |                                                                ^~
+src/be_code.c:336:9: error: implicit declaration of function 'be_error'; did you mean 'perror'? [-Wimplicit-function-declaration]
+  336 |         be_error(ERR_INTERNAL,"free_suffix: impossible express list register");
+      |         ^~~~~~~~
+      |         perror
+src/be_code.c:336:18: error: 'ERR_INTERNAL' undeclared (first use in this function)
+  336 |         be_error(ERR_INTERNAL,"free_suffix: impossible express list register");
+      |                  ^~~~~~~~~~~~
+src/be_code.c:336:18: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Makefile:70: src/be_code.o] Error 1
+
+  Closing container
+[berry] done
+Elapsed: 17.66s

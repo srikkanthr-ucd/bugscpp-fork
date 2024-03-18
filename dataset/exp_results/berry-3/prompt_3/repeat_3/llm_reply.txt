@@ -1,0 +1,25 @@
+```c
+static void class_inherit(bparser *parser, bexpdesc *e)
+{
+    if (next_type(parser) == OptColon) { /* ':' */
+        bexpdesc e1;
+        scan_next_token(parser); /* skip ':' */
+        expr(parser, &e1);
+        check_var(parser, &e1);
+        be_code_setsuper(e, &e1);
+    }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 24,
+      "error_type": "Missing operand to the left of `&`",
+      "explanation": "`&` expects a variable or an expression on its left."
+    }
+  ],
+  "confidence": 0.98
+}
+```

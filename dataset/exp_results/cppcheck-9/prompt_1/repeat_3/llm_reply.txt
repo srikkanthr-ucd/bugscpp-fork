@@ -1,0 +1,31 @@
+```c++
+ValueFlow::Value getLifetimeObjValue(const Token *tok, bool inconclusive)
+{
+    ValueFlow::Value result;
+    auto first_lifetime_value = std::find_if(tok->values().begin(), tok->values().end(), [&](const ValueFlow::Value &v) {
+        return !inconclusive || !v.isInconclusive() && v.isLocalLifetimeValue() && v.tokvalue->variable();
+    });
+
+    if (first_lifetime_value != tok->values().end())
+        result = *first_lifetime_value;
+    return result;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 15,
+      "error_type": "Double conditional check",
+      "explanation": "The conditional check `!v.isLocalLifetimeValue()` is redundant because it is already checked by `v.isInconclusive()` in the previous conditional. When a local lifetime value is inconclusive, it is also not a local lifetime value."
+    },
+    {
+      "line_number": 17,
+      "error_type": "Unnecessary `std::find_if` check",
+      "explanation": "The `std::find_if` check in the `if` statement is redundant because it is already checked by `v.isInconclusive()` in the previous conditional. If a value is not inconclusive, then it cannot be a local lifetime value."
+    }
+  ],
+  "confidence": 0.9
+}
+```

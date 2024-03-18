@@ -1,0 +1,24 @@
+```c
+	    else if (type != CUR) {
+		xmlFatalErrMsgInt(ctxt, XML_ERR_SEPARATOR_REQUIRED,
+		    "xmlParseElementChildrenContentDecl : '%c' expected\n",
+				  type);
+		if ((last != NULL) && (last != ret))
+		    xmlFreeDocElementContent(ctxt->myDoc, last);
+		return(NULL);
+	    }
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 7,
+      "error_type": "Resource Management Issue",
+      "explanation": "Conditions in which xmlFreeDocElementContent would be called do not guarantee ret is non NULL, calling free on NULL pointer leads to undefined behavior"
+    }
+  ],
+  "confidence": 0.9
+}
+```

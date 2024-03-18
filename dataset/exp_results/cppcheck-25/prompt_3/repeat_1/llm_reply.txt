@@ -1,0 +1,45 @@
+```c++
+static bool isLifetimeBorrowed(const ValueType *vt, const ValueType *vtParent)
+{
+    if (!vtParent)
+        return false;
+    if (!vt)
+        return false;
+    if (vt->type == ValueType::UNKNOWN_TYPE || vtParent->type == ValueType::UNKNOWN_TYPE)
+        return false;
+    if (vtParent->pointer > vt->pointer)
+        return true;
+    if (vtParent->pointer < vt->pointer && vtParent->isIntegral())
+        return true;
+    if (vtParent->str() == vt->str())
+        return true;
+    if (vtParent->pointer == vt->pointer && vtParent->type == vt->type && vtParent->isIntegral())
+        // sign conversion, e.g. when passing explicit cast from "unsigned char" to "char".
+        return true;
+
+    return false;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 14,
+      "error_type": "logical",
+      "explanation": "The statement `return false;` is redundant because the `if (!vtParent)` and `if (!vt)` checks above already handle the case where either `vtParent` or `vt` is null."
+    },
+    {
+      "line_number": 14,
+      "error_type": "logical",
+      "explanation": "The statement `return false;` is redundant because the `if (!vtParent)` and `if (!vt)` checks above already handle the case where either `vtParent` or `vt` is null."
+    },
+    {
+      "line_number": 18,
+      "error_type": "logical",
+      "explanation": "The logic in this condition is incorrect. It should check if `vt` is an unknown type or if `vtParent` is an unknown type, and return `false` in either case."
+    }
+  ],
+  "confidence": 0.8
+}
+```

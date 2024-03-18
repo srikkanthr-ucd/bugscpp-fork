@@ -1,0 +1,35 @@
+```c++
+static bool isLifetimeBorrowed(const ValueType *vt, const ValueType *vtParent)
+{
+    if (!vtParent)
+        return false;
+    if (!vt)
+        return false;
+    if (vt->type != ValueType::UNKNOWN_TYPE && vtParent->type != ValueType::UNKNOWN_TYPE) {
+        if (vtParent->pointer > vt->pointer)
+            return true;
+        if (vtParent->pointer < vt->pointer && vtParent->isIntegral())
+            return true;
+        if (vtParent->str() == vt->str())
+            return true;
+        if (vtParent->pointer == vt->pointer && vtParent->type == vt->type && vtParent->isIntegral())
+            // sign conversion
+            return vtParent->size < vt->size;
+    }
+
+    return false;
+}
+
+```
+```json
+{
+  "error": [
+    {
+      "line_number": 17,
+      "error_type": "Incorrect comparison of signed and unsigned values",
+      "explanation": "The function called isIntegral() can only be called for integral types, which by definition are signed types. Therefore, comparing the result of this function to an unsigned pointer is falling into the Incorrect comparison of signed and unsigned values trap."
+    }
+  ],
+  "confidence": 0.8
+}
+```

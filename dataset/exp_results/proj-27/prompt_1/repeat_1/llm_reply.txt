@@ -1,0 +1,72 @@
+```cpp
+        throw ParsingException(
+            "Missing BASEGEODCRS / BASEGEOGCRS / GEOGCS node");
+    }
+    auto baseGeodCRS = buildGeodeticCRS(baseGeodCRSNode);
+
+    auto props = buildProperties(node);
+
+    auto &csNode = nodeP->lookForChild(WKTConstants::CS_);
+    const auto &nodeValue = nodeP->value();
+    bool isLinear = nn_dynamic_pointer_cast<LinearCS>(cs) != nullptr;
+    if (isNull(csNode) && !ci_equal(nodeValue, WKTConstants::PROJCS) &&
+        !ci_equal(nodeValue, WKTConstants::BASEPROJCRS) && !isLinear) {
+        ThrowMissing(WKTConstants::CS_);
+    }
+    auto cs = buildCS(csNode, node, UnitOfMeasure::NONE);
+    auto cartesianCS = nn_dynamic_pointer_cast<CartesianCS>(cs);
+
+    const std::string projCRSName = stripQuotes(nodeP->children()[0]);
+    if (esriStyle_ && dbContext_) {
+        // It is likely that the ESRI definition of EPSG:32661 (UPS North) &
+        // EPSG:32761 (UPS South) uses the easting-northing order, instead
+        // of the EPSG northing-easting order
+        // so don't substitue names to avoid confusion.
+        if (projCRSName == "UPS_North") {
+            props.set(IdentifiedObject::NAME_KEY, "WGS 84 / UPS North (E,N)");
+        } else if (projCRSName == "UPS_South") {
+            props.set(IdentifiedObject::NAME_KEY, "WGS 84 / UPS South (E,N)");
+        } else {
+            std::string outTableName;
+            std::string authNameFromAlias;
+            std::string codeFromAlias;
+            auto authFactory = AuthorityFactory::create(NN_NO_CHECK(dbContext_),
+                                                        std::string());
+            auto officialName = authFactory->getOfficialNameFromAlias(
+                projCRSName, "projected_crs", "ESRI", false, outTableName,
+                authNameFromAlias, codeFromAlias);
+            if (!officialName.empty()) {
+                // Special case for https://github.com/OSGeo/PROJ/issues/2086
+                // The name of the CRS to identify is
+                // NAD_1983_HARN_StatePlane_Colorado_North_FIPS_0501
+                // whereas it should be
+                // NAD_1983_HARN_StatePlane_Colorado_North_FIPS_0501_Feet
+                constexpr double US_FOOT_CONV_FACTOR = 12.0 / 39.37;
+                if (projCRSName.find("_FIPS_") != std::string::npos &&
+                    projCRSName.find("_Feet") == std::string::npos &&
+                    std::fabs(
+                        cartesianCS->axisList()[0]->unit().conversionToSI() -
+                        US_FOOT_CONV_FACTOR) < 1e-10 * US_FOOT_CONV_FACTOR) {
+                    auto officialNameFromFeet =
+                        authFactory->getOfficialNameFromAlias(
+                            projCRSName + "_Feet", "projected_crs", "ESRI",
+                            false, outTableName, authNameFromAlias,
+                            codeFromAlias);
+                    if (!officialNameFromFeet.empty()) {
+                        officialName = officialNameFromFeet;
+                    }
+                }
+
+                props.set(IdentifiedObject::NAME_KEY, officialName);
+            }
+        }
+
+    }
+```
+
+```json
+{
+  "error": [],
+  "confidence": 0
+}
+```

@@ -1,0 +1,7 @@
+test_result: 
+wget2-2: 
+build_result: True
+test_cases_result:  
+pass_rate: 0.9848484848484849
+pass_test_cases: ['wget2-buggy-2-63', 'wget2-buggy-2-13', 'wget2-buggy-2-31', 'wget2-buggy-2-27', 'wget2-buggy-2-28', 'wget2-buggy-2-50', 'wget2-buggy-2-7', 'wget2-buggy-2-43', 'wget2-buggy-2-49', 'wget2-buggy-2-22', 'wget2-buggy-2-32', 'wget2-buggy-2-4', 'wget2-buggy-2-10', 'wget2-buggy-2-38', 'wget2-buggy-2-62', 'wget2-buggy-2-9', 'wget2-buggy-2-6', 'wget2-buggy-2-3', 'wget2-buggy-2-45', 'wget2-buggy-2-48', 'wget2-buggy-2-17', 'wget2-buggy-2-53', 'wget2-buggy-2-11', 'wget2-buggy-2-46', 'wget2-buggy-2-30', 'wget2-buggy-2-36', 'wget2-buggy-2-52', 'wget2-buggy-2-42', 'wget2-buggy-2-39', 'wget2-buggy-2-40', 'wget2-buggy-2-55', 'wget2-buggy-2-29', 'wget2-buggy-2-58', 'wget2-buggy-2-59', 'wget2-buggy-2-14', 'wget2-buggy-2-8', 'wget2-buggy-2-20', 'wget2-buggy-2-61', 'wget2-buggy-2-16', 'wget2-buggy-2-66', 'wget2-buggy-2-65', 'wget2-buggy-2-44', 'wget2-buggy-2-34', 'wget2-buggy-2-56', 'wget2-buggy-2-54', 'wget2-buggy-2-57', 'wget2-buggy-2-33', 'wget2-buggy-2-41', 'wget2-buggy-2-18', 'wget2-buggy-2-26', 'wget2-buggy-2-37', 'wget2-buggy-2-25', 'wget2-buggy-2-47', 'wget2-buggy-2-24', 'wget2-buggy-2-21', 'wget2-buggy-2-5', 'wget2-buggy-2-1', 'wget2-buggy-2-19', 'wget2-buggy-2-35', 'wget2-buggy-2-2', 'wget2-buggy-2-64', 'wget2-buggy-2-51', 'wget2-buggy-2-15', 'wget2-buggy-2-12', 'wget2-buggy-2-60']
+fail_test_cases: ['wget2-buggy-2-23']

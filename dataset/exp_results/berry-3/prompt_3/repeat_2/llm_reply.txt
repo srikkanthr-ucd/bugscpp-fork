@@ -1,0 +1,25 @@
+```c
+static void class_inherit(bparser *parser, bexpdesc *e)
+{
+    if (next_type(parser) == OptColon) { /* ':' */
+        bexpdesc e1;
+        scan_next_token(parser); /* skip ':' */
+        expr(parser, &e1);
+        check_var(parser, &e1);
+        be_code_setsuper(parser->finfo, e->base, &e1);
+    }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 10,
+      "error_type": "Buggy code",
+      "explanation": "The buggy code assigns the base class of the derived class to the expression `e`, which is incorrect. It should assign the base class to the base class of the derived class, which is `e->base`."
+    }
+  ],
+  "confidence": 1.0
+}
+```

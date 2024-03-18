@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 39: TestSimplifyTemplate
+1/1 Test #39: TestSimplifyTemplate .............   Passed    0.85 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.86 sec

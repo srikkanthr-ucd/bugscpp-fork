@@ -1,0 +1,41 @@
+```
+uint32 TIFFNumberOfStrips(TIFF* tif)
+{
+	TIFFDirectory *td = &tif->tif_dir;
+	uint32 nstrips;
+
+	if (td->td_rowsperstrip == (uint32) -1) {
+
+		/* td_rowsperstrip is unknown: therefore, a single
+		   strip must be created */
+		nstrips = 1;
+
+	}
+	else {
+
+		/* Compute the number of strips using the value of
+		   td_rowsperstrip and  the length of the image */
+
+		uint32 rows_per_strip = td->td_rowsperstrip;
+		nstrips = TIFFhowmany_32(td->td_imagelength, rows_per_strip);
+
+		/* In case of an error, just return 1; the issue will
+		   be detected at a later point */
+
+		if (nstrips == (uint32) -1) {
+			TIFFErrorExt(tif->tif_clientdata,
+				     tif->tif_name,
+				     "TIFFNumberOfStrips: division overflow");
+			TIFFSetField(tif,
+				     TIFFTAG_IMAGEDIMENSIONS,
+				     0, 0);
+			return 1;
+		}
+	}
+
+	if (td->td_planarconfig == PLANARCONFIG_CONTIG && td->td_samplesperpixel > 1)
+		nstrips *= td->td_samplesperpixel;
+	return (nstrips);
+}
+
+```

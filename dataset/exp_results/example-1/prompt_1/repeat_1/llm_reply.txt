@@ -1,0 +1,23 @@
+```c
+int func1(int x) {
+    int y = 100;
+    if (y >= 100) {
+        return -y;
+    }
+    y = x;
+    return y;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 3,
+      "error_type": "wrong initialization",
+      "explanation": "y is initialized to 100 and then modified to be equal to x, so the condition in the if statement will always fail and the return value will always be -100, regardless of the value of x."
+    }
+  ],
+  "confidence": 0.9
+}
+```

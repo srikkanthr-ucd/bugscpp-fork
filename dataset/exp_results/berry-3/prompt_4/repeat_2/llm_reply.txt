@@ -1,0 +1,25 @@
+```c
+static void class_inherit(bparser *parser, bexpdesc *e)
+{
+    if (next_type(parser) == OptColon) { /* ':' */
+        bexpdesc e1;
+        scan_next_token(parser); /* skip ':' */
+        expr(parser, &e1);
+        check_var(parser, &e1);
+        be_code_setsuper(parser->finfo, e, &e1);
+    }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 11,
+      "error_type": "buggy code",
+      "explanation": "The buggy function incorrectly calls `be_code_setsuper` with `&e`, which points to the parent, resulting in incorrect code generation. The correct approach is to call `be_code_setsuper` with `e`, which points to the child."
+    }
+  ],
+  "confidence": 1
+}
+```

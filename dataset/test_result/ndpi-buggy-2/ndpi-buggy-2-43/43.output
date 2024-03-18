@@ -1,0 +1,4 @@
+6c6
+< 	2	UDP 192.168.239.129:138 -> 192.168.239.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][15 pkts/3447 bytes -> 0 pkts/0 bytes][Goodput ratio: 82/0][115.76 sec][Host: mdjr98][bytes ratio: 1.000 (Upload)][IAT c2s/s2c min/avg/max/stddev: 0/0 8826/0 43984/0 11228/0][Pkt Len c2s/s2c min/avg/max/stddev: 219/0 230/0 249/0 10/0][PLAIN TEXT ( ENEEEKFCDJ)]
+---
+> 	2	UDP 192.168.239.129:138 -> 192.168.239.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][15 pkts/3447 bytes -> 0 pkts/0 bytes][Goodput ratio: 82/0][115.76 sec][Host: mdjr98][bytes ratio: 1.000 (Upload)][IAT c2s/s2c min/avg/max/stddev: 0/0 8826/0 43984/0 11228/0][Pkt Len c2s/s2c min/avg/max/stddev: 219/0 230/0 249/0 10/0][Risk: ** Known protocol on non standard port **][PLAIN TEXT ( ENEEEKFCDJ)]

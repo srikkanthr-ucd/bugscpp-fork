@@ -1,0 +1,3 @@
+```
+static void free_suffix(bfuncinfo *finfo, bexpdesc *e)\n{\n    int idx = e->v.ss.idx;\n    int nlocal = be_list_count(finfo->local);\n    /* release suffix register */\n    if (!isK(idx) && idx >= nlocal && idx != -1) {\n        be_code_freeregs(finfo, 1);\n    }\n    /* release object register */\n    if (e->v.ss.tt == ETREG && (int)e->v.ss.obj >= nlocal && (int)e->v.ss.obj < (nlocal+finfo->stacksize)) {\n        be_code_freeregs(finfo, 1);\n    }\n}\n
+```

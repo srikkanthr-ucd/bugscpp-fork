@@ -1,0 +1,21 @@
+```c
+void dpp_sighandler(int signum) {
+	__gcov_flush();
+	sigaction(SIGINT, &dpp_orig_sigaction, NULL);
+	raise(signum);
+	exit(1);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 13,
+      "error_type": "Undefined variable",
+      "explanation": "Variable `sigaction` in line 13 is used without being defined."
+    }
+  ],
+  "confidence": 0.9
+}
+```

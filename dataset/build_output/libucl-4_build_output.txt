@@ -1,0 +1,38 @@
+[libucl] start building
+  Starting container
+    Image: hschoe/defects4cpp-ubuntu:libucl
+Traceback (most recent call last):
+  File "/home/codespace/.local/lib/python3.10/site-packages/docker/api/client.py", line 268, in _raise_for_status
+    response.raise_for_status()
+  File "/home/codespace/.local/lib/python3.10/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 409 Client Error: Conflict for url: http+docker://localhost/v1.43/containers/create?name=libucl-dpp
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspaces/bugscpp-fork/dataset/../bugscpp/bugscpp.py", line 55, in <module>
+    main()
+  File "/workspaces/bugscpp-fork/dataset/../bugscpp/bugscpp.py", line 43, in main
+    measure_time(commands[name], argv)
+  File "/workspaces/bugscpp-fork/dataset/../bugscpp/bugscpp.py", line 21, in measure_time
+    func(args)
+  File "/workspaces/bugscpp-fork/bugscpp/processor/core/command.py", line 325, in __call__
+    with Docker(
+  File "/workspaces/bugscpp-fork/bugscpp/processor/core/docker.py", line 207, in __enter__
+    self.client.containers.run(
+  File "/home/codespace/.local/lib/python3.10/site-packages/docker/models/containers.py", line 846, in run
+    container = self.create(image=image, command=command,
+  File "/home/codespace/.local/lib/python3.10/site-packages/docker/models/containers.py", line 905, in create
+    resp = self.client.api.create_container(**create_kwargs)
+  File "/home/codespace/.local/lib/python3.10/site-packages/docker/api/container.py", line 431, in create_container
+    return self.create_container_from_config(config, name, platform)
+  File "/home/codespace/.local/lib/python3.10/site-packages/docker/api/container.py", line 448, in create_container_from_config
+    return self._result(res, True)
+  File "/home/codespace/.local/lib/python3.10/site-packages/docker/api/client.py", line 274, in _result
+    self._raise_for_status(response)
+  File "/home/codespace/.local/lib/python3.10/site-packages/docker/api/client.py", line 270, in _raise_for_status
+    raise create_api_error_from_http_exception(e) from e
+  File "/home/codespace/.local/lib/python3.10/site-packages/docker/errors.py", line 39, in create_api_error_from_http_exception
+    raise cls(e, response=response, explanation=explanation) from e
+docker.errors.APIError: 409 Client Error for http+docker://localhost/v1.43/containers/create?name=libucl-dpp: Conflict ("Conflict. The container name "/libucl-dpp" is already in use by container "83fce8e53bd27c2227765eed349ffafceace70070ca91cfc3837f2d8d4b53d42". You have to remove (or rename) that container to be able to reuse that name.")

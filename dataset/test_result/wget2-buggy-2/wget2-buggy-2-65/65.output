@@ -1,0 +1,31 @@
+make: Entering directory '/home/workspace/unit-tests'
+make  buffer_printf_perf stringmap_perf test test-parse-html test-cond test-decompress test-dl libalpha.la libbeta.la
+make[1]: Entering directory '/home/workspace/unit-tests'
+make[1]: 'buffer_printf_perf' is up to date.
+make[1]: 'stringmap_perf' is up to date.
+make[1]: 'test' is up to date.
+make[1]: 'test-parse-html' is up to date.
+make[1]: 'test-cond' is up to date.
+make[1]: 'test-decompress' is up to date.
+make[1]: 'test-dl' is up to date.
+make[1]: 'libalpha.la' is up to date.
+make[1]: 'libbeta.la' is up to date.
+make[1]: Leaving directory '/home/workspace/unit-tests'
+make  check-TESTS
+make[1]: Entering directory '/home/workspace/unit-tests'
+make[2]: Entering directory '/home/workspace/unit-tests'
+PASS: test-decompress
+============================================================================
+Testsuite summary for wget2 1.99.2
+============================================================================
+# TOTAL: 1
+# PASS:  1
+# SKIP:  0
+# XFAIL: 0
+# FAIL:  0
+# XPASS: 0
+# ERROR: 0
+============================================================================
+make[2]: Leaving directory '/home/workspace/unit-tests'
+make[1]: Leaving directory '/home/workspace/unit-tests'
+make: Leaving directory '/home/workspace/unit-tests'

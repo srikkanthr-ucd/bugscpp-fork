@@ -1,0 +1,15 @@
+Example 18 (lines 196-204) [Issue 83](https://github.com/mity/md4c/issues/83)
+foo
+>
+
+--- expected HTML
++++ actual HTML
+@@ -1,4 +1,2 @@
+-<p>foo</p>
+-<blockquote>
+-</blockquote>
+-
++<p>foo
++&gt;</p>
+
+0 passed, 1 failed, 0 errored, 25 skipped

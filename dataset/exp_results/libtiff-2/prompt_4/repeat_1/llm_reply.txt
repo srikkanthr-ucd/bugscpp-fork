@@ -1,0 +1,21 @@
+```c
+void dpp_sighandler(int signum) {
+	__gcov_flush();
+	sigaction(signum, &dpp_orig_sigaction, NULL);
+	raise(signum);
+	exit(1);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 1,
+      "error_type": "buggy function call",
+      "explanation": "sigaction takes 3 arguments, the first argument should be a signal"
+    }
+  ],
+  "confidence": 1.0
+}
+```

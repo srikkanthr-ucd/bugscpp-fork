@@ -1,0 +1,10 @@
+Test_Repo: cppcheck-29
+Prompt_ID: 1
+Repeat_Num: 1
+Total_Patch_Num: 1
+Compilable_Patch_Num: 1
+Plausible_Patch_Num: 0
+Average_Response_Time: 5.698517322540283
+Average_Confidence: 1.0
+Average_Identify_Accuracy: 0.0
+Average_Pass_Rate: 0.0

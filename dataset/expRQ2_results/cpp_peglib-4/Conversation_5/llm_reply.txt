@@ -1,0 +1,34 @@
+```
+inline void LinkReferences::visit(Reference& ope) {
+    // Check if the reference is a macro parameter
+    auto found_param = false;
+    for (size_t i = 0; i < params_.size(); i++) {
+        const auto& param = params_[i];
+        if (param == ope.name_) {
+            ope.iarg_ = i;
+            found_param = true;
+            break;
+        }
+    }
+
+    // If the reference is not a macro parameter, then check if it is a definition rule
+    if (!found_param) {
+        grammar_.emplace(ope.name_, ope);
+    } else if (grammar_[ope.name_].args_.size() != ope.args_.size()) {
+        throw std::runtime_error("Multiple definitions of rule " + ope.name_ + " found in the grammar with different argument lists.");
+    } else {
+        for (size_t i = 0; i < ope.args_.size(); i++) {
+            if (ope.args_[i]->getType() == Node::Type::Reference) {
+                if (std::static_pointer_cast<peg::Reference>(ope.args_[i])->getText() != std::static_pointer_cast<peg::Reference>(grammar_[ope.name_].args_[i])->getText()) {
+                    throw std::runtime_error("Multiple definitions of rule " + ope.name_ + " found in the grammar with different argument lists.");
+                }
+            }
+        }
+    }
+
+    for (auto arg: ope.args_) {
+        arg->accept(*this);
+    }
+}
+
+```

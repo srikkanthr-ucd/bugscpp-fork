@@ -1,0 +1,7 @@
+test_result: 
+jerryscript-9: 
+build_result: True
+test_cases_result:  
+pass_rate: 0.8571428571428571
+pass_test_cases: ['jerryscript-buggy-9-6', 'jerryscript-buggy-9-2', 'jerryscript-buggy-9-3', 'jerryscript-buggy-9-1', 'jerryscript-buggy-9-5', 'jerryscript-buggy-9-4']
+fail_test_cases: ['jerryscript-buggy-9-7']

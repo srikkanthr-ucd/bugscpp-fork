@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "test/spec_tests.py", line 144, in <module>
+    do_test(test, args.normalize, result_counts)
+  File "test/spec_tests.py", line 44, in do_test
+    [retcode, actual_html, err] = cmark.to_html(test['markdown'])
+  File "/home/workspace/test/cmark.py", line 23, in <lambda>
+    self.to_html = lambda x: pipe_through_prog(prog, x)
+  File "/home/workspace/test/cmark.py", line 10, in pipe_through_prog
+    p1 = Popen(prog.split(), stdout=PIPE, stdin=PIPE, stderr=PIPE)
+  File "/usr/lib/python3.6/subprocess.py", line 729, in __init__
+    restore_signals, start_new_session)
+  File "/usr/lib/python3.6/subprocess.py", line 1364, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'build/md2html/md2html': 'build/md2html/md2html'

@@ -1,0 +1,28 @@
+```c
+	    else if (type != CUR) {
+		xmlFatalErrMsgInt(ctxt, XML_ERR_SEPARATOR_REQUIRED,
+		    "xmlParseElementChildrenContentDecl : '%c' expected\n",
+				  type);
+		if ((last != NULL) && (last != ret))
+		    xmlFreeDocElementContent(ctxt->myDoc, last);
+		if (ret != NULL) {
+		    xmlFreeDocElementContent(ctxt->myDoc, ret);
+		    ret = NULL;
+		}
+		return(ret);
+	    }
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 6,
+      "error_type": "Unintended Memory Release",
+      "explanation": "The function `xmlFreeDocElementContent` should not be called with an argument of `ret` when `ret` is `NULL`."
+    }
+  ],
+  "confidence": 0.8
+}
+```

@@ -1,0 +1,20 @@
+```c
+    else if (ent->etype == XML_EXTERNAL_GENERAL_UNPARSED_ENTITY) {
+	xmlFatalErrMsg(ctxt, XML_ERR_UNPARSED_ENTITY,
+		 "Entity reference to unparsed entity %s\n", name);
+    }
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 3,
+      "error_type": "Incorrect function call",
+      "explanation": "xmlFatalErrMsgStr() is used for string error messages, while xmlFatalErrMsg() should be used for general error messages."
+    }
+  ],
+  "confidence": 0.9
+}
+```

@@ -1,0 +1,33 @@
+```c
+static void code_not(bfuncinfo *finfo, bexpdesc *e)
+{
+    switch (e->type) {
+    case ETINT: e->v.i = !e->v.i; break;
+    case ETREAL: e->v.r = !e->v.r; break; //Fix the operand from i to r
+    case ETNIL: e->v.i = 0; break;
+    case ETBOOL: e->v.i = !e->v.i; break;
+    case ETSTRING: e->v.i = 0; break;
+    default: {
+        int temp = e->t;
+        e->t = e->f;
+        e->f = temp;
+        e->not = NOT_EXPR | (e->not ^ NOT_MASK);
+        return;
+    }
+    }
+    e->type = ETBOOL;
+}
+
+```
+```json
+{
+  "error": [
+    {
+      "line_number": 6,
+      "error_type": "Incorrect Logic",
+      "explanation": "Logical NOT operation is applied to the wrong operand. The operand should be the floating point number, instead of the integer."
+    }
+  ],
+  "confidence": 1.0
+}
+```

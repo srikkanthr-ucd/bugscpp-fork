@@ -1,0 +1,32 @@
+```c++
+else if (styleEnabled) {
+                            if (mTokenizer->isCPP() && mSettings->standards.cpp == Standards::CPP11 && tok->str() == "==") {
+                                const Token* parent = tok->astParent();
+                                const Token* parent2 = parent->astParent();
+                                while (parent2 && parent2->astParent()) {
+                                    parent = parent2;
+                                    parent2 = parent->astParent();
+                                }
+                                if (parent && parent->previous() && parent->previous()->str() == "static_assert") {
+                                    continue;
+                                }
+                                if (parent && parent->next() && parent->next()->str() == "delete") {
+                                    continue;
+                                }
+                            }
+                            duplicateExpressionError(tok->astOperand1(), tok->astOperand2(), tok, errorPath);
+                        }
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 14,
+      "error_type": "missing condition",
+      "explanation": "The if condition is missing the check for the token following the current token. This check is necessary to correctly identify static_assert and delete statements."
+    }
+  ],
+  "confidence": 0.8
+}
+```

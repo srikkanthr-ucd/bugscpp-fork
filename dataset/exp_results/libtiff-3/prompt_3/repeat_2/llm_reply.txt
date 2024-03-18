@@ -1,0 +1,21 @@
+```c
+void dpp_sighandler(int signum) {
+	__gcov_flush();
+	sigaction(SIGINT, &dpp_orig_sigaction, NULL);
+	raise(signum);
+	exit(1);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 2,
+      "error_type": "misspelling",
+      "explanation": "The function name is misspelled, should use sigaction() instead of sigaction()"
+    }
+  ],
+  "confidence": 1.0
+}
+```

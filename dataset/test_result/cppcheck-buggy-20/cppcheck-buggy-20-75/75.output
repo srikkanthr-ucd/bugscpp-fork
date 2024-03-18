@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 75: cfg-windows32A
+1/1 Test #75: cfg-windows32A ...................   Passed    1.46 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   1.48 sec

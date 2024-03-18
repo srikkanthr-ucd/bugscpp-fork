@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 44: TestStl
+1/1 Test #44: TestStl ..........................   Passed    2.23 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   2.24 sec

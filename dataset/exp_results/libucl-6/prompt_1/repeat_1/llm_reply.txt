@@ -1,0 +1,30 @@
+```c
+		else if (*p == '\\') {
+			*need_unescape = true;
+			ucl_chunk_skipc(chunk, p);
+			if (p < chunk->end) {
+				char ch = *p;
+				if (ch == '\"' || ch == '\\' || ch == 'n' || ch == 'r' || ch == 't') {
+					*p = ch == 'n' ? '\n' : ch == 'r' ? '\r' : ch == 't' ? '\t' : *p;
+					ucl_chunk_skipc(chunk, p);
+				} else {
+					ucl_chunk_skipc(chunk, p);
+				}
+			}
+			continue;
+		}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 8,
+      "error_type": "Wrong usage of ucl_chunk_skipc Function",
+      "explanation": "The function `ucl_chunk_skipc` skips a single character in a chunk, but it is used to skip multiple characters here."
+    }
+  ],
+  "confidence": 0.8
+}
+```

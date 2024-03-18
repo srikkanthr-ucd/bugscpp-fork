@@ -1,0 +1,8 @@
+test_result: 
+yara-2: 
+build_result: True
+test_cases_result:  
+pass_rate: 0.0
+pass_test_cases: []
+fail_test_cases: ['yara-buggy-2-232']
+fail_test_cases_info: {'yara-buggy-2-232': {'failing_info': "tests/test-rules.c:1420: rule matches (but shouldn't)\nFAIL test-rules (exit status: 1)", 'tc_code': '  assert_false_rule_blob(\n       "rule test { strings: $a = \\" cmd.exe \\" nocase wide condition: $a }",\n       ISSUE_1006);'}}

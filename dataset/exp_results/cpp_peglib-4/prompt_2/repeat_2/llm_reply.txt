@@ -1,0 +1,37 @@
+```c++
+inline void LinkReferences::visit(Reference& ope) {
+    // Check if the reference is a macro parameter
+    auto found_param = false;
+    for (size_t i = 0; i < params_.size(); i++) {
+        const auto& param = params_[i];
+        if (param == ope.name_) {
+            ope.iarg_ = i;
+            found_param = true;
+            break;
+        }
+    }
+
+    // Check if the reference is a definition rule
+    if (grammar_.count(ope.name_) > 0) {
+        auto& rule = grammar_.at(ope.name_);
+        ope.rule_ = &rule;
+    }
+
+    for (auto arg: ope.args_) {
+        arg->accept(*this);
+    }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 10,
+      "error_type": "Undefined behavior",
+      "explanation": "The condition 'grammar_.count(ope.name_)' is always false because 'grammar_' is a string map and map::count() function returns '0' if the element is not found"
+    }
+  ],
+  "confidence": 0.9
+}
+```

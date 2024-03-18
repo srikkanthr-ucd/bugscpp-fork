@@ -1,0 +1,14 @@
+```c
+			else if (*p == '"') {
+				++p;
+				state = 2;
+			}
+
+```
+
+```json
+{
+  "error": [],
+  "confidence": 1
+}
+```

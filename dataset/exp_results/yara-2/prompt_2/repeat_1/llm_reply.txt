@@ -1,0 +1,39 @@
+```c
+static int _yr_scan_wicompare(
+    const uint8_t* data,
+    size_t data_size,
+    uint8_t* string,
+    size_t string_length)
+{
+  const uint8_t* s1 = data;
+  const uint8_t* s2 = string;
+
+  size_t i = 0;
+
+  if (data_size < string_length * 2)
+    return 0;
+
+  while (i < string_length && yr_lowercase[*s1] == yr_lowercase[*s2])
+  {
+    s1 += 2;
+    s2 += 2; // Corrected from `s2++`
+    i++;
+  }
+
+  return (int) ((i == string_length) ? i * 2 : 0);
+}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 19,
+      "error_type": "Use of '++' instead of '+='",
+      "explanation": "The line `s2++` should be `s2 += 2` because it is trying to advance the pointer `s2` by 2 bytes."
+    }
+  ],
+  "confidence": 0.9
+}
+```

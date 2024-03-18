@@ -1,0 +1,154 @@
+```c
+int yr_parser_reduce_rule_declaration_phase_1(
+    yyscan_t yyscanner,
+    int32_t flags,
+    const char* identifier,
+    YR_RULE** rule)
+{
+  YR_FIXUP *fixup;
+  YR_INIT_RULE_ARGS *init_rule_args;
+  YR_COMPILER* compiler = yyget_extra(yyscanner);
+
+  *rule = NULL;
+
+  if (yr_hash_table_lookup(
+        compiler->rules_table,
+        identifier,
+        compiler->current_namespace->name) != NULL ||
+      yr_hash_table_lookup(
+        compiler->objects_table,
+        identifier,
+        compiler->current_namespace->name) != NULL)
+  {
+    // A rule or variable with the same identifier already exists, return the
+    // appropriate error.
+
+    yr_compiler_set_error_extra_info(compiler, identifier);
+    return ERROR_DUPLICATED_IDENTIFIER;
+  }
+
+  FAIL_ON_ERROR(yr_arena_allocate_struct(
+      compiler->rules_arena,
+      sizeof(YR_RULE),
+      (void**) rule,
+      offsetof(YR_RULE, identifier),
+      offsetof(YR_RULE, tags),
+      offsetof(YR_RULE, strings),
+      offsetof(YR_RULE, metas),
+      offsetof(YR_RULE, ns),
+      offsetof(YR_RULE, regex_strs),
+      offsetof(YR_RULE, regex_flags),
+      offsetof(YR_RULE, pattern),
+      offsetof(YR_RULE, local_ns),
+      offsetof(YR_RULE, ints),
+      offsetof(YR_RULE, terminals),
+      offsetof(YR_RULE, concat_strs),
+      offsetof(YR_RULE, concat_strs_len),
+      EOL))
+
+  (*rule)->g_flags = flags;
+  (*rule)->ns = compiler->current_namespace;
+
+  #ifdef PROFILING_ENABLED
+  rule->time_cost = 0;
+  #endif
+
+  FAIL_ON_ERROR(yr_arena_write_string(
+      compiler->sz_arena,
+      identifier,
+      (char**) &(*rule)->identifier));
+
+  FAIL_ON_ERROR(yr_parser_emit(
+      yyscanner,
+      OP_INIT_RULE,
+      NULL));
+
+  FAIL_ON_ERROR(yr_arena_allocate_struct(
+      compiler->code_arena,
+      sizeof(YR_INIT_RULE_ARGS),
+      (void**) &init_rule_args,
+      offsetof(YR_INIT_RULE_ARGS, rule),
+      offsetof(YR_INIT_RULE_ARGS, jmp_addr),
+      EOL));
+
+  init_rule_args->rule = *rule;
+
+  // jmp_addr holds the address to jump to when we want to skip the code for
+  // the rule. It is iniatialized as NULL at this point because we don't know
+  // the address until emmiting the code for the rule's condition. The address
+  // is set in yr_parser_reduce_rule_declaration_phase_2.
+  init_rule_args->jmp_addr = NULL;
+
+  // Create a fixup entry for the jump and push it in the stack
+  fixup = (YR_FIXUP*) yr_malloc(sizeof(YR_FIXUP));
+
+  if (fixup == NULL)
+    return ERROR_INSUFFICIENT_MEMORY;
+
+  fixup->address = (void*) &(init_rule_args->jmp_addr);
+  fixup->next = compiler->fixup_stack_head;
+  compiler->fixup_stack_head = fixup;
+
+  // Clean strings_table as we are starting to parse a new rule.
+  yr_hash_table_clean(compiler->strings_table, NULL);
+
+  FAIL_ON_ERROR(yr_hash_table_add(
+      compiler->rules_table,
+      identifier,
+      compiler->current_namespace->name,
+      (void*) *rule));
+
+  compiler->current_rule = *rule;
+
+  return ERROR_SUCCESS;
+}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 76,
+      "error_type": "incompatible pointer type",
+      "explanation": "The variable `regex_strs` points to an array of YR_REGEX_STR, but it is initialized with NULL."
+    },
+    {
+      "line_number": 77,
+      "error_type": "incompatible pointer type",
+      "explanation": "The variable `regex_flags` points to an array of int32_t, but it is initialized with NULL."
+    },
+    {
+      "line_number": 78,
+      "error_type": "incompatible pointer type",
+      "explanation": "The variable `pattern` points to a YR_PATTERN, but it is initialized with NULL."
+    },
+    {
+      "line_number": 79,
+      "error_type": "incompatible pointer type",
+      "explanation": "The variable `local_ns` points to a YR_NAMESPACE, but it is initialized with NULL."
+    },
+    {
+      "line_number": 80,
+      "error_type": "incompatible pointer type",
+      "explanation": "The variable `ints` points to an array of int32_t, but it is initialized with NULL."
+    },
+    {
+      "line_number": 81,
+      "error_type": "incompatible pointer type",
+      "explanation": "The variable `terminals` points to an array of YR_TERMINAL, but it is initialized with NULL."
+    },
+    {
+      "line_number": 82,
+      "error_type": "incompatible pointer type",
+      "explanation": "The variable `concat_strs` points to an array of YR_CONCAT_STR, but it is initialized with NULL."
+    },
+    {
+      "line_number": 83,
+      "error_type": "incompatible pointer type",
+      "explanation": "The variable `concat_strs_len` points to an array of int32_t, but it is initialized with NULL."
+    }
+  ],
+  "confidence": 1.0
+}
+```

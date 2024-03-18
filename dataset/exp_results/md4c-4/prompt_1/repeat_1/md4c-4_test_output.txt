@@ -1,0 +1,7 @@
+test_result: 
+md4c-4: 
+build_result: True
+test_cases_result:  
+pass_rate: 0.0
+pass_test_cases: []
+fail_test_cases: ['md4c-buggy-4-4', 'md4c-buggy-4-13', 'md4c-buggy-4-8', 'md4c-buggy-4-2', 'md4c-buggy-4-6', 'md4c-buggy-4-9', 'md4c-buggy-4-5', 'md4c-buggy-4-12', 'md4c-buggy-4-10', 'md4c-buggy-4-11', 'md4c-buggy-4-7', 'md4c-buggy-4-3', 'md4c-buggy-4-1']

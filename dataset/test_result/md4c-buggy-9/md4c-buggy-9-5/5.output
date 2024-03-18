@@ -1,0 +1,19 @@
+Example 8 (lines 98-102) [Issue 53](https://github.com/mity/md4c/issues/53)
+This is [link](www.github.com/).
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p>This is <a href="www.github.com/">link</a>.</p>
++<p>This is <a href="www.github.com/">link</a>(<a href="http://www.github.com/">www.github.com/</a>).</p>
+
+Example 9 (lines 103-107) [Issue 53](https://github.com/mity/md4c/issues/53)
+This is [link](www.github.com/)X
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p>This is <a href="www.github.com/">link</a>X</p>
++<p>This is <a href="www.github.com/">link</a>(<a href="http://www.github.com/">www.github.com/</a>)X</p>
+
+7 passed, 2 failed, 0 errored, 0 skipped

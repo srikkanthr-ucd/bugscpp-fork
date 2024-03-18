@@ -1,0 +1,45 @@
+```c++
+bool isLikelyStreamRead(bool cpp, const Token *op)
+{
+    if (!cpp)
+        return false;
+
+    if (!Token::Match(op, "&|>>") || !op->isBinaryOp())
+        return false;
+
+    if (!Token::Match(op->astOperand2(), "%name%|.|*|[") && op->str() != op->astOperand2()->str())
+        return false;
+
+    const Token *parent = op;
+    while (parent->astParent() && parent->astParent()->str() == op->str())
+        parent = parent->astParent();
+
+    if (parent->astParent() && !Token::Match(parent->astParent(), "%oror%|&&|(|,|!"))
+        return false;
+
+    if (op->str() == "&" && parent->astParent())
+        return false;
+
+    bool paranthesis = false;
+    if (parent->astOperand1() && parent->astOperand1()->str() == "(")
+        paranthesis = true;
+
+    if (!parent->astOperand1() || !parent->astOperand2())
+        return false;
+
+    return (!parent->astOperand1()->valueType() || !parent->astOperand1()->valueType()->isIntegral() || paranthesis);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 21,
+      "error_type": "Incorrect Logical Operator",
+      "explanation": "The logical operator || is used incorrectly in the if statement. It should be && instead."
+    }
+  ],
+  "confidence": 0.8
+}
+```

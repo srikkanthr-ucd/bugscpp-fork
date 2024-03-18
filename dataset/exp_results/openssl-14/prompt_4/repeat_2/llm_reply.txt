@@ -1,0 +1,34 @@
+```c
+int EVP_PKEY_assign(EVP_PKEY *pkey, int type, void *key)
+{
+    int alias = type;
+
+#ifndef OPENSSL_NO_EC
+    if (EVP_PKEY_type(type) == EVP_PKEY_EC) {
+        const EC_GROUP *group = EC_KEY_get0_group(key);
+
+        if (group != NULL && EC_GROUP_get_curve_name(group) == NID_sm2)
+            alias = EVP_PKEY_SM2;
+    }
+#endif
+
+    if (!pkey || !EVP_PKEY_set_type(pkey, type))
+        return 0;
+    if (!EVP_PKEY_set_alias_type(pkey, alias))
+        return 0;
+    pkey->pkey.ptr = key;
+    return (key != NULL);
+}
+```
+```json
+{
+  "error": [
+    {
+      "line_number": 8,
+      "error_type": "potential null pointer dereference",
+      "explanation": "The condition pkey == NULL || !EVP_PKEY_set_type(pkey, type) checks if the pointer pkey is NULL or if the function EVP_PKEY_set_type returns 0. However, pkey can be NULL even if EVP_PKEY_set_type returns 1."
+    }
+  ],
+  "confidence": 0.5
+}
+```

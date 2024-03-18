@@ -1,0 +1,26 @@
+```cpp
+inline void LinkReferences::visit(Reference& ope) {
+    // Check if the reference is a macro parameter
+    auto found_param = false;
+    for (size_t i = 0; i < params_.size(); i++) {
+        const auto& param = params_[i];
+        if (param == ope.name_) {
+            ope.iarg_ = i;
+            found_param = true;
+            break;
+        }
+    }
+
+    // If the reference is not a macro parameter, then check if it is a definition rule
+    if (!found_param) {
+        grammar_.emplace(ope.name_, ope);
+    } else if (grammar_[ope.name_].args_ != ope.args_)
+        throw std::runtime_error("Multiple definitions of rule " + ope.name_ + " found in the grammar with different argument lists.");
+    else if (grammar_[ope.name_].iarg_ != ope.iarg_)
+        throw std::runtime_error("Multiple definitions rules have the same name and the same arguments but different reference index.");
+
+    for (auto arg: ope.args_) {
+        arg->accept(*this);
+    }
+}
+```

@@ -1,0 +1,4 @@
+65c65
+< 	44	UDP 192.168.1.100:138 -> 192.168.1.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][3 pkts/751 bytes -> 0 pkts/0 bytes][Goodput ratio: 83/0][3600.00 sec][Host: giovanni-pc][PLAIN TEXT ( EHEJEPFGEBEOEOEJ)]
+---
+> 	44	UDP 192.168.1.100:138 -> 192.168.1.255:138 [proto: 10.16/NetBIOS.SMBv1][cat: System/18][3 pkts/751 bytes -> 0 pkts/0 bytes][Goodput ratio: 83/0][3600.00 sec][Host: giovanni-pc][Risk: ** Known protocol on non standard port **][PLAIN TEXT ( EHEJEPFGEBEOEOEJ)]

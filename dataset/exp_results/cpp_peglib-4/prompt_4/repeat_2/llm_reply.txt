@@ -1,0 +1,37 @@
+```cpp
+inline void LinkReferences::visit(Reference& ope) {
+    // Check if the reference is a macro parameter
+    auto found_param = false;
+    for (size_t i = 0; i < params_.size(); i++) {
+        const auto& param = params_[i];
+        if (param == ope.name_) {
+            ope.iarg_ = i;
+            found_param = true;
+            break;
+        }
+    }
+
+    // Check if the definition rule is a terminal or a nonterminal
+    if (grammar_.count(ope.name_)) {
+        const auto& rule = grammar_.at(ope.name_);
+        ope.rule_ = &rule;
+    }
+
+    for (auto arg: ope.args_) {
+        arg->accept(*this);
+    }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 15,
+      "error_type": "LogicError",
+      "explanation": "This condition is always false when the reference is a nonterminal reference, because nonterminal references do not have iarg_. Therefore, when a nonterminal reference is passed to this function, the if condition will always fail, causing the nonterminal reference to be incorrectly treated as a terminal reference."
+    }
+  ],
+  "confidence": 1.0
+}
+```

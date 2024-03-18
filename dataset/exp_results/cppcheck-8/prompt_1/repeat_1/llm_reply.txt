@@ -1,0 +1,37 @@
+```c++
+bool isLikelyStreamRead(bool cpp, const Token *op)
+{
+    if (!cpp)
+        return false;
+
+    if (!Token::Match(op, "&|>>") || !op->isBinaryOp())
+        return false;
+
+    if (!Token::Match(op->astOperand2(), "%name%|.|*|[") && op->str() != op->astOperand2()->str())
+        return false;
+
+    const Token *parent = op;
+    while (parent->astParent() && parent->astParent()->str() == op->str())
+        parent = parent->astParent();
+    if (parent->astParent() && !Token::Match(parent->astParent(), "%oror%|&&|(|,|!"))
+        return false;
+    if (op->str() == "&" && parent->astParent())
+        return false;
+    if (!parent->astOperand1() || !parent->astOperand2())
+        return false;
+    return (!parent->astOperand1()->valueType() || parent->astOperand1()->valueType()->isIntegral());
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 12,
+      "error_type": "incorrect conditional",
+      "explanation": "The condition `!parent->astOperand1()->valueType()` should be replaced with `parent->astOperand1()->valueType()` to check whether the value type of the first operand exists"
+    }
+  ],
+  "confidence": 0.9
+}
+```

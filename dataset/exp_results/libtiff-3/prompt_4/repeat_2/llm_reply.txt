@@ -1,0 +1,26 @@
+```c
+void dpp_sighandler(int signum) {
+	__gcov_flush();
+	sigaction(signum, &dpp_orig_sigaction, NULL);
+	raise(signum);
+	exit(1);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 2,
+      "error_type": "omissions and vulnerability error",
+      "explanation": "The second parameter of `sigaction` should be the address of the `sigaction` structure rather than its value."
+    },
+	{
+      "line_number": 3,
+      "error_type": "error due to division by zero",
+      "explanation": "Division by zero occurs when you raise the signal again without restoring your original signal handler."
+    }
+  ],
+  "confidence": 1
+}
+```

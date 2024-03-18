@@ -1,0 +1,42 @@
+```c++
+void Tokenizer::simplifyOperatorName() {
+  if (mpMacro) {
+    replaceSpacesWithUnderscores(mpMacro->name);
+    if (mpMacro->prefix) {
+      if (mpMacro->prefix[0] == '$') {
+        replaceSpacesWithUnderscores(mpMacro->prefix);  // $lg2 is an infix operator.
+      }
+    }
+  } else if (rawToken[0] == '$') {
+    replaceSpacesWithUnderscores(rawToken);
+  }
+  if (isPrefixOperator()) {
+    if (mpMacro && mpMacro->prefix) {
+      // mpMacro->prefix is either '' or starts with '$'.
+      if (mpMacro->prefix[0] != '$') {
+        rawToken.insert(0, mpMacro->prefix);
+      }
+    } else {
+      // rawToken starts with '$'.
+      removeCharacters(0, "$");
+    }
+  } else if (isPostfixOperator()) {
+    if (mpMacro && mpMacro->postfix) {
+      rawToken.append(mpMacro->postfix);
+    }
+  }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 7,
+      "error_type": "Logic error",
+      "explanation": "This check is not necessary because `mpMacro->prefix` is always either an empty string or starts with `$`."
+    }
+  ],
+  "confidence": 1.0
+}
+```

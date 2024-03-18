@@ -1,0 +1,10 @@
+Test_Repo: ndpi-2
+Prompt_ID: 1
+Repeat_Num: 1
+Total_Patch_Num: 1
+Compilable_Patch_Num: 1
+Plausible_Patch_Num: 0
+Average_Response_Time: 8.122041463851929
+Average_Confidence: 0.8
+Average_Identify_Accuracy: 0.0
+Average_Pass_Rate: 0.8872180451127819

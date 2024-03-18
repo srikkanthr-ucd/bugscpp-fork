@@ -1,0 +1,21 @@
+```cpp
+void dpp_sighandler(int signum) {
+	__gcov_flush();
+	sigaction(SIGINT, &dpp_orig_sigaction, NULL); // Type "sigaction" is a global variable and should not be modified. 
+	raise(signum);
+	exit(1);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 5,
+      "error_type": "Parameter error",
+      "explanation": "sigaction is a global variable and should not be modified, while sigaction(sigaction, &dpp_orig_sigaction, NULL) makes a modification to it. Should be replaced by sigaction(SIGINT, &dpp_orig_sigaction, NULL)"
+    }
+  ],
+  "confidence": 1.0
+}
+```

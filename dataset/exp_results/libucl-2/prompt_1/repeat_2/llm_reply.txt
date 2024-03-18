@@ -1,0 +1,21 @@
+```c++
+			else if (*p == '"') {
+				state = 2;
+				++p;
+				*output++ = *p++;
+			}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 7,
+      "error_type": "Missing output value assignment",
+      "explanation": "The output value is not assigned after the state is changed to 2."
+    }
+  ],
+  "confidence": 0.9
+}
+```

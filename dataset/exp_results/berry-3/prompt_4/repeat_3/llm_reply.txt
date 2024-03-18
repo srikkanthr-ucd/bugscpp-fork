@@ -1,0 +1,25 @@
+```c
+static void class_inherit(bparser *parser, bexpdesc *e)
+{
+    if (next_type(parser) == OptColon) { /* ':' */
+        bexpdesc e1;
+        scan_next_token(parser); /* skip ':' */
+        expr(parser, &e1);
+        check_var(parser, &e1);
+        be_code_settype(parser->finfo, e, &e1);
+    }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 12,
+      "error_type": "Invalid function",
+      "explanation": "be_code_setsuper is not a valid function, it should be be_code_settype."
+    }
+  ],
+  "confidence": 1
+}
+```

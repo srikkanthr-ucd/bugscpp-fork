@@ -1,0 +1,38 @@
+```c
+static void ndpi_http_parse_subprotocol(struct ndpi_detection_module_struct *ndpi_struct,
+				 struct ndpi_flow_struct *flow) {
+  if((flow->l4.tcp.http_stage == 0) || (flow->http.url && flow->http_detected)) {
+    char *double_col = strchr((char*)flow->host_server_name, ':');
+    if (double_col == NULL) { // If there's no ':' in flow->host_server_name, return.
+      return;
+    }
+    *double_col = '\0'; // Changing double_col[0] to *double_col = '\0'
+
+    if(ndpi_match_hostname_protocol(ndpi_struct, flow,
+				    flow->detected_protocol_stack[1],
+				    flow->host_server_name,
+				    strlen(flow->host_server_name)) == 0) {
+      if(flow->http.url &&
+         ((strstr(flow->http.url, ":8080/downloading?n=0.") != NULL)
+          || (strstr(flow->http.url, ":8080/upload?n=0.") != NULL))) {
+	/* This looks like Ookla speedtest */
+	ndpi_set_detected_protocol(ndpi_struct, flow, NDPI_PROTOCOL_OOKLA, NDPI_PROTOCOL_HTTP, NDPI_CONFIDENCE_DPI);
+      }
+    }
+
+  }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 13,
+      "error_type": "Null dereference",
+      "explanation": "double_col[0] may be NULL"
+    }
+  ],
+  "confidence": 0.75
+}
+```

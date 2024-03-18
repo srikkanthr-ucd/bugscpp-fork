@@ -1,0 +1,3 @@
+attribute_error: the 'map' object has no method '()'
+stack traceback:
+	tests/suffix.be:9: in function `main`

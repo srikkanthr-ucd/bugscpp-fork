@@ -1,0 +1,21 @@
+```c
+typedef struct MD_REF_DEF_LIST_tag MD_REF_DEF_LIST;
+struct MD_REF_DEF_LIST_tag {
+    int n_ref_defs;
+    int alloc_ref_defs;
+    MD_REF_DEF* ref_defs;  /* Valid items always  point into ctx->ref_defs[] */
+};
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 7,
+      "error_type": "Array size missing",
+      "explanation": "The array 'ref_defs' is missing a size."
+    }
+  ],
+  "confidence": 0.9
+}
+```

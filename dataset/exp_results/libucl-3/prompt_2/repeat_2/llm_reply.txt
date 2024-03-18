@@ -1,0 +1,18 @@
+```c
+		else if (c == '$') {
+			*var_expand = *var_expand ? false : true; // Fix
+		}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 5,
+      "error_type": "Logical error",
+      "explanation": "The buggy line assigns the value true to the pointer *var_expand. This is incorrect because *var_expand is a boolean that should be toggled between true and false. The correct assignment should be *var_expand = !*var_expand."
+    }
+  ],
+  "confidence": 1
+}
+```

@@ -1,0 +1,19 @@
+```
+		else if (obj->keylen > 0) {
+			func->ucl_emitter_append_len (func->ud, obj->key, obj->keylen);
+		}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 1,
+      "error_type": "Parameter-Order Error",
+      "explanation": "The order of parameters in the function call ucl_emitter_append_len is incorrect. The correct order should be (func->ud, obj->key, obj->keylen)."
+    }
+  ],
+  "confidence": 1
+}
+```

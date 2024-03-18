@@ -1,0 +1,23 @@
+```c
+static bool is_directory(const char *fname)
+{
+    struct stat st;
+    if (stat(fname, &st) == 0 && S_ISDIR(st.st_mode))
+        return true;
+    else
+        return false;
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 9,
+      "error_type": "Missing return statement",
+      "explanation": "The function does not have a return statement in the `else` branch, which may lead to undefined behavior."
+    }
+  ],
+  "confidence": 0.9
+}
+```

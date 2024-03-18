@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/workspace/build
+Test project /home/workspace/build
+    Start 78: cfg-wxwidgets_cpp
+1/1 Test #78: cfg-wxwidgets_cpp ................   Passed    3.98 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   3.98 sec

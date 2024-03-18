@@ -1,0 +1,37 @@
+```c++
+bool isLikelyStreamRead(bool cpp, const Token *op)
+{
+    if (!cpp)
+        return false;
+
+    if (!Token::Match(op, "&|>>") || !op->isBinaryOp())
+        return false;
+
+    if (op->str() == op->astOperand2()->str() || !Token::Match(op->astOperand2(), "%name%|.|*|[") )
+        return false;
+
+    const Token *parent = op;
+    while (parent->astParent() && parent->astParent()->str() == op->str())
+        parent = parent->astParent();
+    if (parent->astParent() && !Token::Match(parent->astParent(), "%oror%|&&|(|,|!"))
+        return false;
+    if (op->str() == "&" && parent->astParent())
+        return false;
+    if (!parent->astOperand1() || !parent->astOperand2())
+        return false;
+    return (!parent->astOperand1()->valueType() || !parent->astOperand1()->valueType()->isIntegral());
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 11,
+      "error_type": "condition",
+      "explanation": "This condition is likely incorrect since it is checking if the two operands of the operator are equal, which is not a valid condition for determining if the stream read is likely."
+    }
+  ],
+  "confidence": 0.8
+}
+```

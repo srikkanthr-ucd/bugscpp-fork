@@ -1,4 +1,6 @@
-Consider the following C++ function. The function as written has an error and I require your assistance in fixing it. In the code the variables defined and their meaning are as follows.
+Consider the following C++ function. 
+The function as written has an error and I require your assistance in fixing it. 
+In the code the variables defined and their meaning are as follows.
 
 `RA()` - this is a function that returns a pointer. 
 `RKB()` - this is a function that returns a pointer.
@@ -17,6 +19,7 @@ opcase(FLIP): {
                 reg = vm->reg;
 ```
 
-When the above code is run on an input where the value of `RKB()` is 3, the output is 4294967293, but the intended output is 4294967292.
+When the above code is run on an input where the value of `RKB()` is 3, 
+the output is 4294967293, but the intended output is 4294967292.
 
 Please output the entire function.

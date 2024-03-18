@@ -1,0 +1,19 @@
+```c
+else if (ent->etype == XML_EXTERNAL_GENERAL_PARSED_ENTITY) {
+	xmlFatalErrMsgStr(ctxt, XML_ERR_UNPARSED_ENTITY_DECL,
+		 "Entity reference to unparsed entity %s\n", name);
+    }
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 2,
+      "error_type": "Incorrect error code passed to xmlFatalErrMsgStr",
+      "explanation": "XML_ERR_UNPARSED_ENTITY is the incorrect error code to use when reporting an error related to an unparsed entity. The correct error code for this situation is XML_ERR_UNPARSED_ENTITY_DECL."
+    }
+  ],
+  "confidence": 0.9
+}
+```

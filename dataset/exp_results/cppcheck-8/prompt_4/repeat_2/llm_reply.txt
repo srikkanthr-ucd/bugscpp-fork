@@ -1,0 +1,39 @@
+Repaired function:
+```c++
+bool isLikelyStreamRead(bool cpp, const Token *op)
+{
+    if (!cpp)
+        return false;
+
+    if (!Token::Match(op, "&|>>") || !op->isBinaryOp())
+        return false;
+
+    if (!Token::Match(op->astOperand2(), "%name%|.|*|[") && op->str() == op->astOperand2()->str())
+        return false;
+
+    const Token *parent = op;
+    while (parent->astParent() && parent->astParent()->str() == op->str())
+        parent = parent->astParent();
+    if (parent->astParent() && !Token::Match(parent->astParent(), "%oror%|&&|(|,|!"))
+        return false;
+    if (op->str() == "&" && parent->astParent())
+        return false;
+    if (!parent->astOperand1() || !parent->astOperand2())
+        return false;
+    return (!parent->astOperand1()->valueType() || !parent->astOperand1()->valueType()->isIntegral());
+}
+```
+
+JSON explanation:
+```json
+{
+  "error": [
+    {
+      "line_number": 11,
+      "error_type": "Invalid condition",
+      "explanation": "The condition '!Token::Match(op->astOperand2(), %name%|.|*|[) && op->str() != op->astOperand2()->str()' is invalid because it checks if the token's second operand doesn't match certain patterns and also if the token's string is not equal to its second operand's string. This condition is always true, so the function always returns false. The correct condition should be '!Token::Match(op->astOperand2(), %name%|.|*|[) || op->str() != op->astOperand2()->str()'."
+    }
+  ],
+  "confidence": 0.9
+}
+```

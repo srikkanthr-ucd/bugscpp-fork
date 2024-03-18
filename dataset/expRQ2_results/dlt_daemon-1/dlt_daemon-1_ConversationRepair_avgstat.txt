@@ -1,0 +1,6 @@
+Test_Repo: dlt_daemon-1
+Conversation_Num: 5
+Total_Patch_Num: 5
+Compilable_Patch_Num: 5
+Plausible_Patch_Num: 1
+Average_Response_Time: 8.455042123794556

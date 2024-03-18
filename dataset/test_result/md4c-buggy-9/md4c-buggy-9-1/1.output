@@ -1,0 +1,880 @@
+Example 308 (lines 5621-5625) Backslash escapes
+[foo](/bar\* "ti\*tle")
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/bar*" title="ti*tle">foo</a></p>
++<p><a href="/bar*" title="ti*tle">foo</a>(/bar* &quot;ti*tle&quot;)</p>
+
+Example 318 (lines 5760-5764) Entity and numeric character references
+[foo](/f&ouml;&ouml; "f&ouml;&ouml;")
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/f%C3%B6%C3%B6" title="föö">foo</a></p>
++<p><a href="/f%C3%B6%C3%B6" title="föö">foo</a>(/föö &quot;föö&quot;)</p>
+
+Example 403 (lines 6798-6802) Emphasis and strong emphasis
+*foo [bar](/url)*
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><em>foo <a href="/url">bar</a></em></p>
++<p><em>foo <a href="/url">bar</a>(/url)</em></p>
+
+Example 418 (lines 6935-6939) Emphasis and strong emphasis
+*foo [*bar*](/url)*
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><em>foo <a href="/url"><em>bar</em></a></em></p>
++<p><em>foo <a href="/url"><em>bar</em></a>(/url)</em></p>
+
+Example 421 (lines 6964-6968) Emphasis and strong emphasis
+**foo [bar](/url)**
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><strong>foo <a href="/url">bar</a></strong></p>
++<p><strong>foo <a href="/url">bar</a>(/url)</strong></p>
+
+Example 432 (lines 7050-7054) Emphasis and strong emphasis
+**foo [*bar*](/url)**
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><strong>foo <a href="/url"><em>bar</em></a></strong></p>
++<p><strong>foo <a href="/url"><em>bar</em></a>(/url)</strong></p>
+
+Example 472 (lines 7364-7368) Emphasis and strong emphasis
+*[bar*](/url)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p>*<a href="/url">bar*</a></p>
++<p>*<a href="/url">bar*</a>(/url)</p>
+
+Example 473 (lines 7371-7375) Emphasis and strong emphasis
+_foo [bar_](/url)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p>_foo <a href="/url">bar_</a></p>
++<p>_foo <a href="/url">bar_</a>(/url)</p>
+
+Example 481 (lines 7503-7507) Links
+[link](/uri "title")
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/uri" title="title">link</a></p>
++<p><a href="/uri" title="title">link</a>(/uri &quot;title&quot;)</p>
+
+Example 482 (lines 7512-7516) Links
+[link](/uri)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/uri">link</a></p>
++<p><a href="/uri">link</a>(/uri)</p>
+
+Example 483 (lines 7521-7525) Links
+[link]()
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="">link</a></p>
++<p><a href="">link</a>()</p>
+
+Example 484 (lines 7528-7532) Links
+[link](<>)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="">link</a></p>
++<p><a href="">link</a>(&lt;&gt;)</p>
+
+Example 486 (lines 7543-7547) Links
+[link](</my uri>)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/my%20uri">link</a></p>
++<p><a href="/my%20uri">link</a>(&lt;/my uri&gt;)</p>
+
+Example 489 (lines 7571-7575) Links
+[a](<b)c>)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="b)c">a</a></p>
++<p><a href="b)c">a</a>(&lt;b)c&gt;)</p>
+
+Example 492 (lines 7600-7604) Links
+[link](\(foo\))
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="(foo)">link</a></p>
++<p><a href="(foo)">link</a>((foo))</p>
+
+Example 493 (lines 7609-7613) Links
+[link](foo(and(bar)))
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="foo(and(bar))">link</a></p>
++<p><a href="foo(and(bar))">link</a>(foo(and(bar)))</p>
+
+Example 494 (lines 7618-7622) Links
+[link](foo\(and\(bar\))
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="foo(and(bar)">link</a></p>
++<p><a href="foo(and(bar)">link</a>(foo(and(bar))</p>
+
+Example 495 (lines 7625-7629) Links
+[link](<foo(and(bar)>)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="foo(and(bar)">link</a></p>
++<p><a href="foo(and(bar)">link</a>(&lt;foo(and(bar)&gt;)</p>
+
+Example 496 (lines 7635-7639) Links
+[link](foo\)\:)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="foo):">link</a></p>
++<p><a href="foo):">link</a>(foo):)</p>
+
+Example 497 (lines 7644-7654) Links
+[link](#fragment)
+
+[link](http://example.com#fragment)
+
+[link](http://example.com?foo=3#frag)
+
+--- expected HTML
++++ actual HTML
+@@ -1,3 +1,3 @@
+-<p><a href="#fragment">link</a></p>
+-<p><a href="http://example.com#fragment">link</a></p>
+-<p><a href="http://example.com?foo=3#frag">link</a></p>
++<p><a href="#fragment">link</a>(#fragment)</p>
++<p><a href="http://example.com#fragment">link</a>(http://example.com#fragment)</p>
++<p><a href="http://example.com?foo=3#frag">link</a>(http://example.com?foo=3#frag)</p>
+
+Example 498 (lines 7660-7664) Links
+[link](foo\bar)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="foo%5Cbar">link</a></p>
++<p><a href="foo%5Cbar">link</a>(foo\bar)</p>
+
+Example 499 (lines 7676-7680) Links
+[link](foo%20b&auml;)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="foo%20b%C3%A4">link</a></p>
++<p><a href="foo%20b%C3%A4">link</a>(foo%20bä)</p>
+
+Example 500 (lines 7687-7691) Links
+[link]("title")
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="%22title%22">link</a></p>
++<p><a href="%22title%22">link</a>(&quot;title&quot;)</p>
+
+Example 501 (lines 7696-7704) Links
+[link](/url "title")
+[link](/url 'title')
+[link](/url (title))
+
+--- expected HTML
++++ actual HTML
+@@ -1,3 +1,3 @@
+-<p><a href="/url" title="title">link</a>
+-<a href="/url" title="title">link</a>
+-<a href="/url" title="title">link</a></p>
++<p><a href="/url" title="title">link</a>(/url &quot;title&quot;)
++<a href="/url" title="title">link</a>(/url 'title')
++<a href="/url" title="title">link</a>(/url (title))</p>
+
+Example 502 (lines 7710-7714) Links
+[link](/url "title \"&quot;")
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/url" title="title &quot;&quot;">link</a></p>
++<p><a href="/url" title="title &quot;&quot;">link</a>(/url &quot;title &quot;&quot;&quot;)</p>
+
+Example 503 (lines 7720-7724) Links
+[link](/url "title")
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/url%C2%A0%22title%22">link</a></p>
++<p><a href="/url%C2%A0%22title%22">link</a>(/url &quot;title&quot;)</p>
+
+Example 505 (lines 7738-7742) Links
+[link](/url 'title "and" title')
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/url" title="title &quot;and&quot; title">link</a></p>
++<p><a href="/url" title="title &quot;and&quot; title">link</a>(/url 'title &quot;and&quot; title')</p>
+
+Example 506 (lines 7762-7767) Links
+[link](   /uri
+  "title"  )
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1,2 @@
+-<p><a href="/uri" title="title">link</a></p>
++<p><a href="/uri" title="title">link</a>(   /uri
++&quot;title&quot;  )</p>
+
+Example 508 (lines 7783-7787) Links
+[link [foo [bar]]](/uri)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/uri">link [foo [bar]]</a></p>
++<p><a href="/uri">link [foo [bar]]</a>(/uri)</p>
+
+Example 510 (lines 7797-7801) Links
+[link [bar](/uri)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p>[link <a href="/uri">bar</a></p>
++<p>[link <a href="/uri">bar</a>(/uri)</p>
+
+Example 511 (lines 7804-7808) Links
+[link \[bar](/uri)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/uri">link [bar</a></p>
++<p><a href="/uri">link [bar</a>(/uri)</p>
+
+Example 512 (lines 7813-7817) Links
+[link *foo **bar** `#`*](/uri)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/uri">link <em>foo <strong>bar</strong> <code>#</code></em></a></p>
++<p><a href="/uri">link <em>foo <strong>bar</strong> <code>#</code></em></a>(/uri)</p>
+
+Example 513 (lines 7820-7824) Links
+[![moon](moon.jpg)](/uri)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/uri"><img src="moon.jpg" alt="moon" /></a></p>
++<p><a href="/uri"><img src="moon.jpg" alt="moon">(moon.jpg)</a>(/uri)</p>
+
+Example 514 (lines 7829-7833) Links
+[foo [bar](/uri)](/uri)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p>[foo <a href="/uri">bar</a>](/uri)</p>
++<p>[foo <a href="/uri">bar</a>(/uri)](/uri)</p>
+
+Example 515 (lines 7836-7840) Links
+[foo *[bar [baz](/uri)](/uri)*](/uri)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p>[foo <em>[bar <a href="/uri">baz</a>](/uri)</em>](/uri)</p>
++<p>[foo <em>[bar <a href="/uri">baz</a>(/uri)](/uri)</em>](/uri)</p>
+
+Example 516 (lines 7843-7847) Links
+![[[foo](uri1)](uri2)](uri3)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><img src="uri3" alt="[foo](uri2)" /></p>
++<p><img src="uri3" alt="[foo(uri1)](uri2)">(uri3)</p>
+
+Example 517 (lines 7853-7857) Links
+*[foo*](/uri)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p>*<a href="/uri">foo*</a></p>
++<p>*<a href="/uri">foo*</a>(/uri)</p>
+
+Example 518 (lines 7860-7864) Links
+[foo *bar](baz*)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="baz*">foo *bar</a></p>
++<p><a href="baz*">foo *bar</a>(baz*)</p>
+
+Example 523 (lines 7931-7937) Links
+[foo][bar]
+
+[bar]: /url "title"
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/url" title="title">foo</a></p>
++<p><a href="/url" title="title">foo</a><a href="/url" title="title">bar</a></p>
+
+Example 524 (lines 7946-7952) Links
+[link [foo [bar]]][ref]
+
+[ref]: /uri
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/uri">link [foo [bar]]</a></p>
++<p><a href="/uri">link [foo [bar]]</a><a href="/uri">ref</a></p>
+
+Example 525 (lines 7955-7961) Links
+[link \[bar][ref]
+
+[ref]: /uri
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/uri">link [bar</a></p>
++<p><a href="/uri">link [bar</a><a href="/uri">ref</a></p>
+
+Example 526 (lines 7966-7972) Links
+[link *foo **bar** `#`*][ref]
+
+[ref]: /uri
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/uri">link <em>foo <strong>bar</strong> <code>#</code></em></a></p>
++<p><a href="/uri">link <em>foo <strong>bar</strong> <code>#</code></em></a><a href="/uri">ref</a></p>
+
+Example 527 (lines 7975-7981) Links
+[![moon](moon.jpg)][ref]
+
+[ref]: /uri
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/uri"><img src="moon.jpg" alt="moon" /></a></p>
++<p><a href="/uri"><img src="moon.jpg" alt="moon">(moon.jpg)</a><a href="/uri">ref</a></p>
+
+Example 528 (lines 7986-7992) Links
+[foo [bar](/uri)][ref]
+
+[ref]: /uri
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p>[foo <a href="/uri">bar</a>]<a href="/uri">ref</a></p>
++<p>[foo <a href="/uri">bar</a>(/uri)]<a href="/uri">ref</a></p>
+
+Example 529 (lines 7995-8001) Links
+[foo *bar [baz][ref]*][ref]
+
+[ref]: /uri
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p>[foo <em>bar <a href="/uri">baz</a></em>]<a href="/uri">ref</a></p>
++<p>[foo <em>bar <a href="/uri">baz</a><a href="/uri">ref</a></em>]<a href="/uri">ref</a></p>
+
+Example 530 (lines 8010-8016) Links
+*[foo*][ref]
+
+[ref]: /uri
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p>*<a href="/uri">foo*</a></p>
++<p>*<a href="/uri">foo*</a><a href="/uri">ref</a></p>
+
+Example 531 (lines 8019-8025) Links
+[foo *bar][ref]*
+
+[ref]: /uri
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/uri">foo *bar</a>*</p>
++<p><a href="/uri">foo *bar</a><a href="/uri">ref</a>*</p>
+
+Example 535 (lines 8060-8066) Links
+[foo][BaR]
+
+[bar]: /url "title"
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/url" title="title">foo</a></p>
++<p><a href="/url" title="title">foo</a><a href="/url" title="title">BaR</a></p>
+
+Example 537 (lines 8083-8090) Links
+[Foo
+  bar]: /url
+
+[Baz][Foo bar]
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/url">Baz</a></p>
++<p><a href="/url">Baz</a><a href="/url">Foo bar</a></p>
+
+Example 540 (lines 8146-8154) Links
+[foo]: /url1
+
+[foo]: /url2
+
+[bar][foo]
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/url1">bar</a></p>
++<p><a href="/url1">bar</a><a href="/url1">foo</a></p>
+
+Example 541 (lines 8161-8167) Links
+program returned error code 1
+=================================================================
+==1104==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x62d000008400 at pc 0x55e8288540f8 bp 0x7fff9e32eb30 sp 0x7fff9e32eb20
+READ of size 1 at 0x62d000008400 thread T0
+    #0 0x55e8288540f7 in md_enter_leave_span_a (/home/workspace/build/md2html/md2html+0x540f7)
+    #1 0x55e828855042 in md_process_inlines (/home/workspace/build/md2html/md2html+0x55042)
+    #2 0x55e828860d5e in md_process_all_blocks (/home/workspace/build/md2html/md2html+0x60d5e)
+    #3 0x55e828867e7c in md_parse (/home/workspace/build/md2html/md2html+0x67e7c)
+    #4 0x55e828840bec in md_render_html (/home/workspace/build/md2html/md2html+0x40bec)
+    #5 0x55e82883991c in main (/home/workspace/build/md2html/md2html+0x3991c)
+    #6 0x7f1bfa078c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #7 0x55e828839f49 in _start (/home/workspace/build/md2html/md2html+0x39f49)
+
+0x62d000008400 is located 0 bytes to the right of 32768-byte region [0x62d000000400,0x62d000008400)
+allocated by thread T0 here:
+    #0 0x7f1bfa526b40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x55e828839726 in main (/home/workspace/build/md2html/md2html+0x39726)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/workspace/build/md2html/md2html+0x540f7) in md_enter_leave_span_a
+Shadow bytes around the buggy address:
+  0x0c5a7fff9030: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c5a7fff9040: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c5a7fff9050: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c5a7fff9060: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c5a7fff9070: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c5a7fff9080:[fa]fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c5a7fff9090: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c5a7fff90a0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c5a7fff90b0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c5a7fff90c0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c5a7fff90d0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104==ABORTING
+Example 545 (lines 8203-8209) Links
+[foo][ref\[]
+
+[ref\[]: /uri
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/uri">foo</a></p>
++<p><a href="/uri">foo</a><a href="/uri">ref[</a></p>
+
+Example 549 (lines 8258-8264) Links
+[foo][]
+
+[foo]: /url "title"
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/url" title="title">foo</a></p>
++<p><a href="/url" title="title">foo</a>[]</p>
+
+Example 550 (lines 8267-8273) Links
+[*foo* bar][]
+
+[*foo* bar]: /url "title"
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/url" title="title"><em>foo</em> bar</a></p>
++<p><a href="/url" title="title"><em>foo</em> bar</a>[]</p>
+
+Example 551 (lines 8278-8284) Links
+[Foo][]
+
+[foo]: /url "title"
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/url" title="title">Foo</a></p>
++<p><a href="/url" title="title">Foo</a>[]</p>
+
+Example 561 (lines 8396-8403) Links
+[foo][bar]
+
+[foo]: /url1
+[bar]: /url2
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/url2">foo</a></p>
++<p><a href="/url2">foo</a><a href="/url2">bar</a></p>
+
+Example 562 (lines 8405-8411) Links
+[foo][]
+
+[foo]: /url1
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/url1">foo</a></p>
++<p><a href="/url1">foo</a>[]</p>
+
+Example 563 (lines 8415-8421) Links
+[foo]()
+
+[foo]: /url1
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="">foo</a></p>
++<p><a href="">foo</a>()</p>
+
+Example 565 (lines 8434-8440) Links
+program returned error code 1
+=================================================================
+==1151==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x62d000008400 at pc 0x56139d8540f8 bp 0x7fff32abb420 sp 0x7fff32abb410
+READ of size 1 at 0x62d000008400 thread T0
+    #0 0x56139d8540f7 in md_enter_leave_span_a (/home/workspace/build/md2html/md2html+0x540f7)
+    #1 0x56139d855042 in md_process_inlines (/home/workspace/build/md2html/md2html+0x55042)
+    #2 0x56139d860d5e in md_process_all_blocks (/home/workspace/build/md2html/md2html+0x60d5e)
+    #3 0x56139d867e7c in md_parse (/home/workspace/build/md2html/md2html+0x67e7c)
+    #4 0x56139d840bec in md_render_html (/home/workspace/build/md2html/md2html+0x40bec)
+    #5 0x56139d83991c in main (/home/workspace/build/md2html/md2html+0x3991c)
+    #6 0x7f719bca5c86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #7 0x56139d839f49 in _start (/home/workspace/build/md2html/md2html+0x39f49)
+
+0x62d000008400 is located 0 bytes to the right of 32768-byte region [0x62d000000400,0x62d000008400)
+allocated by thread T0 here:
+    #0 0x7f719c153b40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x56139d839726 in main (/home/workspace/build/md2html/md2html+0x39726)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/workspace/build/md2html/md2html+0x540f7) in md_enter_leave_span_a
+Shadow bytes around the buggy address:
+  0x0c5a7fff9030: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c5a7fff9040: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c5a7fff9050: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c5a7fff9060: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c5a7fff9070: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c5a7fff9080:[fa]fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c5a7fff9090: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c5a7fff90a0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c5a7fff90b0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c5a7fff90c0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c5a7fff90d0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1151==ABORTING
+Example 566 (lines 8446-8453) Links
+[foo][bar][baz]
+
+[baz]: /url1
+[bar]: /url2
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><a href="/url2">foo</a><a href="/url1">baz</a></p>
++<p><a href="/url2">foo</a><a href="/url1">bar</a><a href="/url1">baz</a></p>
+
+Example 567 (lines 8459-8466) Links
+program returned error code 1
+=================================================================
+==1154==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x62d000008400 at pc 0x5580420540f8 bp 0x7ffc4d6a8730 sp 0x7ffc4d6a8720
+READ of size 1 at 0x62d000008400 thread T0
+    #0 0x5580420540f7 in md_enter_leave_span_a (/home/workspace/build/md2html/md2html+0x540f7)
+    #1 0x558042055042 in md_process_inlines (/home/workspace/build/md2html/md2html+0x55042)
+    #2 0x558042060d5e in md_process_all_blocks (/home/workspace/build/md2html/md2html+0x60d5e)
+    #3 0x558042067e7c in md_parse (/home/workspace/build/md2html/md2html+0x67e7c)
+    #4 0x558042040bec in md_render_html (/home/workspace/build/md2html/md2html+0x40bec)
+    #5 0x55804203991c in main (/home/workspace/build/md2html/md2html+0x3991c)
+    #6 0x7f400791fc86 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    #7 0x558042039f49 in _start (/home/workspace/build/md2html/md2html+0x39f49)
+
+0x62d000008400 is located 0 bytes to the right of 32768-byte region [0x62d000000400,0x62d000008400)
+allocated by thread T0 here:
+    #0 0x7f4007dcdb40 in __interceptor_malloc (/usr/lib/x86_64-linux-gnu/libasan.so.4+0xdeb40)
+    #1 0x558042039726 in main (/home/workspace/build/md2html/md2html+0x39726)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/workspace/build/md2html/md2html+0x540f7) in md_enter_leave_span_a
+Shadow bytes around the buggy address:
+  0x0c5a7fff9030: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c5a7fff9040: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c5a7fff9050: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c5a7fff9060: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c5a7fff9070: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c5a7fff9080:[fa]fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c5a7fff9090: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c5a7fff90a0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c5a7fff90b0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c5a7fff90c0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c5a7fff90d0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1154==ABORTING
+Example 568 (lines 8482-8486) Images
+![foo](/url "title")
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><img src="/url" alt="foo" title="title" /></p>
++<p><img src="/url" alt="foo" title="title">(/url &quot;title&quot;)</p>
+
+Example 570 (lines 8498-8502) Images
+![foo ![bar](/url)](/url2)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><img src="/url2" alt="foo bar" /></p>
++<p><img src="/url2" alt="foo bar">(/url)(/url2)</p>
+
+Example 571 (lines 8505-8509) Images
+![foo [bar](/url)](/url2)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><img src="/url2" alt="foo bar" /></p>
++<p><img src="/url2" alt="foo bar(/url)">(/url2)</p>
+
+Example 572 (lines 8519-8525) Images
+![foo *bar*][]
+
+[foo *bar*]: train.jpg "train & tracks"
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><img src="train.jpg" alt="foo bar" title="train &amp; tracks" /></p>
++<p><img src="train.jpg" alt="foo bar" title="train &amp; tracks">[]</p>
+
+Example 573 (lines 8528-8534) Images
+![foo *bar*][foobar]
+
+[FOOBAR]: train.jpg "train & tracks"
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><img src="train.jpg" alt="foo bar" title="train &amp; tracks" /></p>
++<p><img src="train.jpg" alt="foo bar" title="train &amp; tracks"><a href="train.jpg" title="train &amp; tracks">foobar</a></p>
+
+Example 574 (lines 8537-8541) Images
+![foo](train.jpg)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><img src="train.jpg" alt="foo" /></p>
++<p><img src="train.jpg" alt="foo">(train.jpg)</p>
+
+Example 575 (lines 8544-8548) Images
+My ![foo bar](/path/to/train.jpg  "title"   )
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p>My <img src="/path/to/train.jpg" alt="foo bar" title="title" /></p>
++<p>My <img src="/path/to/train.jpg" alt="foo bar" title="title">(/path/to/train.jpg  &quot;title&quot;   )</p>
+
+Example 576 (lines 8551-8555) Images
+![foo](<url>)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><img src="url" alt="foo" /></p>
++<p><img src="url" alt="foo">(<url>)</p>
+
+Example 577 (lines 8558-8562) Images
+![](/url)
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><img src="/url" alt="" /></p>
++<p><img src="/url" alt="">(/url)</p>
+
+Example 578 (lines 8567-8573) Images
+![foo][bar]
+
+[bar]: /url
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><img src="/url" alt="foo" /></p>
++<p><img src="/url" alt="foo"><a href="/url">bar</a></p>
+
+Example 579 (lines 8576-8582) Images
+![foo][bar]
+
+[BAR]: /url
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><img src="/url" alt="foo" /></p>
++<p><img src="/url" alt="foo"><a href="/url">bar</a></p>
+
+Example 580 (lines 8587-8593) Images
+![foo][]
+
+[foo]: /url "title"
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><img src="/url" alt="foo" title="title" /></p>
++<p><img src="/url" alt="foo" title="title">[]</p>
+
+Example 581 (lines 8596-8602) Images
+![*foo* bar][]
+
+[*foo* bar]: /url "title"
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><img src="/url" alt="foo bar" title="title" /></p>
++<p><img src="/url" alt="foo bar" title="title">[]</p>
+
+Example 582 (lines 8607-8613) Images
+![Foo][]
+
+[foo]: /url "title"
+
+--- expected HTML
++++ actual HTML
+@@ -1 +1 @@
+-<p><img src="/url" alt="Foo" title="title" /></p>
++<p><img src="/url" alt="Foo" title="title">[]</p>
+
+574 passed, 72 failed, 3 errored, 0 skipped

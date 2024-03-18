@@ -1,0 +1,4 @@
+Test_Repo,Prompt_ID,Repeat_Num,Total_Patch_Num,Compilable_Patch_Num,Plausible_Patch_Num,Average_Response_Time,Average_Confidence,Average_Identify_Accuracy,Average_Pass_Rate
+libucl-2,2,3,3,0,0,3.079265753428141,0.8333333333333334,0.0,0.0
+libucl-3,2,3,3,3,0,2.8426244258880615,0.9666666666666667,0.0,0.8000000000000002
+libucl-4,2,3,3,3,0,3.2685508728027344,0.9666666666666667,0.0,0.26666666666666666

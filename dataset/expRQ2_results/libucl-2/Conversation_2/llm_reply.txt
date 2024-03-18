@@ -1,0 +1,57 @@
+```
+static ucl_object_t *
+ucl_parse_macro_arguments (struct ucl_parser *parser,
+		struct ucl_chunk *chunk)
+{
+	ucl_object_t *res = NULL;
+	struct ucl_parser *params_parser;
+	int obraces = 1, ebraces = 0, state = 0;
+	const unsigned char *p, *c;
+	size_t args_len = 0;
+
+	if (!(chunk->remain >= 2 && (*chunk->pos == '('))) {
+		return NULL;
+	}
+
+	ucl_chunk_skipc (chunk, chunk->pos);
+
+	p = chunk->pos;
+	c = chunk->pos;
+	while (p != chunk->end) {
+		switch (state) {
+		case 0:
+			if (*p == '(') {
+				obraces ++;
+			} else if (*p == ')') {
+				ebraces ++;
+				args_len += p - c - 1;
+				c = p + 1;
+			} else if (*p == '"') {
+				state = 1;
+			}
+			ucl_chunk_skipc (chunk, p);
+			break;
+		case 1:
+			if (*p == '"' && *(p - 1) != '\\') {
+				state = 0;
+			}
+			ucl_chunk_skipc (chunk, p);
+			break;
+		case 99:
+			params_parser = ucl_parser_new (parser->flags);
+			if (!ucl_parser_add_chunk (params_parser, c, args_len)) {
+				ucl_set_err (parser, UCL_ESYNTAX, "macro arguments parsing error", &parser->err);
+			} else {
+				res = ucl_parser_get_object (params_parser);
+			}
+			ucl_parser_free (params_parser);
+			return res;
+		}
+		if (obraces == ebraces) {
+			state = 99;
+		}
+	}
+
+	return res;
+}
+```

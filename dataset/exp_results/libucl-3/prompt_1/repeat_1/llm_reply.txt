@@ -1,0 +1,20 @@
+```c
+		else if (c == '$') {
+			*var_expand = true;
+			state = VAR_EXPAND;
+		}
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 2,
+      "error_type": "missing return statement",
+      "explanation": "The `else if` statement should have a `return` statement at the end to exit the function."
+    }
+  ],
+  "confidence": 0.7
+}
+```

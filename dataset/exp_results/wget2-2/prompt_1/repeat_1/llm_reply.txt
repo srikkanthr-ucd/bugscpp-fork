@@ -1,0 +1,21 @@
+```c
+static bool is_directory(const char *fname)
+{
+    struct stat st;
+    int ret = stat(fname, &st);
+    return ret == 0 && S_ISDIR(st.st_mode);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 4,
+      "error_type": "Return value not being used",
+      "explanation": "The return value of `stat` function is not being checked before being used. This can lead to incorrect results if there was an error in the `stat` call, such as `fname` not existing or being inaccessible, which would result in a return value of `-1`."
+    }
+  ],
+  "confidence": 0.9
+}
+```

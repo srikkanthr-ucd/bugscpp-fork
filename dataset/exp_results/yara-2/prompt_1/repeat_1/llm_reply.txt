@@ -1,0 +1,38 @@
+```c
+static int _yr_scan_wicompare(
+    const uint8_t* data,
+    size_t data_size,
+    uint8_t* string,
+    size_t string_length)
+{
+  const uint8_t* s1 = data;
+  const uint8_t* s2 = string;
+
+  size_t i = 0;
+
+  if (data_size < string_length * 2) {
+    return 0;
+  }
+
+  while (i < string_length && yr_lowercase[*s1] == yr_lowercase[*s2]) {
+    s1++; // fix: +1 instead of +2 
+    s2++;
+    i++;
+  }
+
+  return (int) ((i == string_length) ? i * 2 : 0);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 14,
+      "error_type": "Logic Error",
+      "explanation": "The line s1+=2 increments the pointer s1 by 2 bytes, which is incorrect because Wireshark uses 1-byte characters. It should be incremented by 1 byte to match the size of the characters being compared."
+    }
+  ],
+  "confidence": 0.8
+}
+```

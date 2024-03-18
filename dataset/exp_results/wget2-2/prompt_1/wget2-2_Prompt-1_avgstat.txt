@@ -1,0 +1,10 @@
+Test_Repo: wget2-2
+Prompt_ID: 1
+Repeat_Num: 3
+Total_Patch_Num: 3
+Compilable_Patch_Num: 3
+Plausible_Patch_Num: 0
+Average_Response_Time: 3.7433739503224692
+Average_Confidence: 0.9
+Average_Identify_Accuracy: 0.0
+Average_Pass_Rate: 0.9848484848484849

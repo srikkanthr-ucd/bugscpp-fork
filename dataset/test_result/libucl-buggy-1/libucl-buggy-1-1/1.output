@@ -8,16 +8,42 @@ make  test_basic test_speed test_generate test_schema test_streamline test_msgpa
 make[2]: Entering directory '/home/workspace/tests'
   CC       test_basic-test_basic.o
   CCLD     test_basic
-/usr/bin/ld: test_basic-test_basic.o: in function `main':
-/home/workspace/tests/test_basic.c:130: undefined reference to `ucl_object_emit'
-/usr/bin/ld: /home/workspace/tests/test_basic.c:140: undefined reference to `ucl_object_emit'
-/usr/bin/ld: /home/workspace/tests/test_basic.c:172: undefined reference to `ucl_object_emit'
-/usr/bin/ld: /home/workspace/tests/test_basic.c:137: undefined reference to `ucl_object_emit'
-/usr/bin/ld: /home/workspace/tests/test_basic.c:133: undefined reference to `ucl_object_emit'
-/usr/bin/ld: ../src/.libs/libucl.so: undefined reference to `ucl_standartd_emitter_ops'
-collect2: error: ld returned 1 exit status
+  CC       test_speed-test_speed.o
+  CCLD     test_speed
+  CC       test_generate-test_generate.o
+  CCLD     test_generate
+  CC       test_schema-test_schema.o
+  CCLD     test_schema
+  CC       test_streamline-test_streamline.o
+  CCLD     test_streamline
+  CC       test_msgpack-test_msgpack.o
+  CCLD     test_msgpack
 make[2]: Leaving directory '/home/workspace/tests'
-make[2]: *** [Makefile:647: test_basic] Error 1
-make[1]: *** [Makefile:1041: check-am] Error 2
+make  check-TESTS
+make[2]: Entering directory '/home/workspace/tests'
+make[3]: Entering directory '/home/workspace/tests'
+PASS: basic.test
+============================================================================
+Testsuite summary for libucl 0.7.3
+============================================================================
+# TOTAL: 1
+# PASS:  1
+# SKIP:  0
+# XFAIL: 0
+# FAIL:  0
+# XPASS: 0
+# ERROR: 0
+============================================================================
+make[3]: Leaving directory '/home/workspace/tests'
+make[2]: Leaving directory '/home/workspace/tests'
 make[1]: Leaving directory '/home/workspace/tests'
-make: *** [Makefile:479: check-recursive] Error 1
+Making check in utils
+make[1]: Entering directory '/home/workspace/utils'
+make[1]: Nothing to be done for 'check'.
+make[1]: Leaving directory '/home/workspace/utils'
+Making check in doc
+make[1]: Entering directory '/home/workspace/doc'
+make[1]: Nothing to be done for 'check'.
+make[1]: Leaving directory '/home/workspace/doc'
+make[1]: Entering directory '/home/workspace'
+make[1]: Leaving directory '/home/workspace'

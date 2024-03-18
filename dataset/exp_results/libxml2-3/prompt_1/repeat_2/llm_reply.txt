@@ -1,0 +1,25 @@
+```c
+	    else if (type != CUR) {
+		xmlFatalErrMsgInt(ctxt, XML_ERR_SEPARATOR_REQUIRED,
+		    "xmlParseElementChildrenContentDecl : '%c' expected\n",
+				  type);
+		if ((last != NULL) && (last != ret)) {
+			xmlFreeDocElementContent(ctxt->myDoc, last);
+		}
+		return(NULL);
+	    }
+
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 9,
+      "error_type": "Memory leak",
+      "explanation": "The variable 'ret' is not freed when an error is encountered."
+    }
+  ],
+  "confidence": 0.8
+}
+```

@@ -1,0 +1,21 @@
+```c
+void dpp_sighandler(int signum) {
+	__gcov_flush();
+	sigaction(signaux, &dpp_orig_sigaction, NULL);
+	raise(signum);
+	exit(1);
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 4,
+      "error_type": "Variable `sigaction` is undeclared",
+      "explanation": "The variable `sigaction` is used without having been declared or defined. You need to declare `sigaction` before using it."
+    }
+  ],
+  "confidence": 1
+}
+```

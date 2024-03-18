@@ -1,0 +1,67 @@
+```c++
+void CheckLeakAutoVar::ret(const Token *tok, const VarInfo &varInfo)
+{
+    const std::map<int, VarInfo::AllocInfo> &alloctype = varInfo.alloctype;
+    const std::map<int, std::string> &possibleUsage = varInfo.possibleUsage;
+
+    const SymbolDatabase *symbolDatabase = mTokenizer->getSymbolDatabase();
+    for (std::map<int, VarInfo::AllocInfo>::const_iterator it = alloctype.begin(); it != alloctype.end(); ++it) {
+        // don't warn if variable is conditionally allocated or unused locally
+        if (!it->second.managed() && (varInfo.conditionalAlloc.find(it->first) != varInfo.conditionalAlloc.end() || varInfo.locallyUnused.find(it->first) != varInfo.locallyUnused.end()))
+            continue;
+
+        // don't warn if there is a reference of the variable
+        if (varInfo.referenced.find(it->first) != varInfo.referenced.end())
+            continue;
+
+        const int varid = it->first;
+        const Variable *var = symbolDatabase->getVariableFromVarId(varid);
+        if (var) {
+            bool used = false;
+            for (const Token *tok2 = tok; tok2; tok2 = tok2->next()) {
+                if (tok2->str() == ";")
+                    break;
+                if (Token::Match(tok2, "return|(|{|, %varid% [});,]", varid)) {
+                    used = true;
+                    break;
+                }
+                if (Token::Match(tok2, "return|(|{|, & %varid% . %name% [});,]", varid)) {
+                    used = true;
+                    break;
+                }
+            }
+
+            // return deallocated pointer
+            if (used && it->second.status == VarInfo::DEALLOC)
+                deallocReturnError(tok, var->name());
+
+            else if (!used && !it->second.managed()) {
+                const std::map<int, std::string>::const_iterator use = possibleUsage.find(varid);
+                if (use == possibleUsage.end()) {
+                    leakError(tok, var->name(), it->second.type);
+                } else {
+                    configurationInfo(tok, use->second);
+                }
+            }
+        }
+    }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 12,
+      "error_type": "Incorrect condition",
+      "explanation": "The condition !(it->second.managed() && varInfo.conditionalAlloc.find(it->first) != varInfo.conditionalAlloc.end()) is incorrect. It should be !(it->second.managed() || varInfo.conditionalAlloc.find(it->first) != varInfo.conditionalAlloc.end())."
+    },
+    {
+      "line_number": 13,
+      "error_type": "Incorrect condition",
+      "explanation": "The condition (varInfo.locallyUnused.find(it->first) != varInfo.locallyUnused.end()) is incorrect. It should be (varInfo.locallyUnused.find(it->first) == varInfo.locallyUnused.end())."
+    }
+  ],
+  "confidence": 0.9
+}
+```

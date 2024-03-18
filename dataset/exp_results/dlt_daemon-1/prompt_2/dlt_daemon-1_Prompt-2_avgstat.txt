@@ -1,0 +1,10 @@
+Test_Repo: dlt_daemon-1
+Prompt_ID: 2
+Repeat_Num: 1
+Total_Patch_Num: 1
+Compilable_Patch_Num: 1
+Plausible_Patch_Num: 0
+Average_Response_Time: 10.315993547439575
+Average_Confidence: 0.9
+Average_Identify_Accuracy: 0.0
+Average_Pass_Rate: 0.9821428571428571

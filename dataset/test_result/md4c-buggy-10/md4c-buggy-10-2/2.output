@@ -1,0 +1,27 @@
+Example 24 (lines 261-281) `md_build_ref_def_hashtable()`
+[foo]: /foo
+[qnptgbh]: /qnptgbh
+[abgbrwcv]: /abgbrwcv
+[abgbrwcv]: /abgbrwcv2
+[abgbrwcv]: /abgbrwcv3
+[abgbrwcv]: /abgbrwcv4
+[alqadfgn]: /alqadfgn
+
+[foo]
+[qnptgbh]
+[abgbrwcv]
+[alqadfgn]
+[axgydtdu]
+
+--- expected HTML
++++ actual HTML
+@@ -1,5 +1,3 @@
+-<p><a href="/foo">foo</a>
+-<a href="/qnptgbh">qnptgbh</a>
+-<a href="/abgbrwcv">abgbrwcv</a>
+-<a href="/alqadfgn">alqadfgn</a>
++<p><a href="/qnptgbh">foo</a>
++<a href="/alqadfgn">abgbrwcv</a>
+ [axgydtdu]</p>
+
+22 passed, 1 failed, 0 errored, 1 skipped

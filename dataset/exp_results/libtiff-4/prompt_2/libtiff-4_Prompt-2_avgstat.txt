@@ -1,0 +1,10 @@
+Test_Repo: libtiff-4
+Prompt_ID: 2
+Repeat_Num: 1
+Total_Patch_Num: 1
+Compilable_Patch_Num: 0
+Plausible_Patch_Num: 0
+Average_Response_Time: 12.776681900024414
+Average_Confidence: 0.7
+Average_Identify_Accuracy: 0.0
+Average_Pass_Rate: 0.0

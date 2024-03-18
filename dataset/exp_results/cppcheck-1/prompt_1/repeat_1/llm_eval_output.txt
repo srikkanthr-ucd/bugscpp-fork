@@ -1,0 +1,11 @@
+eval_result: 
+prompt_index: 1
+confidence_score: 0.9
+build_result: 1
+identify_accuracy: 0.0
+pass_rate: 0.0
+response_time: 13.166890621185303
+pass_testcases_num: 0
+fail_testcases_num: 75
+llm_errline_num_list: [11, 12]
+true_errline_num_list: [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 43]

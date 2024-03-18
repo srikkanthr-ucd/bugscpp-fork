@@ -1,0 +1,16 @@
+53c53
+< 	32	UDP 93.71.110.205:16332 <-> 192.168.1.6:50016 [proto: 78.38/STUN.SkypeCall][cat: VoIP/10][30 pkts/5952 bytes <-> 7 pkts/3184 bytes][Goodput ratio: 79/91][2.72 sec][bytes ratio: 0.303 (Upload)][IAT c2s/s2c min/avg/max/stddev: 0/0 99/467 1167/1168 282/553][Pkt Len c2s/s2c min/avg/max/stddev: 80/80 198/455 1256/1256 284/507][Risk: ** Known protocol on non standard port **][PLAIN TEXT (SMnzNK)]
+---
+> 	32	UDP 93.71.110.205:16332 <-> 192.168.1.6:50016 [proto: 78.38/STUN.SkypeCall][cat: VoIP/10][30 pkts/5952 bytes <-> 7 pkts/3184 bytes][Goodput ratio: 79/91][2.72 sec][bytes ratio: 0.303 (Upload)][IAT c2s/s2c min/avg/max/stddev: 0/0 99/467 1167/1168 282/553][Pkt Len c2s/s2c min/avg/max/stddev: 80/80 198/455 1256/1256 284/507][PLAIN TEXT (SMnzNK)]
+68,70c68,70
+< 	47	UDP 93.71.110.205:16333 <-> 192.168.1.6:50036 [proto: 78.38/STUN.SkypeCall][cat: VoIP/10][3 pkts/414 bytes <-> 5 pkts/634 bytes][Goodput ratio: 69/67][2.31 sec][bytes ratio: -0.210 (Download)][IAT c2s/s2c min/avg/max/stddev: 101/15 634/572 1166/1168 532/565][Pkt Len c2s/s2c min/avg/max/stddev: 130/88 138/127 154/158 11/27][Risk: ** Known protocol on non standard port **]
+< 	48	UDP 192.168.1.6:50016 -> 192.168.0.4:50005 [proto: 78.250/STUN.Teams][cat: VoIP/10][5 pkts/770 bytes -> 0 pkts/0 bytes][Goodput ratio: 73/0][1.22 sec][Risk: ** Known protocol on non standard port **]
+< 	49	UDP 192.168.1.6:50036 -> 192.168.0.4:50020 [proto: 78.250/STUN.Teams][cat: VoIP/10][5 pkts/770 bytes -> 0 pkts/0 bytes][Goodput ratio: 73/0][1.22 sec][Risk: ** Known protocol on non standard port **]
+---
+> 	47	UDP 93.71.110.205:16333 <-> 192.168.1.6:50036 [proto: 78.38/STUN.SkypeCall][cat: VoIP/10][3 pkts/414 bytes <-> 5 pkts/634 bytes][Goodput ratio: 69/67][2.31 sec][bytes ratio: -0.210 (Download)][IAT c2s/s2c min/avg/max/stddev: 101/15 634/572 1166/1168 532/565][Pkt Len c2s/s2c min/avg/max/stddev: 130/88 138/127 154/158 11/27]
+> 	48	UDP 192.168.1.6:50016 -> 192.168.0.4:50005 [proto: 78.250/STUN.Teams][cat: VoIP/10][5 pkts/770 bytes -> 0 pkts/0 bytes][Goodput ratio: 73/0][1.22 sec]
+> 	49	UDP 192.168.1.6:50036 -> 192.168.0.4:50020 [proto: 78.250/STUN.Teams][cat: VoIP/10][5 pkts/770 bytes -> 0 pkts/0 bytes][Goodput ratio: 73/0][1.22 sec]
+83c83
+< 	62	UDP 52.114.252.21:3480 <-> 192.168.1.6:50036 [proto: 78.38/STUN.SkypeCall][cat: VoIP/10][1 pkts/166 bytes <-> 1 pkts/142 bytes][Goodput ratio: 74/70][0.01 sec][Risk: ** Known protocol on non standard port **]
+---
+> 	62	UDP 52.114.252.21:3480 <-> 192.168.1.6:50036 [proto: 78.38/STUN.SkypeCall][cat: VoIP/10][1 pkts/166 bytes <-> 1 pkts/142 bytes][Goodput ratio: 74/70][0.01 sec]

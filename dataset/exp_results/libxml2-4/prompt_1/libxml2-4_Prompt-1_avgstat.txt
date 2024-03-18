@@ -1,0 +1,10 @@
+Test_Repo: libxml2-4
+Prompt_ID: 1
+Repeat_Num: 3
+Total_Patch_Num: 3
+Compilable_Patch_Num: 2
+Plausible_Patch_Num: 0
+Average_Response_Time: 5.063000361124675
+Average_Confidence: 0.8000000000000002
+Average_Identify_Accuracy: 0.0
+Average_Pass_Rate: 0.6495726495726496

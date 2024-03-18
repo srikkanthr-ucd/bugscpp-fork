@@ -1,0 +1,42 @@
+```c++
+inline void LinkReferences::visit(Reference& ope) {
+    // Check if the reference is a macro parameter
+    auto found_param = false;
+    for (size_t i = 0; i < params_.size(); i++) {
+        const auto& param = params_[i];
+        if (param == ope.name_) {
+            ope.iarg_ = i;
+            found_param = true;
+            break;
+        }
+    }
+    // Otherwise, store the reference name and mark it as free
+    if (!found_param) {
+        undefined_references_.insert(ope.name_);
+        return;
+    }
+
+    // Check if the reference is a definition rule
+    if (grammar_.count(ope.name_)) {
+        auto& rule = grammar_.at(ope.name_);
+        ope.rule_ = &rule;
+    }
+
+    for (auto arg: ope.args_) {
+        arg->accept(*this);
+    }
+}
+```
+
+```json
+{
+  "error": [
+    {
+      "line_number": 25,
+      "error_type": "Bug: Undefined references to macro parameters",
+      "explanation": "The code doesn't handle the case where a reference is to a macro parameter.  This results in an undefined reference which can cause a crash when the macro is used."
+    }
+  ],
+  "confidence": 0.9
+}
+```
